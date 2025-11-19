@@ -4,6 +4,11 @@ require_once __DIR__ . "/../config/Database.php";
 
 class Usuario extends Database {
     
+    public const int STATUS_OK = 1;
+    public const int STATUS_INSERT_ERROR = 2;
+    public const int STATUS_EXISTS = 3;
+    public const int STATUS_EXCEPTION = 4;
+
     private string $table1;
     private string $table2;
     private string $table3;
@@ -13,72 +18,69 @@ class Usuario extends Database {
 
         $table = require __DIR__ . "/../../.env/tables.php";
 
-        $this->table1 = $table['sistema_de_demandas'][1];
-        $this->table2 = $table['sistema_de_demandas'][2];
-        $this->table3 = $table['sistema_de_demandas'][3];
+        $this->table1 = $table['sistema_de_demandas'][1] ?? '';
+        $this->table2 = $table['sistema_de_demandas'][2] ?? '';
+        $this->table3 = $table['sistema_de_demandas'][3] ?? '';
 
     }
 
     public function cadastro(string $nome, string $email, string $senha): int {
         try {
-            $stmtCheck = $this->conn->prepare("SELECT * FROM $this->table1 WHERE email = :email");
+            $sqlCheck = "SELECT 1 FROM {$this->table1} WHERE email = :email LIMIT 1";
+            $stmtCheck = $this->conn->prepare($sqlCheck);
             $stmtCheck->bindValue(":email", $email);
             $stmtCheck->execute();
 
             if ($stmtCheck->rowCount() > 0) {
-                return 3;
+                return self::STATUS_EXISTS;
             }
 
             $hash = password_hash($senha, PASSWORD_DEFAULT);
-            $stmtCheck = $this->conn->prepare("INSERT INTO $this->table1 (nome, email, senha) VALUES (:nome, :email, :senha)");
-            $stmtCheck->bindValue(":nome", $nome);
-            $stmtCheck->bindValue(":email", $email);
-            $stmtCheck->bindValue(":senha", $hash);
+            $sqlInsert = "INSERT INTO {$this->table1} (nome, email, senha) VALUES (:nome, :email, :senha)";
+            $stmtInsert = $this->conn->prepare($sqlInsert);
+            $stmtInsert->bindValue(":nome", $nome);
+            $stmtInsert->bindValue(":email", $email);
+            $stmtInsert->bindValue(":senha", $hash);
 
-            if(!$stmtCheck->execute()){
-                return 2;
+            if(!$stmtInsert->execute()){
+                error_log("Falha ao inserir Usuário. SQLSTATE: " . $this->conn->errorInfo()[0]);
+                return self::STATUS_INSERT_ERROR;
             }
 
-            return 1;
+            return self::STATUS_OK;
+        } catch (PDOException $e) {
+            error_log("PDOException ao cadastrar Usuário: " . $e->getMessage());
+            return self::STATUS_EXCEPTION;
         } catch (Exception $e) {
-            error_log("Erro ao cadastrar Usuário: " . $e->getMessage());
-            return 0;
+            error_log("Exception ao cadastrar Usuário: " . $e->getMessage());
+            return self::STATUS_EXCEPTION;
         }
     }
 
     public function login(string $email, string $senha): int {
         try {
-            $stmtCheck = $this->conn->prepare("SELECT * FROM $this->table1 WHERE email = :email");
-            $stmtCheck->bindValue(":email", $email);
-            $stmtCheck->execute();
+            $sql = "SELECT * FROM {$this->table1} WHERE email = :email LIMIT 1";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(":email", $email);
+            $stmt->execute();
 
-            if ($stmtCheck->rowCount() == 0) {
-                return 3;
-            }
+            // if ($stmt->rowCount() == 0) {
+            //     return self::STATUS_EXISTS;
+            // }
 
-            $user = $stmtCheck->fetch(PDO::FETCH_ASSOC);
-
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
             if (!$user) {
-                return 3;
+                return self::STATUS_EXISTS;
             }
 
-            if (!password_verify($senha, $user['senha'])) {
-                return 2;
-            }
-            
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
-            
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['nome'] = $user['nome'];
-            $_SESSION['email'] = $user['email'];
+            return self::STATUS_OK;
 
-            return 1;
-
+        } catch (PDOException $e) {
+            error_log("PDOException ao fazer login: " . $e->getMessage());
+            return self::STATUS_EXCEPTION;
         } catch (Exception $e) {
-            error_log("Erro ao fazer login: " . $e->getMessage());
-            return 0;
+            error_log("Exception ao fazer login: " . $e->getMessage());
+            return self::STATUS_EXCEPTION;
         }
     } 
 
