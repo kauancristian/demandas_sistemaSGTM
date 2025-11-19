@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <title>Início | Demandas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        html, body{
+            overflow-x: hidden;
+        }
+
+        :root {
+            --primary-green: #00b348;
+            --dark-green: #007A33;
+            --dark-green2: #173625;
+            --accent-yellow: #ffae18;
+            --bg-dark: #0f0f0f;
+            --bg-card: #1a1a1a;
+            --bg-elevated: #393939;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #6b7280;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-focus: rgba(0, 179, 72, 0.3);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btnSpecial{
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btnSpecial::after{
+            content: "";
+            position: absolute;
+            width: 75%;
+            height: 100%;
+            left: -100%;
+            top: 0;
+            background-image: linear-gradient(120deg, transparent, #ffffff6b, transparent);
+            transition: left 0.5s ease-in-out;
+        }
+
+        .btnSpecial:hover::after{
+            left: 100%;
+        }
+
+        .nav-bar{
+            position: relative;
+            display: inline-flex;
+        }
+
+        .nav-bar::after{
+            content: "";
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-yellow);
+            transition: 0.3s ease-in-out;
+        }
+
+        .nav-bar:hover::after{
+            width: 100%;
+        }
+
+        #imgPc:hover{
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sec 1 -->
+    <div class="bg-gradient-to-tl from-[#121212] via-[#121212] to-[var(--dark-green2)] h-screen">
+
+        <!-- Menu Mobile -->
+        <div id="menuMobile" class="hidden lg:hidden">
+            <div class="absolute h-screen w-full bg-gradient-to-br from-[#121212] to-[#262626] flex flex-col justify-between z-[8000]">
+                <div class="flex flex-col items-center space-y-4 justify-center pt-10">
+                    <img class="object-cover w-20" src="../assets/S.png" alt="">
+                    <p class="text-center text-gray-400 text-sm px-10">Acompanhe, organize e gerencie suas demandas de forma simples e eficiente. Aqui você encontra rapidez, clareza e controle em cada etapa do processo.</p>
+                </div>
+                <nav class="transform translate-y-[-150px] px-9">
+                    <ul class="flex flex-col gap-6 text-gray-200 text-xl">
+                        <a class="cursor-pointer nav-bar hover:text-[var(--accent-yellow)]" href="">
+                            <li>Início</li>
+                        </a>
+                        <a class="cursor-pointer nav-bar hover:text-[var(--accent-yellow)]" href="">
+                            <li>Tarefa</li>
+                        </a>
+                        <a class="cursor-pointer nav-bar hover:text-[var(--accent-yellow)]" href="">
+                            <li>Relatórios</li>
+                        </a>
+                    </ul>
+                </nav>
+                <div class="transform translate-y-[-20px] flex justify-center">
+                    <button class="text-white font-semibold flex justify-center items-center space-x-1 p-3 rounded-full bg-[var(--dark-green)] text-sm btnSpecial hover:translate-y-[-3px] hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 w-[85%]">
+                        <i class="bi bi-box-arrow-in-left"></i>
+                        <p>Desconectar-se</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <header class="bg-black/30 p-2 flex items-center justify-between border-b-2 border-b-gray-700">
+
+            <!-- Img Mobile -->
+            <div class="lg:hidden">
+                <img class="object-cover w-12" src="../assets/S.png" alt="">
+            </div>
+
+            <!-- Btn Menu Mobile -->
+            <div>
+                <button id="btnMoblieOpen" class="lg:hidden translate-x-[-9px] transform cursor-pointer z-[9999] relative focus:text-[var(--primary-green)]">
+                    <i class="bi bi-list text-gray-300 text-2xl "></i>
+                </button>
+
+                <button id="btnMobileClose" class="lg:hidden translate-x-[-9px] transform cursor-pointer z-[9999] relative focus:text-[var(--primary-green)] hidden">
+                    <i class="bi bi-x-lg text-gray-300 text-2xl "></i>
+                </button>
+            </div>
+
+            <!-- Img Pc -->
+            <div class="hidden lg:block">
+                <img id="imgPc" class="object-cover w-16 cursor-pointer transition ease-in-out duration-700" src="../assets/S.png" alt="">
+            </div>
+
+            <!-- Menu Pc -->
+            <div class="hidden lg:block">
+                <nav class="transform translate-x-10">
+                    <ul class="flex gap-6 text-gray-200">
+                        <a class="cursor-pointer nav-bar hover:text-[var(--accent-yellow)]" href="">
+                            <li>Início</li>
+                        </a>
+                        <a class="cursor-pointer nav-bar hover:text-[var(--accent-yellow)]" href="">
+                            <li>Tarefa</li>
+                        </a>
+                        <a class="cursor-pointer nav-bar hover:text-[var(--accent-yellow)]" href="">
+                            <li>Relatórios</li>
+                        </a>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="hidden lg:block transform translate-x-[-10px]">
+                <button class="text-white font-semibold flex items-center space-x-1 p-3 rounded-full bg-[var(--dark-green)] text-sm btnSpecial hover:translate-y-[-3px] hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
+                    <i class="bi bi-box-arrow-in-left"></i>
+                    <p>Desconectar-se</p>
+                </button>
+            </div>
+        </header>
+
+        <!-- Sessão de organização das tarefas -->
+            <div id="containerGeralSecs" class="grid sm:grid-cols-2 lg:grid-cols-4 pt-12 gap-10 lg:gap-4"><!-- O grid -->
+                <!-- Container de Sessão -->
+                <!-- No script -->
+            </div>
+    </div>
+    
+    <script>
+        
+        const containerGeralSecs = document.getElementById("containerGeralSecs");
+        
+        function createSection() {
+
+            const containerSec = document.createElement("div");
+            containerSec.innerHTML = `
+            
+            <div id="containerSec" class="flex justify-center items-center space-x-4">
+                <div class="flex flex-col space-y-3">
+                    <div class="text-white bg-[var(--bg-elevated)] inline-flex w-[220px] py-2 rounded-xl border-2 border-transparent  hover:border-[var(--dark-green)]">
+                        <div class="flex justify-between items-center w-full px-2">
+                            <h2 class="text-2xl secTitle">Seção 1</h2>
+                            <i class="bi bi-three-dots-vertical cursor-pointer hover:text-[var(--primary-green)] transition ease-in-out duration-300"></i>
+                        </div>
+                    </div>
+                    <!-- Btn de comentarios -->
+                    <button class="w-[220px] py-2 rounded-xl bg-[#262626] flex justify-center items-center text-gray-300 hover:text-white hover:bg-[#292929] transition ease-in-out duration-300">
+                        <i class="bi bi-chat-dots"></i>
+                    </button>
+                </div>
+
+                <!-- Btn de criar mais seções -->
+                <div>
+                    <button class="bg-[var(--dark-green)] hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 py-5 px-6 rounded-full text-white cursor-pointer btnCreate">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                </div>
+            </div>
+            
+            `;
+
+            return containerSec;
+
+        };
+
+        const firstSection = createSection();
+        containerGeralSecs.appendChild(firstSection);
+
+        containerGeralSecs.addEventListener("click", (e) => {
+            const btn = e.target.closest(".btnCreate");
+
+            if(btn) {
+                btn.classList.add("opacity-0", "pointer-events-none");
+                const newSection = createSection();
+                containerGeralSecs.appendChild(newSection);
+            }
+
+            const title = e.target.closest(".secTitle");
+
+            if(secTitle) {
+                textoAtual = title.textContent.trim();
+
+                const input = document.createElement("input");
+                input.type = "text";
+                input.value = textoAtual;
+                input.className = "bg-[var(--bg-elevated)] text-white border-2 border-[var(--dark-green)] rounded-xl px-2 py-1 w-full outline-none";
+                input.style.fontSize = "1.4rem";
+
+                title.replaceWith(input);
+
+                input.focus();
+
+                function salvar() {
+                    novoTitulo = input.value.trim() || "Sem título";
+                    
+                    title.textContent = novoTitulo;
+
+                    input.replaceWith(title);
+                };
+
+                input.addEventListener("keydown", (e) => {
+                    if(e.key ===  "Enter") {
+                        e.preventDefault();
+                        salvar();
+                    }
+                });
+
+                input.addEventListener("blur", salvar);
+            }
+        })
+
+
+        const secTitle = document.querySelectorAll(".secTitle");
+
+        secTitle.forEach((title) => {
+            title.onclick = () => {
+
+                const textoAtual = title.textContent.trim();
+
+                const input = document.createElement("input");
+                input.type = "text";
+                input.value = textoAtual;
+                input.className = "bg-[var(--bg-elevated)] text-white border-2 border-[var(--dark-green)] rounded-xl px-2 py-1 w-full outline-none";
+                input.style.fontSize = "1.4rem";
+
+                title.replaceWith(input);
+
+                input.focus();
+
+                function salvar() {
+                    const novoTitulo = input.value.trim() || "Sem título";
+
+                    title.textContent = novoTitulo;
+
+                    input.replaceWith(title);
+                };
+
+                input.addEventListener("keydown", (e) => {
+                    if(e.key === "Enter") {
+                        e.preventDefault();
+                        salvar();
+                    }
+                });
+
+                input.addEventListener("blur", salvar);
+            }
+        });
+    </script>
+
+    <script>
+        const menuMobile = document.getElementById("menuMobile");
+        const btnMoblieOpen = document.getElementById("btnMoblieOpen");
+        const btnMobileClose = document.getElementById("btnMobileClose");
+
+        btnMoblieOpen.onclick = () => {
+            menuMobile.style.display = "block";
+            btnMoblieOpen.style.display = "none";
+            btnMobileClose.style.display = "block";
+        }
+
+        btnMobileClose.onclick = () => {
+            menuMobile.style.display = "none";
+            btnMoblieOpen.style.display = "block";
+            btnMobileClose.style.display = "none";
+        }
+    </script>
+</body>
+</html>
