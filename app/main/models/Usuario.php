@@ -1,13 +1,12 @@
 <?php
 
-require_once __DIR__ . "../config/Database.php";
+require_once __DIR__ . "/../config/Database.php";
 
 class Usuario extends Database {
+    
     private string $table1;
     private string $table2;
     private string $table3;
-    private string $table4;
-    private string $table5;
 
     public function __construct() {
         parent::__construct();
@@ -53,15 +52,27 @@ class Usuario extends Database {
             $stmtCheck->bindValue(":email", $email);
             $stmtCheck->execute();
 
-            $user = $stmtCheck->fetch(PDO::FETCH_ASSOC);
-
             if ($stmtCheck->rowCount() == 0) {
                 return 3;
             }
 
-            if (password_verify($senha, $user['senha'])) {
+            $user = $stmtCheck->fetch(PDO::FETCH_ASSOC);
+
+            if (!$user) {
                 return 3;
             }
+
+            if (!password_verify($senha, $user['senha'])) {
+                return 2;
+            }
+            
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['nome'] = $user['nome'];
+            $_SESSION['email'] = $user['email'];
 
             return 1;
 
