@@ -66,7 +66,7 @@
     </style>
 </head>
 <body>
-    <div class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 fixed bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 via-[#121212] to-[#262626] h-[500px] w-[85%] sm:w-[500px] rounded-xl flex flex-col justify-between">
+    <div class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 fixed bg-gradient-to-br from-[#121212]/90 via-[#262626]/80 via-[#121212] to-[#262626] h-[500px] w-[95%] sm:w-[500px] rounded-xl flex flex-col justify-between">
         <div class="flex justify-between items-center p-4 text-gray-200 relative">
             <div>
                 <button class="bg-[#404040] py-2 px-3 rounded-full hover:bg-[#505050] transition ease-in-out duration-300">
@@ -74,7 +74,7 @@
                 </button>
             </div>
             <div>
-                <button class="bg-[var(--primary-green)] py-2 px-6 rounded-full flex justify-center items-center hover:bg-green-600 transition ease-in-out duration-300 btnSpecial">
+                <button class="bg-[var(--primary-green)] py-2 px-6 rounded-2xl flex justify-center items-center hover:bg-green-600 transition ease-in-out duration-300 btnSpecial">
                     <p>Publicar</p>
                 </button>
             </div>
@@ -85,7 +85,19 @@
         </div>
 
         <div class="bg-gradient-to-br bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 to-[#404040] w-[90%] mx-auto rounded-md h-[180px]">
-                
+            <div class="grid grid-cols-3 px-4 sm:px-10">
+                <button class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full">
+                    <i class="bi bi-file-earmark-plus text-2xl"></i>
+                </button>
+
+                <button class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full">
+                    <i class="bi bi-link text-2xl"></i>
+                </button>
+
+                <button class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full">
+                    <i class="bi bi-images text-2xl"></i>
+                </button>
+            </div>
         </div>
 
         <div class="w-[90%] mx-auto flex justify-center transform transform translate-y-[-10px] outline-none relative">
