@@ -66,7 +66,7 @@
         }
 
         .btn-active {
-            background: var(--dark-green);
+            background: #575757;
             color: white;
             font-weight: 600;
         }
@@ -100,90 +100,105 @@
         }
     </style>
 </head>
-<body class="bg-gradient-to-tl from-[#121212] via-[#121212] to-[var(--dark-green2)] h-screen">
+<body class="bg-gradient-to-br from-[#EAF5F8] to-blue-400 h-screen">
     <!-- Modal doFormulario -->
-    <div id="modalForm" class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 fixed m-auto rounded-xl w-[90%] xl:h-620screen xgg:h-650screen md:w-[550px] bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 to-[#121212]">
-        <div class="flex flex-col items-center justify-center pt-6 gap-3 w-full justify-between">
-            <div class="flex flex-col items-center gap-3">
-                <img class="object-cover w-24" src="assets/S.png" alt="">
-                <h1 class="text-white text-2xl">Seja bem-vindo!</h1>
-                <p id="textInstru" class="text-center text-sm px-12 text-[var(--text-secondary)]">É bom lhe ver denovo! Preencha seus dados abaixo para darmos procedimento nas demandas!</p>
+    <div id="modalForm" class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 fixed m-auto rounded-xl w-[90%] md:w-[85%] grid lg:grid-cols-2 xl:h-620screen xgg:h-650screen">
+        <div class="bg-gradient-to-br from-[#294815] via-[var(--dark-green2)] to-[var(--accent-yellow)] h-full hidden lg:block rounded-l-xl">
+            <div class="flex flex-col items-center justify-center h-full gap-6">
+                <i class="bi bi-mortarboard-fill text-9xl text-[var(--accent-yellow)]"></i>
+                <h2 class="text-white flex items-center text-5xl">EEEP <p class="text-[var(--accent-yellow)] pl-2"> Salaberga</p></h2>
+                <p class="text-center px-6 text-gray-200">Transformando o futuro através da organização e gestão inteligente de demandas.</p>
+                <div class="flex text-sm space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <i class="bi bi-diagram-3 text-[var(--accent-yellow)]"></i>
+                        <p class="text-gray-200">Integração</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="bi bi-speedometer2 text-[var(--accent-yellow)]"></i>
+                        <p class="text-gray-200">Performance</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="bi bi-cpu text-[var(--accent-yellow)]"></i>
+                        <p class="text-gray-200">Automação</p>
+                    </div>
+                </div>
             </div>
-
-            <div class="bg-[var(--border-subtle)] w-[85%] rounded-xl flex items-center p-2 space-x-2">
-                <button id="btnLogin" class="py-2 btn-active rounded-xl w-[50%] flex items-center space-x-2 justify-center">
-                    <i class="bi bi-box-arrow-in-right text-gray-100"></i>
-                    <p class="text-gray-100">Login</p>
-                </button>
-
-                <button id="btnCad" class="py-2 rounded-xl w-[50%] flex items-center space-x-2 justify-center">
-                    <i class="bi bi-person-fill-add text-gray-100"></i>
-                    <p class="text-gray-100">Cadastro</p>
-                </button>
-            </div>
-
-            <div class="w-full flex">
-                <!-- Form Login -->
-                <form id="formLogin" class="flex flex-col items-center justify-center w-full gap-6 px-4 transform translate-y-4" action="">
-                    <div class="w-full relative flex flex-col items-center gap-6">
-                        <div class="w-[85%] relative flex items-center">
-                            <i class="bi bi-envelope-fill absolute left-3 text-xl text-[var(--primary-green)]"></i>
-                            <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="text" name="nome" id="" required placeholder="" minlength="6" maxlength="255">
-                            <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Email</label>
+        </div>
+        <div class="bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 to-[#121212] h-full overflow-y-auto pb-12 rounded-r-xl">
+            <div class="flex flex-col items-center justify-center pt-6 gap-3 w-full justify-between">
+                <div class="flex flex-col items-center gap-5">
+                    <img class="object-cover w-20" src="assets/S.png" alt="">
+                    <h1 class="text-white text-2xl">Seja bem-vindo!</h1>
+                    <p id="textInstru" class="text-center text-sm px-12 text-[var(--text-secondary)]">É bom lhe ver denovo! Preencha seus dados abaixo para darmos procedimento nas demandas!</p>
+                </div>
+                <div class="bg-[var(--border-subtle)] w-[85%] rounded-xl flex items-center p-2 space-x-2">
+                    <button id="btnLogin" class="py-2 btn-active rounded-xl w-[50%] flex items-center space-x-2 justify-center">
+                        <i class="bi bi-box-arrow-in-right text-gray-100"></i>
+                        <p class="text-gray-100">Login</p>
+                    </button>
+                    <button id="btnCad" class="py-2 rounded-xl w-[50%] flex items-center space-x-2 justify-center">
+                        <i class="bi bi-person-fill-add text-gray-100"></i>
+                        <p class="text-gray-100">Cadastro</p>
+                    </button>
+                </div>
+                <div class="w-full flex">
+                    <!-- Form Login -->
+                    <form id="formLogin" class="flex flex-col items-center justify-center w-full gap-6 px-4 transform translate-y-4" action="">
+                        <div class="w-full relative flex flex-col items-center gap-6">
+                            <div class="w-[85%] relative flex items-center">
+                                <i class="bi bi-envelope-fill absolute left-3 text-xl text-[var(--dark-green)]"></i>
+                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="text" name="nome" id="" required placeholder="" minlength="6" maxlength="255">
+                                <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Email</label>
+                            </div>
+                            <div class="w-[85%] relative flex items-center">
+                                <i class="bi bi-key-fill absolute left-3 text-xl text-[var(--dark-green)]"></i>
+                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="text" name="nome" id="" required placeholder="" minlength="6" maxlength="255">
+                                <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Senha</label>
+                            </div>
                         </div>
-                        <div class="w-[85%] relative flex items-center">
-                            <i class="bi bi-key-fill absolute left-3 text-xl text-[var(--primary-green)]"></i>
-                            <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="text" name="nome" id="" required placeholder="" minlength="6" maxlength="255">
-                            <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Senha</label>
-                        </div>
-                    </div>
-
-                    <div class="pt-6 w-full flex justify-center">
-                        <button class="flex w-[85%] py-3 bg-[var(--dark-green)] text-center rounded-md text-white font-semibold space-x-2 justify-center hover:translate-y-[-3px] transition ease-in-out duration-300 btnSpecial">
-                            <i class="bi bi-box-arrow-in-right"></i>
-                            <p>Acessar Sistema</p>
-                        </button>
-                    </div>
-
-                    <p class="text-[var(--accent-yellow)] translate-y-1 text-[13px]">
-                        Precisando de ajuda?<a class="font-semibold" href=""> Fale conosco.</a>
-                    </p>
-                </form>
-
-                <!-- Form Cad -->
-                <form id="formCad" class="flex flex-col items-center justify-center w-full gap-3 px-4 hidden" action="">
-                    <div class="w-full relative flex flex-col items-center gap-5">
-                        <div class="w-[85%] relative flex items-center">
-                            <i class="bi bi-person-fill absolute left-3 text-xl text-[var(--primary-green)]"></i>
-                            <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="text" name="nome" id="" required placeholder="" minlength="6" maxlength="255">
-                            <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Nome</label>
-                        </div>
-                        <div class="w-[85%] relative flex items-center">
-                            <i class="bi bi-envelope-fill absolute left-3 text-xl text-[var(--primary-green)]"></i>
-                            <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="text" name="nome" id="" required placeholder="" minlength="6" maxlength="255">
-                            <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Email</label>
-                        </div>
-                        <div class="w-[85%] relative flex items-center">
-                            <i class="bi bi-key-fill absolute left-3 text-xl text-[var(--primary-green)]"></i>
-                            <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="text" name="nome" id="" required placeholder="" minlength="6" maxlength="255">
-                            <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Senha</label>
-                        </div>
-                    </div>
-
-                    <div class="w-full flex flex-col items-center transform ">
-                        <div class="pt-6 w-full flex justify-center transform translate-y-[-10px]">
-                            <button class="flex w-[85%] py-3 bg-[var(--dark-green)] text-center rounded-md text-white font-semibold space-x-2 justify-center hover:translate-y-[-3px] transition ease-in-out duration-300 btnSpecial">
-                                <i class="bi bi-key-fill"></i>
-                                <p>Verificar Primeiro Acesso</p>
+                        <div class="pt-6 w-full flex justify-center">
+                            <button class="flex w-[85%] py-3 bg-gradient-to-br from-[var(--dark-green)] to-white/40 hover:from-[var(--dark-green)] text-center rounded-md text-white font-semibold space-x-2 justify-center hover:translate-y-[-3px] transition ease-in-out duration-300 btnSpecial">
+                                <i class="bi bi-box-arrow-in-right"></i>
+                                <p>Acessar Sistema</p>
                             </button>
                         </div>
-                        <p class="text-[var(--accent-yellow)] translate-y-3 text-[13px]">
+                        <p class="text-[var(--accent-yellow)] translate-y-1 text-[13px]">
                             Precisando de ajuda?<a class="font-semibold" href=""> Fale conosco.</a>
                         </p>
-                    </div>
-                </form>
+                    </form>
+                    <!-- Form Cad -->
+                    <form id="formCad" class="flex flex-col items-center justify-center w-full gap-3 px-4 hidden" action="">
+                        <div class="w-full relative flex flex-col items-center gap-5">
+                            <div class="w-[85%] relative flex items-center">
+                                <i class="bi bi-person-fill absolute left-3 text-xl text-[var(--dark-green)]"></i>
+                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="text" name="nome" id="" required placeholder="" minlength="6" maxlength="255">
+                                <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Nome</label>
+                            </div>
+                            <div class="w-[85%] relative flex items-center">
+                                <i class="bi bi-envelope-fill absolute left-3 text-xl text-[var(--dark-green)]"></i>
+                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="text" name="nome" id="" required placeholder="" minlength="6" maxlength="255">
+                                <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Email</label>
+                            </div>
+                            <div class="w-[85%] relative flex items-center">
+                                <i class="bi bi-key-fill absolute left-3 text-xl text-[var(--dark-green)]"></i>
+                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="text" name="nome" id="" required placeholder="" minlength="6" maxlength="255">
+                                <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Senha</label>
+                            </div>
+                        </div>
+                        <div class="w-full flex flex-col items-center transform ">
+                            <div class="pt-6 w-full flex justify-center transform translate-y-[-10px]">
+                                <button class="flex w-[85%] py-3 bg-gradient-to-br from-[var(--dark-green)] to-white/40 hover:from-[var(--dark-green)] text-center rounded-md text-white font-semibold space-x-2 justify-center hover:translate-y-[-3px] transition ease-in-out duration-300 btnSpecial">
+                                    <i class="bi bi-key-fill"></i>
+                                    <p>Verificar Primeiro Acesso</p>
+                                </button>
+                            </div>
+                            <p class="text-[var(--accent-yellow)] translate-y-3 text-[13px]">
+                                Precisando de ajuda?<a class="font-semibold" href=""> Fale conosco.</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
             </div>
-
         </div>
     </div>
 
