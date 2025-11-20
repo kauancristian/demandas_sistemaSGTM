@@ -93,5 +93,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: ../index.html?erro=erro_servidor");
             exit;
         }
+    } else if ($action === 'logout') {
+        session_start();
+        session_unset();
+        session_destroy();
+        header("Location: ../index.html?sucesso=logout");
+        exit;
     }
 }
