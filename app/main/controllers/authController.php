@@ -4,7 +4,7 @@ require_once __DIR__ . "/../models/Usuario.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $action = $_POST['action'] ?? '';
+    $action = $_GET['action'] ?? '';
 
     if ($action === 'cadastro') {
         
