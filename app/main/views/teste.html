@@ -107,6 +107,35 @@
 
     <div class="pt-12"></div>
 
-     
+     <div>
+         <button class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 btnFile">
+            <i class="bi bi-file-earmark-plus text-2xl"></i>
+         </button>
+         <input type="file" name="" id="fileInput" class="hidden" >
+     </div>
+
+     <div>
+        <button id="btnLink" class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
+            <i class="bi bi-link text-2xl"></i>
+        </button>
+        <div id="areaLinks"></div>
+     </div>
+
+     <div>
+        <button id="btnImage" class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
+            <i class="bi bi-images text-2xl"></i>
+        </button>
+        <input type="file" name="" id="imgInput" accept="image/*" class="hidden" >
+     </div>
+
+     <script>
+        const btnFile = document.getElementById("btnFile").onclick = () => {
+            document.getElementById("fileInput").click();
+        };
+
+        const btnImage = document.getElementById("btnImage").onclick = () => {
+            document.getElementById("imgInput").click();
+        };
+     </script>
 </body>
 </html>
