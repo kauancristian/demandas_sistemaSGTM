@@ -131,9 +131,28 @@
             }
         }
 
+        @keyframes movieLeft {
+            0%{
+                margin-left: -20px;
+                opacity: 0;
+            }
+
+            100%{
+                margin-top: 0px;
+                opacity: 1;
+            }
+        }
+
+        #menuLateral{
+            animation: movieLeft 1.2s ease-in-out;
+        }
+
+
         main{
             animation: movieBottom 1.2s ease-in-out;
         }
+
+
     </style>
 </head>
 <body class="">
@@ -143,7 +162,7 @@
 
         <!-- Menu Lateral PC-->
         <div class="hidden lg:block">
-            <div class="h-screen bg-[#121212] flex flex-col justify-between text-white pt-5 relative">
+            <div id="menuLateral" class="h-screen bg-[#121212] flex flex-col justify-between text-white pt-5 relative z-[9999]">
 
                 <div class="flex flex-col">
                     <div class="flex items-center justify-between px-4">
@@ -204,7 +223,11 @@
             </div>
         </div>
 
-        <main class="h-[100vh] overflow-y-auto bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 to-[#121212]">
+        <main class="h-[100vh] overflow-y-auto bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 to-[#121212] pb-2">
+
+            <!-- Shadow -->
+            <div class="bg-black inset-0 absolute opacity-80 h-[100vh] w-full shadowDiv hidden"></div>
+
             <div class="bg-gradient-to-b from-[var(--primary-green)] to-[var(--accent-yellow)] h-[65px] pb-0.5">
                 <header class="bg-gradient-to-r from-[#22411B] via-[var(--dark-green)] h-full flex items-center">
                     <h1 class="text-[#fff] lg:text-xl font-semibold ml-4">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
@@ -214,7 +237,7 @@
             <!-- Sec Inicio -->
             <div class="secs">
                  <!-- Sessão de organização das tarefas -->
-                <div id="containerGeralSecs" class="flex items-center flex-wrap pt-12 gap-10 lg:gap-4 px-6">
+                <div id="containerGeralSecs" class="flex items-center flex-wrap gap-6 lg:gap-4 px-6">
                     <!-- Container de Sessão -->
                     <!-- No script -->
                 </div>
@@ -243,8 +266,8 @@
             const containerSec = document.createElement("div");
             containerSec.innerHTML = `
             
-           <div class="flex justify-center items-center mx-auto space-x-4 containerSec">
-                <div class="flex flex-col space-y-3">
+           <div class="flex justify-center items-center mx-auto space-x-4 containerSec pt-12">
+                <div class="secContent flex flex-col space-y-3">
                     <div class="text-white bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 via-[#121212] to-[#262626] inline-flex w-[220px] py-2 rounded-xl border-2 border-transparent  hover:border-[var(--dark-green)]">
                         <div class="flex justify-between items-center w-full px-2">
                             <h2 class="text-2xl secTitle">Seção 1</h2>
@@ -276,7 +299,7 @@
 
                 <!-- Btn de criar mais seções -->
                 <div>
-                    <button class="bg-[var(--dark-green)] hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 py-5 px-6 rounded-full text-white cursor-pointer btnCreate">
+                    <button class="bg-[var(--dark-green)] hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 py-5 lg:px-6 rounded-full text-white cursor-pointer btnCreate">
                         <i class="bi bi-plus-lg"></i>
                     </button>
                 </div>
@@ -291,16 +314,38 @@
         const firstSection = createSection();
         containerGeralSecs.appendChild(firstSection);
 
+        // Controle de newButton
+
+        function updateCreateButtons() {
+            const sections = document.querySelectorAll(".containerSec");
+
+            sections.forEach(sec => {
+                const btn = sec.parentElement.querySelector(".btnCreate");
+                if (btn) {
+                    btn.classList.add("opacity-0", "pointer-events-none");
+                }
+            });
+
+            const lastSec = sections[sections.length - 1];
+            if (!lastSec) return;
+
+            const lastBtn = lastSec.parentElement.querySelector(".btnCreate");
+            if (lastBtn) {
+                lastBtn.classList.remove("opacity-0", "pointer-events-none");
+            }
+        }
+
+
 
         // Criação de novas sessões
         containerGeralSecs.addEventListener("click", (e) => {
             const btn = e.target.closest(".btnCreate");
 
             if(btn) {
-                btn.classList.add("opacity-0", "pointer-events-none");
                 const newSection = createSection();
                 containerGeralSecs.appendChild(newSection);
-            }
+                updateCreateButtons();
+            };
 
             // Modal Config Secs
             const configSecBtn = e.target.closest(".configSecBtn");
@@ -309,14 +354,15 @@
                 const modalSecConfig = configSecBtn.closest(".flex").querySelector(".modalSecConfig");
 
                 modalSecConfig.classList.toggle("hidden");
-            }
+            };
 
             const deleteSecBtn = e.target.closest(".deleteSecBtn");
 
             if(deleteSecBtn) {
-                const secToDelete = deleteSecBtn.closest(".containerSec");
+                const secToDelete = deleteSecBtn.closest(".containerSec").parentElement;
                 secToDelete.remove();
-            }
+                updateCreateButtons();
+            };
 
             const title = e.target.closest(".secTitle");
 
@@ -354,13 +400,13 @@
         });
 
 
-        // Fazer btnCommnets!!!
+        // Commnets!!!
         function createModalComment() {
 
             const modalComment = document.createElement("div");
             modalComment.innerHTML = `
             
-            <div class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 absolute bg-gradient-to-br from-[#121212] via-[#262626] via-[#121212] to-[#262626] h-[500px] w-[95%] sm:w-[500px] rounded-xl flex flex-col justify-between modalComment">
+            <div class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 absolute bg-gradient-to-br from-[#121212] via-[#262626] via-[#121212] to-[#262626] h-[500px] w-[95%] sm:w-[500px] rounded-xl flex flex-col justify-between modalComment shadow-xl shadow-gray-900">
                 <div class="flex justify-between items-center p-4 text-gray-200 relative">
                     <div>
                         <button class="bg-[#404040] py-2 px-3 rounded-full hover:bg-[#505050] transition ease-in-out duration-300 btnCloseModalComments">
@@ -380,17 +426,26 @@
 
                 <div class="bg-gradient-to-br bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 to-[#404040] w-[90%] mx-auto rounded-md h-[180px]">
                     <div class="grid grid-cols-3 px-4 sm:px-10">
-                        <button class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
-                            <i class="bi bi-file-earmark-plus text-2xl"></i>
-                        </button>
+                        <div>
+                            <button class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 btnFile">
+                                <i class="bi bi-file-earmark-plus text-2xl"></i>
+                            </button>
+                            <input type="file" name="" class="hidden fileInput" >
+                        </div>
 
-                        <button class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
-                            <i class="bi bi-link text-2xl"></i>
-                        </button>
+                        <div>
+                            <button id="btnLink" class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
+                                <i class="bi bi-link text-2xl"></i>
+                            </button>
+                            <div id="areaLinks"></div>
+                        </div>
 
-                        <button class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
-                            <i class="bi bi-images text-2xl"></i>
-                        </button>
+                        <div>
+                            <button id="btnImage" class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
+                                <i class="bi bi-images text-2xl"></i>
+                            </button>
+                            <input type="file" name="" id="imgInput" accept="image/*" class="hidden" >
+                        </div>
                     </div>
                 </div>
 
@@ -405,11 +460,13 @@
         }
 
         containerGeralSecs.addEventListener("click", (e) => {
+            const shadowDiv = document.querySelector(".shadowDiv");
             const btnCommnent = e.target.closest(".btnComents");
 
             if(btnCommnent) {
                 const newModalComment = createModalComment();
                 containerGeralSecs.appendChild(newModalComment);
+                shadowDiv.classList.remove("hidden");
             }
 
             const btnCloseModalComments = e.target.closest(".btnCloseModalComments");
@@ -417,11 +474,16 @@
             if(btnCloseModalComments) {
                 const modalToDelete = btnCloseModalComments.closest(".modalComment");
                 modalToDelete.remove();
+                shadowDiv.classList.add("hidden");
+            }
+
+            const btnFile = e.target.closest(".btnFile");
+            if(btnFile) {
+                const fileInput = btnFile.parentElement.querySelector(".fileInput");
+                fileInput.click();
             }
 
         })
-
-
 
 
         // Script SecTitle
@@ -483,6 +545,8 @@
             btnSairPC.classList.remove("hidden");
             containerGeralSecs.classList.remove("lg:grid-cols-5");
             containerGeralSecs.classList.add("lg:grid-cols-3");
+            containerGeralSecs.classList.remove("lg:px-6");
+            containerGeralSecs.classList.add("lg:px-16");
         };
 
         btnCloseMenuPC.onclick = () => {
@@ -495,6 +559,8 @@
             btnSairPC.classList.add("hidden");
             containerGeralSecs.classList.remove("lg:grid-cols-3");
             containerGeralSecs.classList.add("lg:grid-cols-5");
+            containerGeralSecs.classList.remove("lg:px-16");
+            containerGeralSecs.classList.add("lg:px-6");
         };
 
         const btnSecs = document.querySelectorAll(".btnSecs");
@@ -528,6 +594,7 @@
                 btn.classList.add("btnSpecialNav");
             }
         })
+
     </script>
 </body>
 </html>
