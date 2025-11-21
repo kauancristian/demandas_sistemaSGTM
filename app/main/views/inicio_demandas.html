@@ -204,9 +204,9 @@
             </div>
         </div>
 
-        <main class="h-[100vh] bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 to-[#121212]">
+        <main class="h-[100vh] overflow-y-auto bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 to-[#121212]">
             <div class="bg-gradient-to-b from-[var(--primary-green)] to-[var(--accent-yellow)] h-[65px] pb-0.5">
-                <header class="bg-gradient-to-r from-[#22411B] h-full flex items-center">
+                <header class="bg-gradient-to-r from-[#22411B] via-[var(--dark-green)] h-full flex items-center">
                     <h1 class="text-[#fff] lg:text-xl font-semibold ml-4">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
                 </header>
             </div>
@@ -214,7 +214,7 @@
             <!-- Sec Inicio -->
             <div class="secs">
                  <!-- Sessão de organização das tarefas -->
-                <div id="containerGeralSecs" class="grid sm:grid-cols-2 lg:grid-cols-5 pt-12 gap-10 lg:gap-4 px-12">
+                <div id="containerGeralSecs" class="flex items-center flex-wrap pt-12 gap-10 lg:gap-4 px-4">
                     <!-- Container de Sessão -->
                     <!-- No script -->
                 </div>
@@ -243,14 +243,31 @@
             const containerSec = document.createElement("div");
             containerSec.innerHTML = `
             
-            <div id="containerSec" class="flex justify-center items-center space-x-4">
+           <div class="flex justify-center items-center mx-auto space-x-4 containerSec">
                 <div class="flex flex-col space-y-3">
                     <div class="text-white bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 via-[#121212] to-[#262626] inline-flex w-[220px] py-2 rounded-xl border-2 border-transparent  hover:border-[var(--dark-green)]">
                         <div class="flex justify-between items-center w-full px-2">
                             <h2 class="text-2xl secTitle">Seção 1</h2>
-                            <i class="bi bi-three-dots-vertical cursor-pointer hover:text-[var(--primary-green)] transition ease-in-out duration-300"></i>
+                            <div class="flex items-center space-x-2">
+                                <i class="bi bi-three-dots-vertical cursor-pointer hover:text-[var(--primary-green)] transition ease-in-out duration-300 configSecBtn"></i>
+
+                                <!-- Modal de Config -->
+                                <div class="bg-[#242527] rounded-xl absolute transform lg:translate-x-6 p-4 transform lg:translate-y-5 hidden z-[7000] modalSecConfig">
+                                    <ul class="space-y-3">
+                                        <li class="flex items-center space-x-2 cursor-pointer group">
+                                            <i class="bi bi-plus-lg text-gray-300 group-hover:text-white transition ease-in-out duration-300"></i>
+                                            <p class="text-gray-300 group-hover:text-white transition ease-in-out duration-300">Novo nome</p>
+                                        </li>
+                                        <li class="flex items-center space-x-2 cursor-pointer group deleteSecBtn">
+                                            <i class="bi bi-trash3 text-red-500 group-hover:rotate-[-20deg] transition ease-in-out duration-300"></i>
+                                            <p class="text-red-500">Excluir seção</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                     <!-- Btn de comentarios -->
                     <button class="w-[220px] py-2 rounded-xl bg-[#262626] flex justify-center items-center text-gray-300 hover:text-white hover:bg-[#292929] transition ease-in-out duration-300 btnComents btnSpecial">
                         <i class="bi bi-chat-dots"></i>
@@ -283,6 +300,22 @@
                 btn.classList.add("opacity-0", "pointer-events-none");
                 const newSection = createSection();
                 containerGeralSecs.appendChild(newSection);
+            }
+
+            // Modal Config Secs
+            const configSecBtn = e.target.closest(".configSecBtn");
+
+            if(configSecBtn) {
+                const modalSecConfig = configSecBtn.closest(".flex").querySelector(".modalSecConfig");
+
+                modalSecConfig.classList.toggle("hidden");
+            }
+
+            const deleteSecBtn = e.target.closest(".deleteSecBtn");
+
+            if(deleteSecBtn) {
+                const secToDelete = deleteSecBtn.closest(".containerSec");
+                secToDelete.remove();
             }
 
             const title = e.target.closest(".secTitle");
@@ -322,22 +355,73 @@
 
 
         // Fazer btnCommnets!!!
-        function criarModalComments() {
+        function createModalComment() {
 
             const modalComment = document.createElement("div");
             modalComment.innerHTML = `
             
+            <div class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 absolute bg-gradient-to-br from-[#121212]/90 via-[#262626]/80 via-[#121212] to-[#262626] h-[500px] w-[95%] sm:w-[500px] rounded-xl flex flex-col justify-between modalComment">
+                <div class="flex justify-between items-center p-4 text-gray-200 relative">
+                    <div>
+                        <button class="bg-[#404040] py-2 px-3 rounded-full hover:bg-[#505050] transition ease-in-out duration-300 btnCloseModalComments">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <button class="bg-[var(--primary-green)] py-2 px-6 rounded-2xl flex justify-center items-center hover:bg-green-600 transition ease-in-out duration-300 btnSpecial">
+                            <p>Publicar</p>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex flex-col justify-center items-center relative">
+                    <input id="inputComent" class="w-[90%] bg-transparent outline-none text-white text-xl" type="text" name="" id="" placeholder="Assunto">
+                </div>
+
+                <div class="bg-gradient-to-br bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 to-[#404040] w-[90%] mx-auto rounded-md h-[180px]">
+                    <div class="grid grid-cols-3 px-4 sm:px-10">
+                        <button class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
+                            <i class="bi bi-file-earmark-plus text-2xl"></i>
+                        </button>
+
+                        <button class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
+                            <i class="bi bi-link text-2xl"></i>
+                        </button>
+
+                        <button class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
+                            <i class="bi bi-images text-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="w-[90%] mx-auto flex justify-center transform transform translate-y-[-10px] outline-none relative">
+                    <textarea class="w-full h-40 p-2 pt-2 leading-tight placeholder-[#a8a7a7] outline-none rounded-md bg-transparent text-white" placeholder="Escreva algo necessário..."></textarea>
+                </div>
+            </div>
+
             `
 
+            return modalComment;
         }
 
         containerGeralSecs.addEventListener("click", (e) => {
             const btnCommnent = e.target.closest(".btnComents");
 
             if(btnCommnent) {
-
+                const newModalComment = createModalComment();
+                containerGeralSecs.appendChild(newModalComment);
             }
+
+            const btnCloseModalComments = e.target.closest(".btnCloseModalComments");
+
+            if(btnCloseModalComments) {
+                const modalToDelete = btnCloseModalComments.closest(".modalComment");
+                modalToDelete.remove();
+            }
+
         })
+
+
 
 
         // Script SecTitle
