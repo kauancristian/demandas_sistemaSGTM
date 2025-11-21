@@ -1,3 +1,15 @@
+<?php
+
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+        if (!isset($_SESSION['id_usuario'])) {
+            header("Location: ../index.php");
+            exit;
+        }
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -195,12 +207,14 @@
                 </div>
 
                 <!-- Btn Sair -->
-                <div id="btnSairPC" class="transform translate-y-[-20px] hidden">
-                    <div class="flex items-center cursor-pointer pl-8 space-x-3 w-full py-4 font-semibold hover:bg-[#3B3B3B] transition ease-in-out duration-300 btnSpecialNav">
-                        <i class="bi bi-box-arrow-left"></i>
-                        <p>Sair</p>
+                <form action="../controllers/authController.php?action=logout" method="POST">
+                    <div id="btnSairPC" class="transform translate-y-[-20px] hidden">
+                        <div class="flex items-center cursor-pointer pl-8 space-x-3 w-full py-4 font-semibold hover:bg-[#3B3B3B] transition ease-in-out duration-300 btnSpecialNav">
+                            <i class="bi bi-box-arrow-left"></i>
+                            <button type="submit">Sair</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -208,6 +222,16 @@
             <div class="bg-gradient-to-b from-[var(--primary-green)] to-[var(--accent-yellow)] h-[65px] pb-0.5">
                 <header class="bg-gradient-to-r from-[#22411B] via-[var(--dark-green)] h-full flex items-center">
                     <h1 class="text-[#fff] lg:text-xl font-semibold ml-4">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
+                    <div class="ml-auto pr-4">
+                        <div class="flex items-center justify-end space-x-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-[var(--dark-green)] flex items-center justify-center text-white font-semibold">
+                                    <?php echo htmlspecialchars(mb_substr($_SESSION['nome'], 0, 1, 'UTF-8')); ?>
+                                </div>
+                                <span class="text-white font-medium hidden sm:inline-block"><?php echo htmlspecialchars(isset($_SESSION['nome']) ? $_SESSION['nome'] : 'Usuário'); ?></span>
+                            </div>
+                        </div>
+                    </div>
                 </header>
             </div>
 

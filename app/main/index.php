@@ -156,7 +156,7 @@
                 </div>
                 <div class="w-full flex">
                     <!-- Form Login -->
-                    <form id="formLogin" class="flex flex-col items-center justify-center w-full gap-6 px-4 transform translate-y-4" action="">
+                    <form id="formLogin" class="flex flex-col items-center justify-center w-full gap-6 px-4 transform translate-y-4" action="../main/controllers/authController.php?action=login" method="POST">
                         <div class="w-full relative flex flex-col items-center gap-6">
                             <div class="w-[85%] relative flex items-center">
                                 <i class="bi bi-envelope-fill absolute left-3 text-xl text-[var(--dark-green)]"></i>
@@ -170,7 +170,7 @@
                             </div>
                         </div>
                         <div class="pt-6 w-full flex justify-center">
-                            <button class="flex w-[85%] py-3 bg-gradient-to-br from-[var(--dark-green)] to-white/40 hover:from-[var(--dark-green)] text-center rounded-md text-white font-semibold space-x-2 justify-center hover:translate-y-[-3px] transition ease-in-out duration-300 btnSpecial">
+                            <button class="flex w-[85%] py-3 bg-gradient-to-br from-[var(--dark-green)] to-white/40 hover:from-[var(--dark-green)] text-center rounded-md text-white font-semibold space-x-2 justify-center hover:translate-y-[-3px] transition ease-in-out duration-300 btnSpecial" type="submit">
                                 <i class="bi bi-box-arrow-in-right"></i>
                                 <p>Acessar Sistema</p>
                             </button>
@@ -180,7 +180,7 @@
                         </p>
                     </form>
                     <!-- Form Cad -->
-                    <form id="formCad" class="flex flex-col items-center justify-center w-full gap-3 px-4 hidden" action="">
+                    <form id="formCad" class="flex flex-col items-center justify-center w-full gap-3 px-4 hidden" action="../main/controllers/authController.php?action=cadastro" method="POST">
                         <div class="w-full relative flex flex-col items-center gap-5">
                             <div class="w-[85%] relative flex items-center">
                                 <i class="bi bi-person-fill absolute left-3 text-xl text-[var(--dark-green)]"></i>
@@ -200,7 +200,7 @@
                         </div>
                         <div class="w-full flex flex-col items-center transform ">
                             <div class="pt-6 w-full flex justify-center transform translate-y-[-10px]">
-                                <button class="flex w-[85%] py-3 bg-gradient-to-br from-[var(--dark-green)] to-white/40 hover:from-[var(--dark-green)] text-center rounded-md text-white font-semibold space-x-2 justify-center hover:translate-y-[-3px] transition ease-in-out duration-300 btnSpecial">
+                                <button class="flex w-[85%] py-3 bg-gradient-to-br from-[var(--dark-green)] to-white/40 hover:from-[var(--dark-green)] text-center rounded-md text-white font-semibold space-x-2 justify-center hover:translate-y-[-3px] transition ease-in-out duration-300 btnSpecial" type="submit">
                                     <i class="bi bi-key-fill"></i>
                                     <p>Verificar Primeiro Acesso</p>
                                 </button>
