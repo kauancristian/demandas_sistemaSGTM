@@ -158,70 +158,7 @@
 <body class="">
 
     <!-- Sec 1 -->
-    <div id="sec1" class="grid lg:grid-cols-[0.02fr_2fr]"> 
-
-        <!-- Menu Lateral PC-->
-        <div class="hidden lg:block">
-            <div id="menuLateral" class="h-screen bg-[#121212] flex flex-col justify-between text-white pt-5 relative z-[9999]">
-
-                <div class="flex flex-col">
-                    <div class="flex items-center justify-between px-4">
-                        <div></div>
-                        <!-- ImgSalabergaPC -->
-                        <div id="imgSalabergaPC" class="flex items-center hidden">
-                            <img class="w-20 object-contain transform translate-x-3" src="../assets/S.png" alt="">
-                        </div>
-                        <!-- Btns Abrir e Fechar Menu -->
-                        <div>
-                            <button id="btnOpenMenuPC" class="h-1 hover:text-[var(--accent-yellow)] transition ease-in-out duration-300">
-                                <i class="ri-menu-unfold-line text-2xl"></i>
-                            </button>
-                            <button id="btnCloseMenuPC" class="h-1 hover:text-[var(--accent-yellow)] transition ease-in-out duration-300 hidden">
-                                <i class="ri-menu-fold-line text-2xl"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- textMenuPC -->
-                    <div id="textMenuPC" class="text-center text-gray-400 px-4 text-sm pt-4 hidden">
-                        <p>Gerencie suas demandas com facilidade. Crie, edite, acompanhe o progresso e mantenha suas atividades sempre organizadas.</p>
-                    </div>
-                </div>
-
-                <!-- Nav -->
-                <div id="navMenuPc" class="transform translate-y-[-70px] hidden">
-                    <nav>
-                        <ul class="space-y-0 font-semibold">
-                            <li class="w-full secSelect btnSpecialNav hover:bg-[#3B3B3B] transition ease-in-out duration-300 btnSecs">
-                                <div class="flex items-center cursor-pointer pl-8 space-x-3 w-full py-4">
-                                    <i class="bi bi-house"></i>
-                                    <p>Início</p>
-                                </div>
-                            </li>
-                            <li class="w-full btnSpecialNav hover:bg-[#3B3B3B] transition ease-in-out duration-300 btnSecs">
-                                <div class="flex items-center cursor-pointer pl-8 space-x-3 w-full py-4">
-                                    <i class="bi bi-list-task"></i>
-                                    <p>Tarefas</p>
-                                </div>
-                            </li>
-                            <li class="w-full btnSpecialNav hover:bg-[#3B3B3B] transition ease-in-out duration-300 btnSecs">
-                                <div class="flex items-center cursor-pointer pl-8 space-x-3 w-full py-4">
-                                    <i class="bi bi-clipboard-data"></i>
-                                    <p>Relatórios</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-
-                <!-- Btn Sair -->
-                <div id="btnSairPC" class="transform translate-y-[-20px] hidden">
-                    <div class="flex items-center cursor-pointer pl-8 space-x-3 w-full py-4 font-semibold hover:bg-[#3B3B3B] transition ease-in-out duration-300 btnSpecialNav">
-                        <i class="bi bi-box-arrow-left"></i>
-                        <p>Sair</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="sec1" class=""> 
 
         <main class="h-[100vh] overflow-y-auto bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 to-[#121212] pb-2">
 
@@ -534,34 +471,6 @@
         const btnSairPC = document.getElementById("btnSairPC");
 
         const sec1 = document.getElementById("sec1");
-
-        btnOpenMenuPC.onclick = () => {
-            sec1.className = "grid lg:grid-cols-[0.5fr_2fr]";
-            btnOpenMenuPC.classList.add("hidden");
-            btnCloseMenuPC.classList.remove("hidden");
-            imgSalabergaPC.classList.remove("hidden");
-            textMenuPC.classList.remove("hidden");
-            navMenuPc.classList.remove("hidden");
-            btnSairPC.classList.remove("hidden");
-            containerGeralSecs.classList.remove("lg:grid-cols-5");
-            containerGeralSecs.classList.add("lg:grid-cols-3");
-            containerGeralSecs.classList.remove("lg:px-6");
-            containerGeralSecs.classList.add("lg:px-16");
-        };
-
-        btnCloseMenuPC.onclick = () => {
-            sec1.className = "grid lg:grid-cols-[0.02fr_2fr]";
-            btnOpenMenuPC.classList.remove("hidden");
-            btnCloseMenuPC.classList.add("hidden");
-            imgSalabergaPC.classList.add("hidden");
-            textMenuPC.classList.add("hidden");
-            navMenuPc.classList.add("hidden");
-            btnSairPC.classList.add("hidden");
-            containerGeralSecs.classList.remove("lg:grid-cols-3");
-            containerGeralSecs.classList.add("lg:grid-cols-5");
-            containerGeralSecs.classList.remove("lg:px-16");
-            containerGeralSecs.classList.add("lg:px-6");
-        };
 
         const btnSecs = document.querySelectorAll(".btnSecs");
         const secs = document.querySelectorAll(".secs");
