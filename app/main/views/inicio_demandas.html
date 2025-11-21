@@ -166,8 +166,26 @@
             <div class="bg-black inset-0 absolute opacity-80 h-[100vh] w-full shadowDiv hidden"></div>
 
             <div class="bg-gradient-to-b from-[var(--primary-green)] to-[var(--accent-yellow)] h-[65px] pb-0.5">
-                <header class="bg-gradient-to-r from-[#22411B] via-[var(--dark-green)] h-full flex items-center">
-                    <h1 class="text-[#fff] lg:text-xl font-semibold ml-4">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
+                <header class="bg-gradient-to-r from-[#22411B] via-[var(--dark-green)] h-full flex justify-between items-center">
+                    <h1 class="text-[#fff] lg:text-xl font-semibold ml-5">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
+
+                    <div id="menuPC" class="hidden lg:block">
+                        <div class="transform translate-x-[-120px]">
+                            <nav>
+                                <ul class="flex flex-col lg:flex-row items-center lg:space-x-3">
+                                    <li class="text-gray-200 cursor-pointer">Início</li>
+                                    <li class="text-gray-200 cursor-pointer">Tarefas</li>
+                                    <li class="text-gray-200 cursor-pointer">Registros</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="transform translate-x-[-30px]">
+                        <button>
+                            <i class="bi bi-three-dots-vertical text-xl text-gray-300"></i>
+                        </button>
+                    </div>
                 </header>
             </div>
 
@@ -236,7 +254,7 @@
 
                 <!-- Btn de criar mais seções -->
                 <div>
-                    <button class="bg-[var(--dark-green)] hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 py-5 lg:px-6 rounded-full text-white cursor-pointer btnCreate">
+                    <button class="bg-[var(--dark-green)] hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 py-5 px-6 rounded-full text-white cursor-pointer btnCreate">
                         <i class="bi bi-plus-lg"></i>
                     </button>
                 </div>
