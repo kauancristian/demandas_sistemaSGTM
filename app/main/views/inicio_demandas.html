@@ -68,8 +68,8 @@
             height: 100%;
             left: -100%;
             top: 0;
-            background-image: linear-gradient(120deg, transparent, #ffffff6b, transparent);
-            transition: left 0.4s ease-in-out;
+            background-image: linear-gradient(120deg, transparent, #00b3481a, transparent);
+            transition: left 0.3s ease-in-out;
         }
 
         .btnSpecial:hover::after{
@@ -83,27 +83,29 @@
     <!-- Sec 1 -->
     <div id="sec1" class="h-screen"> 
 
-        <div class="bg-gradient-to-b from-[var(--primary-green)] to-[var(--accent-yellow)] h-[65px] pb-0.5">
-                <header class="bg-gradient-to-r from-[#22411B] via-[#22411B] via-[var(--dark-green2)] to-[var(--accent-yellow)] h-full flex justify-between items-center">
+        
+        <div class="fixed bg-gradient-to-r from-[var(--accent-yellow)] via-[var(--primary-green)] to-[var(--accent-yellow)] h-[75px] pb-1 z-[9999]">
+            <header class="bg-gradient-to-r from-[var(--dark-green)] to-[#005A24] h-full flex justify-between items-center w-screen z-[9999]">
+                <div class="flex items-center space-x-3 ml-4">
+                    <img class="object-contain w-14" src="../assets/S.png" alt="">
                     <h1 id="h1Header" class="text-[#fff] lg:text-xl font-semibold ml-5">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
+                </div>
+                <div class="transform translate-x-[-30px]">
+                    <button>
+                        <i class="bi bi-three-dots-vertical text-xl text-gray-300"></i>
+                    </button>
+                </div>
+            </header>
+        </div>
+            
+        <!-- Inicio -->
+        <div class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 relative w-full text-center">
+            <div id="textSec1" class="flex flex-col items-center justify-center">
+                <h3 class="epi text-4xl lg:text-[6vw] font-bold text-white drop-shadow-[0_0_1px_gray]">SEJA BEM <span class="text-[#FFA500] epi">VINDO!</span></h3>
 
+                <p class="px-4 sm:px-0 sm:w-[610px] text-gray-200 text-center text-sm pt-5">Nosso sistema de demandas foi desenvolvido para melhorar o atendimento interno, conectando equipes, setores e gestores em uma plataforma inteligente, prática e segura. Aqui, cada solicitação é organizada, acompanhada e resolvida com agilidade, garantindo processos mais eficientes e comunicação clara entre todos os envolvidos.</p>
 
-                    <div class="transform translate-x-[-30px]">
-                        <button>
-                            <i class="bi bi-three-dots-vertical text-xl text-gray-300"></i>
-                        </button>
-                    </div>
-                </header>
-            </div>
-
-            <!-- Inicio -->
-            <div class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 relative w-full text-center">
-               <div id="textSec1" class="flex flex-col items-center justify-center transform translate-y-[-30px]">
-                    <h3 class="epi text-4xl lg:text-[6vw] font-bold text-white drop-shadow-[0_0_1px_gray]">SEJA BEM <span class="text-[#FFA500] epi">VINDO!</span></h3>
-
-                    <p class="px-4 sm:px-0 sm:w-[610px] text-gray-200 text-center text-sm pt-5">Nosso sistema de demandas foi desenvolvido para melhorar o atendimento interno, conectando equipes, setores e gestores em uma plataforma inteligente, prática e segura. Aqui, cada solicitação é organizada, acompanhada e resolvida com agilidade, garantindo processos mais eficientes e comunicação clara entre todos os envolvidos.</p>
-
-                    <div class="pt-5 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-5 items-center">
+                <div class="pt-5 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-5 items-center">
                     <a href="createDemandas.html">
                         <button class="bg-[#156635] btnSpecial py-3 text-lg text-white w-[200px] rounded-xl btnSpecialGreen hover:translate-y-[-5px] transition ease-in-out duration-500 flex items-center space-x-2 justify-center group">
                             <p>Gerar Planilha</p>
@@ -113,7 +115,7 @@
 
                     <div class="pt-5 lg:pt-0">
                         <div class="flex items-center space-x-3">
-                            <img class="w-[12vw] lg:w-[3vw] object-contain" src="../assets/S.png" alt="">
+                            <i class="bi bi-buildings-fill text-[var(--accent-yellow)] text-4xl"></i>
                             <div class="flex flex-col items-center justify-center">
                                 <p class="text-sm text-white"> - EEEP Salaberga 2025</p>
                                 <p class="text-sm text-[#FFA400] transform translate-x-[-10px]">Sistema Integrado</p>
@@ -121,8 +123,9 @@
                         </div>
                     </div>
                 </div>
-               </div>   
-            </div>
+            </div>  
+        </div>
+    </div>
 
     </div>
 
@@ -136,7 +139,7 @@
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 px-10 pt-12">
             <a id="func1" href="createDemandas.html">
-                <div class="bg-gradient-to-br btnSpecial hover:translate-y-[-5px] transition ease-in-out duration-300 p-3 rounded-lg cursor-pointer w-[95%] h-[250px] lg:w-[25vw] mx-auto">
+                <div class="bg-gradient-to-br btnSpecial hover:translate-y-[-5px] p-3 rounded-lg cursor-pointer w-[95%] h-[250px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300">
                     <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
                         <i class="bi bi-plus-lg text-5xl text-[var(--accent-yellow)]"></i>
                         <p class="font-semibold text-white text-xl">Nova <span class="text-[var(--primary-green)]">Planilha</span></p>
@@ -146,7 +149,7 @@
             </a>
 
             <a id="func2" href="tarefasDemandas.html">
-                <div class="bg-gradient-to-br btnSpecial hover:translate-y-[-5px] transition ease-in-out duration-300 p-3 rounded-lg cursor-pointer w-[95%] h-[250px] lg:w-[25vw] mx-auto">
+                <div class="bg-gradient-to-br btnSpecial hover:translate-y-[-5px] p-3 rounded-lg cursor-pointer w-[95%] h-[250px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300">
                     <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
                         <i class="bi bi-clipboard2-data text-5xl text-[var(--accent-yellow)]"></i>
                         <p class="font-semibold text-white text-xl">Gerenciar <span class="text-[var(--primary-green)]">Tarefas</span></p>
@@ -156,7 +159,7 @@
             </a>
 
             <a id="func3" href="relatoriosDemandas.html">
-                <div class="bg-gradient-to-br btnSpecial hover:translate-y-[-5px] transition ease-in-out duration-300 p-3 rounded-lg cursor-pointer w-[95%] h-[250px] lg:w-[25vw] mx-auto">
+                <div class="bg-gradient-to-br btnSpecial hover:translate-y-[-5px] p-3 rounded-lg cursor-pointer w-[95%] h-[250px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300">
                     <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
                         <i class="bi bi-file-earmark-arrow-up-fill text-5xl text-[var(--accent-yellow)]"></i>
                         <p class="font-semibold text-white text-xl">Gerar <span class="text-[var(--primary-green)]">Relatórios</span></p>
