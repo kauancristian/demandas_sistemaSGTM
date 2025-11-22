@@ -81,14 +81,12 @@
     <!-- Sec 1 -->
     <div id="sec1" class="h-screen"> 
 
-        <div class="bg-gradient-to-b from-[var(--primary-green)] to-[var(--accent-yellow)] h-[65px] pb-0.5">
-            <header class="bg-gradient-to-r from-[#22411B] via-[#22411B] via-[var(--dark-green2)] to-[var(--accent-yellow)] h-full flex justify-between items-center">
-                <div class="flex items-center space-x-5 ml-5">
-                    <a href="inicio_demandas.html"><i class="bi bi-arrow-return-left text-white hover:text-[var(--accent-yellow)] transition ease-in-out duration-300 cursor-pointer text-xl"></i></a>
-                    <h1 class="text-[#fff] lg:text-xl font-semibold ml-5">Geração de <span class="text-[var(--accent-yellow)]">Planilha</span></h1>
+        <div class="fixed bg-gradient-to-r from-[var(--accent-yellow)] via-[var(--primary-green)] to-[var(--accent-yellow)] h-[75px] pb-1 z-[9999]">
+            <header class="bg-gradient-to-r from-[var(--dark-green)] to-[#005A24] h-full flex justify-between items-center w-screen z-[9999]">
+                <div class="flex items-center space-x-3 ml-4">
+                    <img class="object-contain w-14" src="../assets/S.png" alt="">
+                    <h1 id="h1Header" class="text-[#fff] lg:text-xl font-semibold ml-5">Criação de <span class="text-[var(--accent-yellow)]">Planilhas</span></h1>
                 </div>
-
-
                 <div class="transform translate-x-[-30px]">
                     <button>
                         <i class="bi bi-three-dots-vertical text-xl text-gray-300"></i>
@@ -97,8 +95,26 @@
             </header>
         </div>
 
+        <!-- Sessão de nada criado -->
+        <div class="pt-[120px] flex flex-col items-center justify-center">
+            <div class="flex flex-col items-center space-y-3 text-center">
+                <h1 class="text-gray-200 text-xl">Crie sua primeira seção para começar a organizar suas demandas.</h1>
+                <span class="bg-[var(--accent-yellow)] h-[1px] w-[200px] mx-auto block"></span>
+            </div>
+
+            <div class="pt-12">
+                <button class="bg-[#156635] p-5 rounded-lg text-white hover:bg-white hover:text-[#156635] hover:translate-y-[-3px] transition ease-in-out duration-300">
+                    <div class="flex flex-col items-center space-y-2">
+                        <i class="bi bi-plus-lg text-4xl"></i>
+                        <p class= "font-semibold">Criar Seção</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+
         <!-- Sec Criação de Seções -->
-        <div class="secs">
+        <div class="secCreateDemanda hidden  pt-12">
                 <!-- Sessão de organização das tarefas -->
             <div id="containerGeralSecs" class="flex items-center flex-wrap gap-6 lg:gap-4 px-6">
                 <!-- Container de Sessão -->
