@@ -138,35 +138,98 @@
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 px-10 pt-12">
-            <a id="func1" href="createDemandas.html">
-                <div class="bg-gradient-to-br btnSpecial hover:translate-y-[-5px] p-3 rounded-lg cursor-pointer w-[95%] h-[250px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300">
-                    <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
-                        <i class="bi bi-plus-lg text-5xl text-[var(--accent-yellow)]"></i>
-                        <p class="font-semibold text-white text-xl">Nova <span class="text-[var(--primary-green)]">Planilha</span></p>
-                        <p class="text-center text-gray-300 px-4">Crie uma nova planilha para registrar e organizar suas demandas.</p>
-                    </div>
+            <div id="func1" class="bg-gradient-to-br btnSpecial p-3 rounded-lg cursor-pointer w-[95%] h-[320px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300 flex flex-col justify-between">
+                <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
+                    <i class="bi bi-plus-lg text-5xl text-[var(--accent-yellow)]"></i>
+                    <p class="font-semibold text-white text-xl">Nova <span class="text-[var(--primary-green)]">Planilha</span></p>
                 </div>
-            </a>
 
-            <a id="func2" href="tarefasDemandas.html">
-                <div class="bg-gradient-to-br btnSpecial hover:translate-y-[-5px] p-3 rounded-lg cursor-pointer w-[95%] h-[250px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300">
-                    <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
-                        <i class="bi bi-clipboard2-data text-5xl text-[var(--accent-yellow)]"></i>
-                        <p class="font-semibold text-white text-xl">Gerenciar <span class="text-[var(--primary-green)]">Tarefas</span></p>
-                        <p class="text-center text-gray-300 px-4">Acompanhe, edite e organize todas as tarefas em andamento.</p>
-                    </div>
+                <div class="transform translate-y-2">
+                    <p class="text-center text-gray-300 px-4">Crie uma nova planilha para registrar e organizar suas demandas.</p>
                 </div>
-            </a>
 
-            <a id="func3" href="relatoriosDemandas.html">
-                <div class="bg-gradient-to-br btnSpecial hover:translate-y-[-5px] p-3 rounded-lg cursor-pointer w-[95%] h-[250px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300">
-                    <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
-                        <i class="bi bi-file-earmark-arrow-up-fill text-5xl text-[var(--accent-yellow)]"></i>
-                        <p class="font-semibold text-white text-xl">Gerar <span class="text-[var(--primary-green)]">Relatórios</span></p>
-                        <p class="text-center text-gray-300 px-4">Gere relatórios completos para análise e acompanhamento das demandas.</p>
+                <div class="pt-3 transform translate-y-[-10px] flex flex-col items-center">
+                    <div class="span bg-[#404040] h-[1px] w-[85%] block"></div>
+
+                    <div class="flex justify-between items-center w-[85%] pt-6">
+                        <div class="flex items-center space-x-2 text-[--primary-green] bg-[#404040] py-1.5 px-3 rounded-full border border-[--primary-green] text-center justify-center">
+                            <i class="bi bi-circle-fill text-xs"></i>
+                            <p class="font-semibold text-xs">ATIVA</p>
+                        </div>
+
+                        <div>
+                            <a href="createDemandas.html">
+                                <button class="flex items-center space-x-2 bg-[#156635] py-2 px-4 rounded-xl hover:translate-y-[-3px] hover:drop-shadow-[0_0_6px_var(--primary-green)] transition ease-in-out duration-300">
+                                    <i class="bi bi-box-arrow-up-right text-white"></i>
+                                    <p class="font-semibold text-white text-sm">Acessar</p>
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </a>
+            </div>
+
+            <div id="func2" class="bg-gradient-to-br btnSpecial p-3 rounded-lg cursor-pointer w-[95%] h-[320px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300 flex flex-col justify-between">
+                <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
+                    <i class="bi bi-clipboard2-data text-5xl text-[var(--accent-yellow)]"></i>
+                    <p class="font-semibold text-white text-xl">Gerenciar <span class="text-[var(--primary-green)]">Tarefas</span></p>
+                </div>
+
+                <div class="transform translate-y-2">
+                    <p class="text-center text-gray-300 px-4">Acompanhe, edite e organize todas as tarefas em andamento.</p>
+                </div>
+
+                <div class="pt-3 transform translate-y-[-10px] flex flex-col items-center">
+                    <div class="span bg-[#404040] h-[1px] w-[85%] block"></div>
+
+                    <div class="flex justify-between items-center w-[85%] pt-6">
+                        <div class="flex items-center space-x-2 text-[--primary-green] bg-[#404040] py-1.5 px-3 rounded-full border border-[--primary-green] text-center justify-center">
+                            <i class="bi bi-circle-fill text-xs"></i>
+                            <p class="font-semibold text-xs">ATIVA</p>
+                        </div>
+
+                        <div>
+                            <a href="tarefasDemandas.html">
+                                <button class="flex items-center space-x-2 bg-[#156635] py-2 px-4 rounded-xl hover:translate-y-[-3px] hover:drop-shadow-[0_0_6px_var(--primary-green)] transition ease-in-out duration-300">
+                                    <i class="bi bi-box-arrow-up-right text-white"></i>
+                                    <p class="font-semibold text-white text-sm">Acessar</p>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="func3" class="bg-gradient-to-br btnSpecial p-3 rounded-lg cursor-pointer w-[95%] h-[320px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300 flex flex-col justify-between">
+                <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
+                    <i class="bi bi-file-earmark-arrow-up-fill text-5xl text-[var(--accent-yellow)]"></i>
+                    <p class="font-semibold text-white text-xl">Gerar <span class="text-[var(--primary-green)]">Relatórios</span></p>
+                </div>
+
+                <div class="transform translate-y-2">
+                    <p class="text-center text-gray-300 px-4">Gere relatórios completos para análise e acompanhamento das demandas.</p>
+                </div>
+
+                <div class="pt-3 transform translate-y-[-10px] flex flex-col items-center">
+                    <div class="span bg-[#404040] h-[1px] w-[85%] block"></div>
+
+                    <div class="flex justify-between items-center w-[85%] pt-6">
+                        <div class="flex items-center space-x-2 text-[--primary-green] bg-[#404040] py-1.5 px-3 rounded-full border border-[--primary-green] text-center justify-center">
+                            <i class="bi bi-circle-fill text-xs"></i>
+                            <p class="font-semibold text-xs">ATIVA</p>
+                        </div>
+
+                        <div>
+                            <a href="relatoriosDemandas.html">
+                                <button class="flex items-center space-x-2 bg-[#156635] py-2 px-4 rounded-xl hover:translate-y-[-3px] hover:drop-shadow-[0_0_6px_var(--primary-green)] transition ease-in-out duration-300">
+                                    <i class="bi bi-box-arrow-up-right text-white"></i>
+                                    <p class="font-semibold text-white text-sm">Acessar</p>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -200,7 +263,7 @@
                     </div>
                 </div>
                 <div class="text-white flex flex-col items-center justify-center space-y-5 pt-9 lg:pt-3 sm:pt-0">
-                    <p class="text-sm">Transforme a gestão da sua escola com um sistema completo: organize alunos, professores, notas e tarefas de forma simples e eficiente.</p>
+                    <p class="text-sm">Otimize a gestão da sua escola com um sistema inteligente de demandas: organize solicitações, acompanhe tarefas, conecte equipes e mantenha tudo funcionando de forma clara, simples e eficiente.</p>
                     <p>&#169 Todos os direitos reservados</p>
                 </div>
                 <div class="w-full h-full flex flex-col items-center space-y-2 justify-center pt-12 lg:pt-0">
