@@ -84,7 +84,7 @@
     <div id="sec1" class="h-screen"> 
 
         <div class="bg-gradient-to-b from-[var(--primary-green)] to-[var(--accent-yellow)] h-[65px] pb-0.5">
-                <header class="bg-gradient-to-r from-[#22411B] via-[var(--dark-green)] h-full flex justify-between items-center">
+                <header class="bg-gradient-to-r from-[#22411B] via-[#22411B] via-[var(--dark-green2)] to-[var(--accent-yellow)] h-full flex justify-between items-center">
                     <h1 id="h1Header" class="text-[#fff] lg:text-xl font-semibold ml-5">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
 
 
@@ -105,7 +105,7 @@
 
                     <div class="pt-5 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-5 items-center">
                     <a href="createDemandas.html">
-                        <button class="bg-[var(--dark-green)] btnSpecial py-3 text-lg text-white w-[200px] rounded-xl btnSpecialGreen hover:translate-y-[-5px] transition ease-in-out duration-500 flex items-center space-x-2 justify-center group">
+                        <button class="bg-[#156635] btnSpecial py-3 text-lg text-white w-[200px] rounded-xl btnSpecialGreen hover:translate-y-[-5px] transition ease-in-out duration-500 flex items-center space-x-2 justify-center group">
                             <p>Gerar Planilha</p>
                             <i id="chevron" class="bi bi-chevron-right group-hover:translate-x-1 transition ease-in-out duration-300"></i>
                         </button>
@@ -169,7 +169,7 @@
     </div>
     
 
-     <div class="bg-gradient-to-t from-[var(--primary-green)] to-[var(--accent-yellow)] lg:h-[240px] pt-[2px]">
+     <div class="bg-gradient-to-t from-[var(--primary-green)] to-[var(--accent-yellow)] lg:h-[260px] pt-[2px]">
          <footer class="bg-[#1C1C1C] h-full px-5 pb-12 flex justify-center items-center bottom-0 p-8 text-center">
             <div class="grid lg:grid-cols-3 h-full w-full flex items-center">
                 <div class="text-white flex flex-col items-start transform translate-x-2 lg:items-center text-start text-sm sm:text-[15px] ">
@@ -189,6 +189,11 @@
                             <i class="bi bi-heart-fill text-[var(--accent-yellow)]"></i>
                             <p class="text-gray-200">Thalyta Helen</p>
                         </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="bi bi-bar-chart-line-fill text-[var(--accent-yellow)]"></i>
+                            <p class="text-gray-200">Kauanna Tiburcio</p>
+                        </div>
+
                     </div>
                 </div>
                 <div class="text-white flex flex-col items-center justify-center space-y-5 pt-9 lg:pt-3 sm:pt-0">
@@ -213,7 +218,7 @@
         });
 
         ScrollReveal().reveal('#func1', {
-            delay: 400,
+            delay: 300,
             origin: 'bottom',
             distance: '30px',
             duration: 800,
@@ -221,7 +226,7 @@
         });
 
         ScrollReveal().reveal('#func2', {
-            delay: 600,
+            delay: 400,
             origin: 'bottom',
             distance: '30px',
             duration: 800,
@@ -229,7 +234,7 @@
         });
 
         ScrollReveal().reveal('#func3', {
-            delay: 800,
+            delay: 600,
             origin: 'bottom',
             distance: '30px',
             duration: 800,
@@ -237,7 +242,7 @@
         });
 
         ScrollReveal().reveal('#h1Header', {
-            delay: 300,
+            delay: 200,
             origin: 'left',
             distance: '30px',
             duration: 800,
@@ -246,7 +251,7 @@
 
 
         ScrollReveal().reveal('#textSec1', {
-            delay: 300,
+            delay: 200,
             origin: 'top',
             distance: '30px',
             duration: 800,

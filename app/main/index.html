@@ -116,7 +116,7 @@
 <body class="bg-gradient-to-br from-[#EAF5F8] to-[#67AAD7] h-screen">
     <!-- Modal doFormulario -->
     <div id="modalForm" class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 fixed m-auto rounded-xl w-[90%] sm:w-[550px] lg:w-[85%] grid lg:grid-cols-2 xl:h-620screen xgg:h-650screen">
-        <div class="bg-gradient-to-br from-[#294815] via-[var(--dark-green2)] to-[var(--accent-yellow)] h-full hidden lg:block rounded-l-xl">
+        <div class="bg-gradient-to-br from-[#193823] via-[#22411B] to-[var(--accent-yellow)] h-full hidden lg:block rounded-l-xl">
             <div class="flex flex-col items-center justify-center h-full gap-8">
                 <i class="bi bi-mortarboard-fill text-9xl text-[var(--accent-yellow)]"></i>
                 <h2 class="text-white flex items-center text-5xl textComf">EEEP <span class="text-[var(--accent-yellow)] pl-2 font-semibold"> Salaberga</span></h2>
