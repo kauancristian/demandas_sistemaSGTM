@@ -22,7 +22,7 @@ class Usuario extends Database {
 
     }
 
-    public function cadastro(string $nome, string $email, string $senha): int {
+    public function cadastro(string $nome, string $email, string $senha, string $perfil): int {
         try {
             $sqlCheck = "SELECT 1 FROM {$this->table1} WHERE email = :email LIMIT 1";
             $stmtCheck = $this->conn->prepare($sqlCheck);
@@ -34,11 +34,12 @@ class Usuario extends Database {
             }
 
             $hash = password_hash($senha, PASSWORD_DEFAULT);
-            $sqlInsert = "INSERT INTO {$this->table1} (nome, email, senha) VALUES (:nome, :email, :senha)";
+            $sqlInsert = "INSERT INTO {$this->table1} (nome, email, senha, perfil) VALUES (:nome, :email, :senha, :perfil)";
             $stmtInsert = $this->conn->prepare($sqlInsert);
             $stmtInsert->bindValue(":nome", $nome);
             $stmtInsert->bindValue(":email", $email);
             $stmtInsert->bindValue(":senha", $hash);
+            $stmtInsert->bindValue(":perfil", $perfil);
 
             if(!$stmtInsert->execute()){
                 error_log("Falha ao inserir Usuário. SQLSTATE: " . $this->conn->errorInfo()[0]);

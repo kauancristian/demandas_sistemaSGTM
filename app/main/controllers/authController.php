@@ -29,8 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         try {
+            $perfil = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
             $usuario = new Usuario();
-            $result = $usuario->cadastro($nome, $email, $senha);
+            $result = $usuario->cadastro($nome, $email, $senha, $perfil);
 
             switch ($result) {
                 case Usuario::STATUS_OK:
@@ -74,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     $_SESSION['id_usuario'] = $result['usuario']['id'];
                     $_SESSION['nome'] = $result['usuario']['nome'];
+                    $_SESSION['perfil'] = $result['usuario']['perfil'];
                     header("Location: ../views/inicio_demandas.php?sucesso=login_realizado");
                     exit;
                 case Usuario::STATUS_EXISTS:

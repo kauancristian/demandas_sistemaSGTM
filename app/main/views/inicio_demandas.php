@@ -1,3 +1,15 @@
+<?php
+
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+        if (!isset($_SESSION['id_usuario'])) {
+            header("Location: ../index.php?erro=acesso_negado");
+            exit;
+        }
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,6 +101,16 @@
                 <div class="flex items-center space-x-3 ml-4">
                     <img class="object-contain w-14 hover:scale-105 transition ease-in-out duration-300" src="../assets/S.png" alt="">
                     <h1 id="h1Header" class="text-[#fff] lg:text-xl font-semibold ml-5">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
+                </div>
+                <div class="flex items-center space-x-4 mr-[-900px]">
+                    <div class="flex flex-col items-end">
+                        <p class="text-white font-semibold text-lg"><?= $_SESSION['nome']; ?></p>
+                    </div>
+                    <button>
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: <?= $_SESSION['perfil']; ?>;">
+                            <p class="text-white font-semibold text-md"><?= htmlspecialchars(mb_substr($_SESSION['nome'], 0, 1, 'UTF-8')); ?></p>
+                        </div>
+                    </button>
                 </div>
                 <div class="transform translate-x-[-30px]">
                     <button>
