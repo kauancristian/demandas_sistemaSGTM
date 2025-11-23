@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . "/../models/Usuario.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -14,17 +13,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $senha = $_POST['senha'] ?? '';
 
         if (empty($nome) || empty($email) || empty($senha)) {
-            header("Location: ../index.php?erro=campos_vazios");
+            header("Location: ../views/formLogin.php?erro=campos_vazios");
             exit;
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            header("Location: ../index.php?erro=email_invalido");
+            header("Location: ../views/formLogin.php?erro=email_invalido");
             exit;
         }
 
         if (strlen($senha) < 6) {
-            header("Location: ../index.php?erro=senha_fraca");
+            header("Location: ../views/formLogin.php?erro=senha_fraca");
             exit;
         }
 
@@ -35,31 +34,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             switch ($result) {
                 case Usuario::STATUS_OK:
-                    header("Location: ../index.php?sucesso=cadastro_realizado");
+                    header("Location: ../views/formLogin.php?sucesso=cadastro_realizado");
                     exit;
+
                 case Usuario::STATUS_EXISTS:
-                    header("Location: ../index.php?erro=usuario_existe");
+                    header("Location: ../views/formLogin.php?erro=usuario_existe");
                     exit;
+
                 case Usuario::STATUS_INSERT_ERROR:
-                    header("Location: ../index.php?erro=falha_insercao");
+                    header("Location: ../views/formLogin.php?erro=falha_insercao");
                     exit;
+
                 case Usuario::STATUS_EXCEPTION:
                 default:
-                    header("Location: ../index.php?erro=erro_servidor");
+                    header("Location: ../views/formLogin.php?erro=erro_servidor");
                     exit;
             }
+
         } catch (Exception $e) {
             error_log("Erro ao instanciar Usuario: " . $e->getMessage());
-            header("Location: ../index.php?erro=erro_servidor");
+            header("Location: ../views/formLogin.php?erro=erro_servidor");
             exit;
         }
-    } else if ($action === 'login') {
+    }
+
+    else if ($action === 'login') {
         
         $email = trim($_POST['email'] ?? '');
         $senha = trim($_POST['senha'] ?? '');
 
         if (empty($email) || empty($senha)) {
-            header("Location: ../index.php?erro=campos_vazios");
+            header("Location: ../views/formLogin.php?erro=campos_vazios");
             exit;
         }
 
@@ -68,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $result = $usuario->login($email, $senha);
 
             switch ($result['status']) {
+
                 case Usuario::STATUS_OK:
                     if (session_status() === PHP_SESSION_NONE) {
                         session_start();
@@ -75,31 +81,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     $_SESSION['id_usuario'] = $result['usuario']['id'];
                     $_SESSION['nome'] = $result['usuario']['nome'];
-                    $_SESSION['perfil'] = $result['usuario']['perfil'];
-                    header("Location: ../views/inicio_demandas.php?sucesso=login_realizado");
+                    $_SESSION['perfil'] = $result['usuario']['perfil']; 
+
+                    header("Location: ../index.php?sucesso=login_realizado");
                     exit;
+
                 case Usuario::STATUS_EXISTS:
-                    header("Location: ../index.php?erro=usuario_nao_encontrado");
+                    header("Location: ../views/formLogin.php?erro=usuario_nao_encontrado");
                     exit;
+
                 case Usuario::STATUS_INSERT_ERROR:
-                    // Reutilizado para senha incorreta no model
-                    header("Location: ../index.php?erro=senha_incorreta");
+                    header("Location: ../views/formLogin.php?erro=senha_incorreta");
                     exit;
+
                 case Usuario::STATUS_EXCEPTION:
                 default:
-                    header("Location: ../index.php?erro=erro_servidor");
+                    header("Location: ../views/formLogin.php?erro=erro_servidor");
                     exit;
             }
+
         } catch (Exception $e) {
             error_log("Erro ao instanciar Usuario: " . $e->getMessage());
-            header("Location: ../index.php?erro=erro_servidor");
+            header("Location: ../views/formLogin.php?erro=erro_servidor");
             exit;
         }
-    } else if ($action === 'logout') {
-        session_start();
-        session_unset();
-        session_destroy();
-        header("Location: ../index.php?sucesso=logout");
-        exit;
     }
+
+    else if ($action === 'logout') {
+    session_start();
+    session_unset();
+    session_destroy();
+
+    echo "SAIU DO SISTEMA (teste)";
+
+    exit;
+}
 }
