@@ -123,7 +123,7 @@
                     <div class="flex items-center space-x-4 ">
                         <div class="flex flex-col items-end">
                             <p class="text-white text-sm hidden sm:block">
-                                <?= isset($_SESSION['nome']) ? htmlspecialchars($_SESSION['nome']) : '' ?>
+                                <?= isset($_SESSION['nome']) ? htmlspecialchars(implode(" ", array_slice(explode(" ", trim($_SESSION['nome'])), 0, 2))) : '' ?>
                             </p>
                         </div>
                         <div>
@@ -140,12 +140,12 @@
 
                             <?php if(isset($_SESSION['id_usuario'])) : ?>
                                 <div class="absolute bg-[#262626] text-[var(--primary-green)] py-2 px-4 translate-x-[-20px] transform translate-y-1 rounded-md hidden divSair">
-                                    <a href="controllers/authController.php?action=logout">
-                                        <button class="flex items-center space-x-2 hover:text-[var(--accent-yellow)] hover:scale-105 transition ease-in-out duration-300 nav-bar botao-sair">
+                                    <form action="../main/controllers/authController.php?action=logout" method="POST">
+                                        <button class="flex items-center space-x-2 hover:text-[var(--accent-yellow)] hover:scale-105 transition ease-in-out duration-300 nav-bar botao-sair" type="submit">
                                             <i class="bi bi-box-arrow-in-right text-xl"></i>
                                             <p>Sair</p>
                                         </button>
-                                    </a>
+                                    </form>
                                 </div>
                             <?php endif; ?>
                         </div>

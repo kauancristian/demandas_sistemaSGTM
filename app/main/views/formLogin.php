@@ -187,16 +187,16 @@
 
                 <div class="w-full flex">
                     <!-- Form Login -->
-                    <form id="formLogin" class="flex flex-col items-center justify-center w-full gap-6 px-4 transform translate-y-4 formSite" action="../controllers/authController.php?action=login" method="POST">
+                    <form novalidate id="formLogin" class="flex flex-col items-center justify-center w-full gap-6 px-4 transform translate-y-4 formSite" action="../controllers/authController.php?action=login" method="POST">
                         <div class="w-full relative flex flex-col items-center gap-6">
                             <div class="w-[85%] relative flex items-center">
                                 <i class="bi bi-envelope-fill absolute left-3 text-xl text-[var(--dark-green)]"></i>
-                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="email" name="email" id="" required placeholder="" maxlength="200">
+                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="email" name="email" id="" placeholder="" maxlength="200">
                                 <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Email</label>
                             </div>
                             <div class="w-[85%] relative flex items-center">
                                 <i class="bi bi-key-fill absolute left-3 text-xl text-[var(--dark-green)]"></i>
-                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="password" name="senha" id="" required placeholder="" minlength="6" maxlength="200">
+                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="password" name="senha" id="" placeholder="" minlength="6" maxlength="200">
                                 <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Senha</label>
                             </div>
                         </div>
@@ -215,17 +215,17 @@
                         <div class="w-full relative flex flex-col items-center gap-5">
                             <div class="w-[85%] relative flex items-center">
                                 <i class="bi bi-person-fill absolute left-3 text-xl text-[var(--dark-green)]"></i>
-                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="text" name="nome" id="" required placeholder="" maxlength="200">
+                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="text" name="nome" id="" placeholder="" maxlength="200">
                                 <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Nome</label>
                             </div>
                             <div class="w-[85%] relative flex items-center">
                                 <i class="bi bi-envelope-fill absolute left-3 text-xl text-[var(--dark-green)]"></i>
-                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="email" name="email" id="" required placeholder="" maxlength="200">
+                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="email" name="email" id="" placeholder="" maxlength="200">
                                 <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Email</label>
                             </div>
                             <div class="w-[85%] relative flex items-center">
                                 <i class="bi bi-key-fill absolute left-3 text-xl text-[var(--dark-green)]"></i>
-                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="password" name="senha" id="" required placeholder="" minlength="6" maxlength="200">
+                                <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="password" name="senha" id="" placeholder="" minlength="6" maxlength="200">
                                 <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Senha</label>
                             </div>
                         </div>
