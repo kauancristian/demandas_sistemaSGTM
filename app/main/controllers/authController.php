@@ -108,12 +108,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     else if ($action === 'logout') {
-    session_start();
-    session_unset();
-    session_destroy();
-
-    echo "SAIU DO SISTEMA (teste)";
-
-    exit;
-}
+        session_start();
+        session_unset();
+        session_destroy();
+        header("Location: ../index.php?sucesso=logout");
+        exit;
+    }
 }
