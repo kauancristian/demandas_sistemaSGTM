@@ -78,7 +78,7 @@
             height: 100%;
             left: -100%;
             top: 0;
-            background-image: linear-gradient(120deg, transparent, #ffffff6b, transparent);
+            background-image: linear-gradient(120deg, transparent, #00b3481a, transparent);
             transition: left 0.5s ease-in-out;
         }
 
@@ -199,7 +199,7 @@
                 <span class="bg-[var(--accent-yellow)] h-0.5 w-[100px] mx-auto block"></span>
             </div>
                 <!-- Sessão de organização das tarefas -->
-            <div id="containerGeralSecs" class="flex items-center flex-wrap gap-6 lg:gap-4 px-6 pt-12">
+            <div id="containerGeralSecs" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-4 px-12 pt-12">
                 <!-- Container de Sessão -->
                 <!-- No script -->
 >>>>>>>> main:app/main/views/createDemandas.html
@@ -257,6 +257,7 @@
             }
 
         };
+
 
         btnConfirmado.onclick = () => {
             if(planilhaCriada) {
@@ -430,7 +431,7 @@
             const modalComment = document.createElement("div");
             modalComment.innerHTML = `
             
-            <div class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 absolute bg-gradient-to-br from-[#121212] via-[#262626] via-[#121212] to-[#262626] h-[500px] w-[95%] sm:w-[500px] rounded-xl flex flex-col justify-between modalComment shadow-xl shadow-gray-900">
+            <div class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 absolute bg-gradient-to-br from-[#121212] via-[#262626] via-[#121212] to-[#262626] h-[500px] w-[95%] sm:w-[500px] rounded-xl flex flex-col justify-between modalComment shadow-xl shadow-gray-900 z-[3000]">
                 <div class="flex justify-between items-center p-4 text-gray-200 relative">
                     <div>
                         <button class="bg-[#404040] py-2 px-3 rounded-full hover:bg-[#505050] transition ease-in-out duration-300 btnCloseModalComments">
