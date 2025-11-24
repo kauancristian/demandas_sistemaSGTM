@@ -625,26 +625,7 @@
             const assuntoTexto = assunto.value.trim();
             const descriTexto = descri.value.trim();
 
-            const newCommentDiv = createComment();
-            const contentComment = newCommentDiv.querySelector(".contentComment");
-
-            contentComment.querySelector(".assuntoRecebido").textContent = assuntoTexto;
-            contentComment.querySelector(".descriRecebido").textContent = descriTexto;
-
-            const section = document.querySelector(`[data-section-id="${modal.dataset.sectionId}"]`);
-            if(section) {
-                const containerCommentsGeral = section.querySelector(".containerCommentsGeral");
-                if(containerCommentsGeral) {
-                    containerCommentsGeral.appendChild(newCommentDiv);
-                } else {
-                    console.warn("containerCommentsGeral não encontrado nesta seção!");
-                }
-            } else {
-                console.warn("Seção não encontrada para este comentário!");
-            }
-
-            modal.remove();
-            shadowDiv.classList.add("hidden");
+            
         });
 
 
