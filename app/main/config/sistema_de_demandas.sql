@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18/11/2025 às 20:42
+-- Tempo de geração: 24/11/2025 às 18:36
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.0.30
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,14 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `demandas`
+-- Estrutura para tabela `planilhas`
 --
 
-CREATE TABLE `demandas` (
+CREATE TABLE `planilhas` (
   `id` int(11) NOT NULL,
-  `titulo` varchar(100) NOT NULL,
-  `prioridade` enum('BAIXA','MEDIA','ALTA') DEFAULT NULL,
-  `status` enum('AFAZER','FAZENDO','FEITO') DEFAULT NULL
+  `titulo` varchar(200) NOT NULL,
+  `criado_em` timestamp NOT NULL DEFAULT current_timestamp(),
+  `atualizado_em` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `id_usuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `secoes`
+--
+
+CREATE TABLE `secoes` (
+  `id` int(11) NOT NULL,
+  `id_planilha` int(11) NOT NULL,
+  `titulo` varchar(200) NOT NULL,
+  `criado_em` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -48,27 +62,23 @@ CREATE TABLE `usuarios` (
   `perfil` varchar(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `usuario_demanda`
---
-
-CREATE TABLE `usuario_demanda` (
-  `id` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `id_demanda` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices de tabela `demandas`
+-- Índices de tabela `planilhas`
 --
-ALTER TABLE `demandas`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `planilhas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Índices de tabela `secoes`
+--
+ALTER TABLE `secoes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_planilha` (`id_planilha`);
 
 --
 -- Índices de tabela `usuarios`
@@ -78,45 +88,42 @@ ALTER TABLE `usuarios`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Índices de tabela `usuario_demanda`
---
-ALTER TABLE `usuario_demanda`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_usuario` (`id_usuario`),
-  ADD KEY `id_demanda` (`id_demanda`);
-
---
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT de tabela `demandas`
+-- AUTO_INCREMENT de tabela `planilhas`
 --
-ALTER TABLE `demandas`
+ALTER TABLE `planilhas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `secoes`
+--
+ALTER TABLE `secoes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `usuario_demanda`
---
-ALTER TABLE `usuario_demanda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restrições para tabelas despejadas
 --
 
 --
--- Restrições para tabelas `usuario_demanda`
+-- Restrições para tabelas `planilhas`
 --
-ALTER TABLE `usuario_demanda`
-  ADD CONSTRAINT `usuario_demanda_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `usuario_demanda_ibfk_2` FOREIGN KEY (`id_demanda`) REFERENCES `demandas` (`id`);
+ALTER TABLE `planilhas`
+  ADD CONSTRAINT `planilhas_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restrições para tabelas `secoes`
+--
+ALTER TABLE `secoes`
+  ADD CONSTRAINT `secoes_ibfk_1` FOREIGN KEY (`id_planilha`) REFERENCES `planilhas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
