@@ -249,7 +249,7 @@
         <!-- Seção de Planilha criada -->
         <div id="secPlanilhaYesCreated" class="hidden pt-8">
             <div class="flex flex-col items-center translate-y-16">
-                <div id="divNamePlanilha" class="flex flex-col items-center">
+                <div id="divNamePlanilha" class="flex flex-col items-center space-y-1">
                     <h1 id="h1NomePlanilha" class="text-white text-2xl font-semibold px-6 pb-1 transition ease-in-out duration-300"></h1>
                     <span id="spanH1Planilha" class="bg-[var(--accent-yellow)] h-0.5 w-[100px] mx-auto block"></span>
                 </div>
@@ -358,22 +358,23 @@
                         </button>
                     </div>
 
-                    <div class="flex flex-col containerCommentsGeral"></div>
+                    <div class="flex flex-col containerCommentsGeral space-y-3 pt-4">
+                    
+                    </div>
                 </div>
             `;
 
             quantidadeDeSecs++;
             console.log(quantidadeDeSecs);
 
-
-            if (quantidadeDeSecs === 1) {
-                document.querySelector(".btnSemSec").classList.add("hidden");
-            }
+            if(quantidadeDeSecs === 0) {
+                document.querySelector(".btnSemSec").classList.remove("hidden");
+            };
 
             return containerSec;
         };
 
-
+        // Btn create planilha - libera modal
         btnCreatePlanilha.onclick = () => {
             secPlanilhaNotCreated.classList.add("hidden");
             modalCreatePlanilha.classList.remove("hidden");
@@ -389,6 +390,7 @@
             }
         };
 
+        // btn Avançar
         btnCreateFINAL.onclick = () => {
             const nomePlanilha = inptNamePlanilha.value.trim();
 
@@ -436,17 +438,17 @@
                 secPlanilhaYesCreated.classList.remove("hidden");
                 h1NomePlanilha.textContent = nomePlanilhaFinal;
 
-                const firstSection = createSection();
-                containerGeralSecs.appendChild(firstSection);
-                updateCreateButtons();
+                const btnSemSec = document.querySelector(".btnSemSec"); 
+                btnSemSec.classList.remove("hidden");
             };
         };
 
 
-        // Criação de novas sessões
+        
         containerGeralSecs.addEventListener("click", (e) => {
-            const btn = e.target.closest(".btnCreateSec");
 
+            // Criação de novas sessões
+            const btn = e.target.closest(".btnCreateSec");
             if(btn) {
                 const newSection = createSection();
                 containerGeralSecs.appendChild(newSection);
@@ -461,47 +463,33 @@
             const configSecBtn = e.target.closest(".configSecBtn");
 
             if(configSecBtn) {
-                const modalSecConfig = configSecBtn.closest(".flex").querySelector(".modalSecConfig");
+                const modalSecConfig = configSecBtn.parentElement.querySelector(".modalSecConfig");
 
                 modalSecConfig.classList.toggle("hidden");
             };
 
-            const deleteSecBtn = e.target.closest(".deleteSecBtn");
+            // Delete Sec
+            const deleteBtn = e.target.closest(".deleteSecBtn");
 
-            if(deleteSecBtn) {
-                const secToDelete = deleteSecBtn.closest(".containerSec");
-                secToDelete.remove();
-                updateCreateButtons();
+            if(deleteBtn){
+                const section = deleteBtn.closest(".containerSec");
+                if(section){
+                    section.remove();
+                    quantidadeDeSecs--;
+                    console.log(quantidadeDeSecs);
 
-                quantidadeDeSecs--;
-                console.log(quantidadeDeSecs);
+                    updateCreateButtons();
 
-                const btnSemSec = document.querySelector(".btnSemSec");
-                if(quantidadeDeSecs === 0) {
-                    btnSemSec.classList.remove("hidden");
-                };
-            };
-
-            // BtnSemSec ativado
-            const btnSemSec = document.querySelector(".btnSemSec");
-            btnSemSec.onclick = () => {
-                sectionCounter = 0;
-                sectionCounter++;
-                newSection = createSection();
-                containerGeralSecs.appendChild(newSection);
-
-                if(quantidadeDeSecs === 1) {
-                    btnSemSec.classList.add("hidden");
-                }else if(quantidadeDeSecs === 0) {
-                    btnSemSec.classList.remove("hidden");
+                    if(quantidadeDeSecs === 0){
+                        document.querySelector(".btnSemSec").classList.remove("hidden");
+                    }
                 }
             };
-
 
             const title = e.target.closest(".secTitle");
 
             // Aplicação de secTitle em geral
-            if(secTitle) {
+            if(title) {
                 textoAtual = title.textContent.trim();
 
                 const input = document.createElement("input");
@@ -530,65 +518,82 @@
                 });
 
                 input.addEventListener("blur", salvar);
-            }
+            };            
+
+            
         });
+
+        const btnSemSec = document.querySelector(".btnSemSec");
+
+        // Uso do btnSemSec
+        btnSemSec.onclick = () => {
+            const newSection = createSection();
+            containerGeralSecs.appendChild(newSection);
+
+            updateCreateButtons();
+
+            if(quantidadeDeSecs === 1) { 
+                btnSemSec.classList.add("hidden"); 
+            } else if(quantidadeDeSecs === 0) {
+                btnSemSec.classList.remove("hidden"); 
+            };
+        };
+
 
 
         // Commnets!!!
-        function createModalComment() {
 
+        function createModalComment(sectionId) {
             const modalComment = document.createElement("div");
             modalComment.innerHTML = `
-            
-            <div class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 absolute bg-gradient-to-br from-[#121212] via-[#262626] via-[#121212] to-[#262626] h-[500px] w-[95%] sm:w-[500px] rounded-xl flex flex-col justify-between modalComment shadow-xl shadow-gray-900 z-[3000]">
-                <div class="flex justify-between items-center p-4 text-gray-200 relative">
-                    <div>
-                        <button class="bg-[#404040] py-2 px-3 rounded-full hover:bg-[#505050] transition ease-in-out duration-300 btnCloseModalComments">
-                            <i class="bi bi-x-lg"></i>
-                        </button>
-                    </div>
-                    <div>
-                        <button class="bg-[var(--primary-green)] py-2 px-6 rounded-2xl flex justify-center items-center hover:bg-green-600 transition ease-in-out duration-300 btnSpecial btnPublicarComment">
-                            <p>Publicar</p>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="flex flex-col justify-center items-center relative">
-                    <input class="w-[90%] bg-transparent outline-none text-white text-xl inputComent" type="text" name="" id="" placeholder="Assunto">
-                </div>
-
-                <div class="bg-gradient-to-br bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 to-[#404040] w-[90%] mx-auto rounded-md h-[180px]">
-                    <div class="grid grid-cols-3 px-4 sm:px-10">
+                <div class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 absolute bg-gradient-to-br from-[#121212] via-[#262626] via-[#121212] to-[#262626] h-[500px] w-[95%] sm:w-[500px] rounded-xl flex flex-col justify-between modalComment shadow-xl shadow-gray-900 z-[3000]" data-section-id="${sectionId}">
+                    <div class="flex justify-between items-center p-4 text-gray-200 relative">
                         <div>
-                            <button class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 btnFile">
-                                <i class="bi bi-file-earmark-plus text-2xl"></i>
+                            <button class="bg-[#404040] py-2 px-3 rounded-full hover:bg-[#505050] transition ease-in-out duration-300 btnCloseModalComments">
+                                <i class="bi bi-x-lg"></i>
                             </button>
-                            <input type="file" name="" class="hidden fileInput" >
                         </div>
-
                         <div>
-                            <button id="btnLink" class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
-                                <i class="bi bi-link text-2xl"></i>
+                            <button class="bg-[var(--primary-green)] py-2 px-6 rounded-2xl flex justify-center items-center hover:bg-green-600 transition ease-in-out duration-300 btnSpecial btnPublicarComment">
+                                <p>Publicar</p>
                             </button>
-                            <div id="areaLinks"></div>
-                        </div>
-
-                        <div>
-                            <button id="btnImage" class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
-                                <i class="bi bi-images text-2xl"></i>
-                            </button>
-                            <input type="file" name="" id="imgInput" accept="image/*" class="hidden" >
                         </div>
                     </div>
-                </div>
 
-                <div class="w-[90%] mx-auto flex justify-center transform transform translate-y-[-10px] outline-none relative">
-                    <textarea class="w-full h-40 p-2 pt-2 leading-tight placeholder-[#a8a7a7] outline-none rounded-md bg-transparent text-white descri" placeholder="Escreva algo necessário..."></textarea>
-                </div>
-            </div>
+                    <div class="flex flex-col justify-center items-center relative">
+                        <input class="w-[90%] bg-transparent outline-none text-white text-xl inputComent" type="text" name="" id="" placeholder="Assunto">
+                    </div>
 
-            `
+                    <div class="bg-gradient-to-br bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 to-[#404040] w-[90%] mx-auto rounded-md h-[180px]">
+                        <div class="grid grid-cols-3 px-4 sm:px-10">
+                            <div>
+                                <button class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 btnFile">
+                                    <i class="bi bi-file-earmark-plus text-2xl"></i>
+                                </button>
+                                <input type="file" name="" class="hidden fileInput" >
+                            </div>
+
+                            <div>
+                                <button id="btnLink" class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
+                                    <i class="bi bi-link text-2xl"></i>
+                                </button>
+                                <div id="areaLinks"></div>
+                            </div>
+
+                            <div>
+                                <button id="btnImage" class="text-white flex justify-center items-center bg-[#505050] w-12 h-12 mx-auto transform translate-y-14 rounded-full hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300">
+                                    <i class="bi bi-images text-2xl"></i>
+                                </button>
+                                <input type="file" name="" id="imgInput" accept="image/*" class="hidden" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-[90%] mx-auto flex justify-center transform transform translate-y-[-10px] outline-none relative">
+                        <textarea class="w-full h-40 p-2 pt-2 leading-tight placeholder-[#a8a7a7] outline-none rounded-md bg-transparent text-white descri" placeholder="Escreva algo necessário..."></textarea>
+                    </div>
+                </div>
+            `;
 
             const btnClose = modalComment.querySelector(".btnCloseModalComments");
 
@@ -610,14 +615,13 @@
 
             if(!section) return;
 
-            const newModalComment = createModalComment();
-            newModalComment.dataset.sectionId = section.dataset.sectionId; //Analisar
-
+            const newModalComment = createModalComment(section.dataset.sectionId);
             document.body.appendChild(newModalComment); 
             shadowDiv.classList.remove("hidden");
 
-            const modalSecConfig = document.querySelector(".secContent .modalSecConfig");
-            modalSecConfig.classList.add("hidden");
+            document.querySelectorAll(".modalSecConfig").forEach((modal) => {
+                modal.classList.add("hidden");
+            });
         });
 
 
@@ -626,7 +630,7 @@
             const commentDiv = document.createElement("div");
             commentDiv.innerHTML = `
             
-            <div class="contentComment overflow-visible w-[220px] rounded-xl bg-gradient-to-br p-4 text-sm space-y-4">
+            <div class="contentComment overflow-visible w-[220px] rounded-xl bg-gradient-to-br p-4 text-sm space-y-4 transform translate-x-[-49px]">
                 <div class="flex items-center justify-between items-center w-full">
                     <span class="space-y-2">
                         <p class="assuntoRecebido font-semibold text-[var(--accent-yellow)]"></p>
@@ -660,59 +664,89 @@
             return commentDiv;
         };
 
+
+
         document.body.addEventListener("click", (e) => {
             const btnPublicar = e.target.closest(".btnPublicarComment");
-            if(!btnPublicar) return;
+            if (!btnPublicar) return;
 
+            // Agora o data-section-id está na div .modalComment interna
             const modal = btnPublicar.closest(".modalComment");
-            if(!modal) return;
+            const sectionId = modal.getAttribute('data-section-id');
 
-            const assunto = modal.querySelector(".inputComent");
-            const descri = modal.querySelector(".descri");
+            const section = document.querySelector(`.containerSec[data-section-id="${sectionId}"]`);
+            if (!section) return;
 
-            const assuntoTexto = assunto.value.trim();
-            const descriTexto = descri.value.trim();
+            const commentsContainer = section.querySelector(".containerCommentsGeral");
 
-            
+            const commentDiv = createComment();
+
+            commentDiv.querySelector(".assuntoRecebido").textContent =
+                modal.querySelector(".inputComent").value.trim();
+
+            commentDiv.querySelector(".descriRecebido").textContent =
+                modal.querySelector(".descri").value.trim();
+
+            commentsContainer.appendChild(commentDiv);
+
+            // Remove o modal inteiro (wrapper externo)
+            modal.parentElement.remove();
+            document.querySelector(".shadowDiv").classList.add("hidden");
+        });
+
+
+
+        // Modal de config do Comment
+        document.body.addEventListener("click", (e) => {
+            const btnConfig = e.target.closest(".configCommentBtn");
+
+            if (btnConfig) {
+                const modal = btnConfig.parentElement.querySelector(".modalDivCommentConfig");
+                modal.classList.toggle("hidden");
+                return;
+            }
+
+            const btnDelete = e.target.closest(".deleteComentDivBtn");
+            if (btnDelete) {
+                const commentDiv = btnDelete.closest(".contentComment");
+                if (commentDiv) commentDiv.remove();
+            }
         });
 
 
         // Script SecTitle
-        const secTitle = document.querySelectorAll(".secTitle");
+        document.body.addEventListener("click", (e) => {
+        const title = e.target.closest(".secTitle");
 
-        secTitle.forEach((title) => {
-            title.onclick = () => {
+        if (!title) return;
 
-                const textoAtual = title.textContent.trim();
+        const textoAtual = title.textContent.trim();
 
-                const input = document.createElement("input");
-                input.type = "text";
-                input.value = textoAtual;
-                input.className = "bg-[var(--bg-elevated)] text-white border-2 border-[var(--dark-green)] rounded-xl px-2 py-1 w-full outline-none";
-                input.style.fontSize = "1.4rem";
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = textoAtual;
+        input.className = "bg-[var(--bg-elevated)] text-white border-2 border-[var(--dark-green)] rounded-xl px-2 py-1 w-full outline-none";
+        input.style.fontSize = "1.4rem";
 
-                title.replaceWith(input);
+        title.replaceWith(input);
+        input.focus();
 
-                input.focus();
+        const salvar = () => {
+            const novoTítulo = input.value.trim() || "Sem título";
+            title.textContent = novoTítulo;
+            input.replaceWith(title);
+        };
 
-                function salvar() {
-                    const novoTitulo = input.value.trim() || "Sem título";
-
-                    title.textContent = novoTitulo;
-
-                    input.replaceWith(title);
-                };
-
-                input.addEventListener("keydown", (e) => {
-                    if(e.key === "Enter") {
-                        e.preventDefault();
-                        salvar();
-                    }
-                });
-
-                input.addEventListener("blur", salvar);
+        input.addEventListener("keydown", (e) => {
+            if(e.key === "Enter") {
+                e.preventDefault();
+                salvar();
             }
         });
+
+        input.addEventListener("blur", salvar);
+    });
+
         
     </script>
 
