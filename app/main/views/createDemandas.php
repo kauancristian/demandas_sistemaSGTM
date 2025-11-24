@@ -616,7 +616,8 @@
             document.body.appendChild(newModalComment); 
             shadowDiv.classList.remove("hidden");
 
-    
+            const modalSecConfig = document.querySelector(".secContent .modalSecConfig");
+            modalSecConfig.classList.add("hidden");
         });
 
 
