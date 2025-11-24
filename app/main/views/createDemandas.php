@@ -302,61 +302,55 @@
         
         const containerGeralSecs = document.getElementById("containerGeralSecs");
 
-        function createSection() {
+        let sectionCounter = 1;
 
+
+        function createSection() {
             const containerSec = document.createElement("div");
+            containerSec.classList.add("containerSec"); 
+            containerSec.dataset.sectionId = sectionCounter++; 
+
             containerSec.innerHTML = `
-            
-           <div class="flex flex-col justify-center items-center mx-auto space-x-4 containerSec pt-12">
-                <div class="secContent flex flex-col space-y-3">
-                    <div class="flex items-center space-x-4">
-                        <div class="text-white bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 via-[#121212] to-[#262626] inline-flex w-[220px] py-2 rounded-xl border-2 border-transparent  hover:border-[var(--dark-green)]">
-                            <div class="flex justify-between items-center w-full px-2">
-                                <h2 class="text-2xl secTitle">Seção 1</h2>
-                                <div class="flex items-center space-x-2">
-                                    <i class="bi bi-three-dots-vertical cursor-pointer hover:text-[var(--primary-green)] transition ease-in-out duration-300 configSecBtn"></i>
-                                    <!-- Modal de Config -->
-                                    <div class="bg-[#242527] rounded-xl absolute transform lg:translate-x-6 p-4 transform lg:translate-y-5 hidden z-[7000] modalSecConfig">
-                                        <ul class="space-y-3">
-                                            <li class="flex items-center space-x-2 cursor-pointer group">
-                                                <i class="bi bi-plus-lg text-gray-300 group-hover:text-white transition ease-in-out duration-300"></i>
-                                                <p class="text-gray-300 group-hover:text-white transition ease-in-out duration-300">Novo nome</p>
-                                            </li>
-                                            <li class="flex items-center space-x-2 cursor-pointer group deleteSecBtn">
-                                                <i class="bi bi-trash3 text-red-500 group-hover:rotate-[-20deg] transition ease-in-out duration-300"></i>
-                                                <p class="text-red-500">Excluir seção</p>
-                                            </li>
-                                        </ul>
+                <div class="flex flex-col justify-center items-center mx-auto space-x-4 pt-12">
+                    <div class="secContent flex flex-col space-y-3">
+                        <div class="flex items-center space-x-4">
+                            <div class="text-white bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 via-[#121212] to-[#262626] inline-flex w-[220px] py-2 rounded-xl border-2 border-transparent hover:border-[var(--dark-green)]">
+                                <div class="flex justify-between items-center w-full px-2">
+                                    <h2 class="text-2xl secTitle">Seção ${containerSec.dataset.sectionId}</h2>
+                                    <div class="flex items-center space-x-2">
+                                        <i class="bi bi-three-dots-vertical cursor-pointer hover:text-[var(--primary-green)] transition ease-in-out duration-300 configSecBtn"></i>
+                                        <div class="bg-[#242527] rounded-xl absolute transform lg:translate-x-6 p-4 transform lg:translate-y-5 hidden z-[7000] modalSecConfig">
+                                            <ul class="space-y-3">
+                                                <li class="flex items-center space-x-2 cursor-pointer group">
+                                                    <i class="bi bi-plus-lg text-gray-300 group-hover:text-white transition ease-in-out duration-300"></i>
+                                                    <p class="text-gray-300 group-hover:text-white transition ease-in-out duration-300">Novo nome</p>
+                                                </li>
+                                                <li class="flex items-center space-x-2 cursor-pointer group deleteSecBtn">
+                                                    <i class="bi bi-trash3 text-red-500 group-hover:rotate-[-20deg] transition ease-in-out duration-300"></i>
+                                                    <p class="text-red-500">Excluir seção</p>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div>
+                                <button class="bg-[var(--dark-green)] hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 py-5 px-6 rounded-full text-white cursor-pointer btnCreateSec">
+                                    <i class="bi bi-plus-lg"></i>
+                                </button>
+                            </div>
                         </div>
-
-                        <!-- Btn de criar mais seções -->
-                        <div>
-                            <button class="bg-[var(--dark-green)] hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 py-5 px-6 rounded-full text-white cursor-pointer btnCreateSec">
-                                <i class="bi bi-plus-lg"></i>
-                            </button>
-                        </div>
+                        <button class="w-[220px] py-2 rounded-xl bg-[#121212] flex justify-center items-center text-gray-300 hover:text-white hover:bg-[#323232] transition ease-in-out duration-300 btnComments btnSpecial">
+                            <i class="bi bi-chat-dots"></i>
+                        </button>
                     </div>
 
-                    <!-- Btn de comentarios -->
-                    <button class="w-[220px] py-2 rounded-xl bg-[#121212] flex justify-center items-center text-gray-300 hover:text-white hover:bg-[#323232] transition ease-in-out duration-300 btnComments btnSpecial">
-                        <i class="bi bi-chat-dots"></i>
-                    </button>
+                    <div class="flex flex-col containerCommentsGeral"></div>
                 </div>
-
-                <div class="flex flex-col containerComentsGeral">
-                    
-                </div>
-
-            </div>
-                        
             `;
 
             return containerSec;
-
-        };
+        }
 
 
         btnCreatePlanilha.onclick = () => {
@@ -440,6 +434,7 @@
 
             // Modal Config Secs
             const configSecBtn = e.target.closest(".configSecBtn");
+            if(!configSecBtn) return;
 
             if(configSecBtn) {
                 const modalSecConfig = configSecBtn.closest(".flex").querySelector(".modalSecConfig");
@@ -448,6 +443,7 @@
             };
 
             const deleteSecBtn = e.target.closest(".modalSecConfig").querySelector(".deleteSecBtn");
+            if(!deleteSecBtn) return;
 
             if(deleteSecBtn) {
                 const secToDelete = deleteSecBtn.closest(".containerSec").parentElement;
@@ -512,7 +508,7 @@
                 </div>
 
                 <div class="flex flex-col justify-center items-center relative">
-                    <input id="inputComent" class="w-[90%] bg-transparent outline-none text-white text-xl" type="text" name="" id="" placeholder="Assunto">
+                    <input class="w-[90%] bg-transparent outline-none text-white text-xl inputComent" type="text" name="" id="" placeholder="Assunto">
                 </div>
 
                 <div class="bg-gradient-to-br bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 to-[#404040] w-[90%] mx-auto rounded-md h-[180px]">
@@ -541,7 +537,7 @@
                 </div>
 
                 <div class="w-[90%] mx-auto flex justify-center transform transform translate-y-[-10px] outline-none relative">
-                    <textarea class="w-full h-40 p-2 pt-2 leading-tight placeholder-[#a8a7a7] outline-none rounded-md bg-transparent text-white" placeholder="Escreva algo necessário..."></textarea>
+                    <textarea class="w-full h-40 p-2 pt-2 leading-tight placeholder-[#a8a7a7] outline-none rounded-md bg-transparent text-white descri" placeholder="Escreva algo necessário..."></textarea>
                 </div>
             </div>
 
@@ -568,6 +564,7 @@
             if(!section) return;
 
             const newModalComment = createModalComment();
+            newModalComment.dataset.sectionId = section.dataset.sectionId; //Analisar
 
             document.body.appendChild(newModalComment); 
             shadowDiv.classList.remove("hidden");
@@ -581,10 +578,10 @@
             const commentDiv = document.createElement("div");
             commentDiv.innerHTML = `
             
-            <div class="contentComent overflow-visible w-[220px] rounded-xl bg-gradient-to-br p-4 text-sm space-y-4 hidden">
+            <div class="contentComment overflow-visible w-[220px] rounded-xl bg-gradient-to-br p-4 text-sm space-y-4">
                 <div class="flex items-center justify-between items-center w-full">
                     <span class="space-y-2">
-                        <p class="assunto font-semibold text-[var(--accent-yellow)]"></p>
+                        <p class="assuntoRecebido font-semibold text-[var(--accent-yellow)]"></p>
                         <span class="bg-[var(--accent-yellow)] h-0.5 w-[50px] block"></span>
                     </span>
                     <div class="flex items-center space-x-2">
@@ -605,7 +602,7 @@
 
                 </div>
 
-                <div class="textoPassado flex flex-col text-gray-200">
+                <div class="descriRecebido flex flex-col text-gray-200">
                     
                 </div>
             </div>
@@ -615,11 +612,39 @@
             return commentDiv;
         };
 
-        containerGeralSecs.addEventListener("click", (e) => {
+        document.body.addEventListener("click", (e) => {
             const btnPublicar = e.target.closest(".btnPublicarComment");
+            if(!btnPublicar) return;
 
-           
-            //Fazer
+            const modal = btnPublicar.closest(".modalComment");
+            if(!modal) return;
+
+            const assunto = modal.querySelector(".inputComent");
+            const descri = modal.querySelector(".descri");
+
+            const assuntoTexto = assunto.value.trim();
+            const descriTexto = descri.value.trim();
+
+            const newCommentDiv = createComment();
+            const contentComment = newCommentDiv.querySelector(".contentComment");
+
+            contentComment.querySelector(".assuntoRecebido").textContent = assuntoTexto;
+            contentComment.querySelector(".descriRecebido").textContent = descriTexto;
+
+            const section = document.querySelector(`[data-section-id="${modal.dataset.sectionId}"]`);
+            if(section) {
+                const containerCommentsGeral = section.querySelector(".containerCommentsGeral");
+                if(containerCommentsGeral) {
+                    containerCommentsGeral.appendChild(newCommentDiv);
+                } else {
+                    console.warn("containerCommentsGeral não encontrado nesta seção!");
+                }
+            } else {
+                console.warn("Seção não encontrada para este comentário!");
+            }
+
+            modal.remove();
+            shadowDiv.classList.add("hidden");
         });
 
 
