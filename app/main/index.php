@@ -26,6 +26,7 @@
         }
 
         html, body{
+            scroll-behavior: smooth;
             overflow-x: hidden;
             outline: none;
         }
@@ -133,18 +134,21 @@
         
         <div class="fixed bg-gradient-to-r from-[var(--accent-yellow)] via-[var(--primary-green)] to-[var(--accent-yellow)] h-[75px] pb-1 z-[9999]">
             <header class="bg-gradient-to-r from-[var(--dark-green)] to-[#005A24] h-full flex justify-between items-center w-screen z-[9999]">
-                <div class="flex items-center space-x-3 ml-4">
+
+                <div class="flex items-center space-x-1 ml-4">
                     <img class="object-contain w-14 hover:scale-105 transition ease-in-out duration-300" src="assets/S.png" alt="">
-                    <h1 id="h1Header" class="text-[#fff] lg:text-xl font-semibold ml-5">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
+                    <h1 id="h1Header" class="text-[#fff] lg:text-xl font-semibold">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
                 </div>
+
                 <div class="flex items-center space-x-10">
+
                     <div class="flex items-center space-x-4 ">
                         <div class="flex flex-col items-end">
                             <p class="text-white text-sm hidden sm:block">
                                 <?= isset($_SESSION['nome']) ? htmlspecialchars(implode(" ", array_slice(explode(" ", trim($_SESSION['nome'])), 0, 2))) : '' ?>
                             </p>
                         </div>
-                        <div>
+                        <div class="flex flex-col">
                             <button class="btnConta">
                                 <?php if (isset($_SESSION['nome'])): ?>
                                     <div class="w-10 h-10 rounded-full flex items-center justify-center"
@@ -157,7 +161,7 @@
                             </button>
 
                             <?php if(isset($_SESSION['id_usuario'])) : ?>
-                                <div class="absolute bg-[#262626] text-[var(--primary-green)] py-2 px-4 translate-x-[-20px] transform translate-y-1 rounded-md hidden divSair">
+                                <div class="absolute bg-[#262626] text-[var(--primary-green)] py-2 px-4 translate-y-[50px] translate-x-[-25px] transform translate-y-1 rounded-md hidden divSair">
                                     <form action="../main/controllers/authController.php?action=logout" method="POST">
                                         <button class="flex items-center space-x-2 hover:text-[var(--accent-yellow)] hover:scale-105 transition ease-in-out duration-300 nav-bar botao-sair" type="submit">
                                             <i class="bi bi-box-arrow-in-right text-xl"></i>
@@ -168,6 +172,7 @@
                             <?php endif; ?>
                         </div>
                     </div>
+
                     <div class="transform translate-x-[-30px]">
                         <?php if (!isset($_SESSION['id_usuario'])): ?>
                             <a href="./views/formLogin.php">
@@ -178,6 +183,7 @@
                             </a>
                         <?php endif; ?>
                     </div>
+
                 </div>
             </header>
         </div>
@@ -190,10 +196,10 @@
                 <p class="px-4 sm:px-0 sm:w-[610px] text-gray-200 text-center text-sm pt-5">Nosso sistema de demandas foi desenvolvido para melhorar o atendimento interno, conectando equipes, setores e gestores em uma plataforma inteligente, prática e segura. Aqui, cada solicitação é organizada, acompanhada e resolvida com agilidade, garantindo processos mais eficientes e comunicação clara entre todos os envolvidos.</p>
 
                 <div class="pt-5 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-5 items-center">
-                    <a href="createDemandas.html">
+                    <a href="#sec2">
                         <button class="bg-[#156635] btnSpecial py-3 text-lg text-white w-[200px] rounded-xl btnSpecialGreen hover:translate-y-[-5px] transition ease-in-out duration-500 flex items-center space-x-2 justify-center group">
-                            <p>Gerar Planilha</p>
-                            <i id="chevron" class="bi bi-chevron-right group-hover:translate-x-1 transition ease-in-out duration-300"></i>
+                            <p>Comece Agora</p>
+                            <i id="chevron" class="bi bi-chevron-down group-hover:translate-y-1 transition ease-in-out duration-300"></i>
                         </button>
                     </a>
 
@@ -257,7 +263,7 @@
                             <p class="font-semibold text-xs">ATIVA</p>
                         </div>
                         <div>
-                            <a href="createDemandas.html">
+                            <a href="./views/createDemandas.php">
                                 <button class="flex items-center space-x-2 bg-[#156635] py-2 px-4 rounded-xl hover:translate-y-[-3px] hover:drop-shadow-[0_0_6px_var(--primary-green)] transition ease-in-out duration-300">
                                     <i class="bi bi-box-arrow-up-right text-white"></i>
                                     <p class="font-semibold text-white text-sm">Acessar</p>
@@ -403,8 +409,8 @@
                     <p class="text-sm">Otimize a gestão da sua escola com um sistema inteligente de demandas: organize solicitações, acompanhe tarefas, conecte equipes e mantenha tudo funcionando de forma clara, simples e eficiente.</p>
                     <p>&#169 Todos os direitos reservados</p>
                 </div>
-                <div class="w-full h-full flex flex-col items-center space-y-2 justify-center pt-12 lg:pt-0">
-                    <img class="object-contain w-[24vw] lg:w-[6vw] translate-x-1" src="../assets/S.png" alt="">
+                <div class="w-full h-full flex flex-col items-center space-y-5 justify-center pt-12 lg:pt-0">
+                    <img class="object-contain w-[24vw] lg:w-[6vw] translate-x-1 hover:scale-105 transition ease-in-out duration-300" src="./assets//S.png" alt="">
                     <p class="text-gray-200 font-semibold text-sm">Salaberga - <span class="text-[var(--accent-yellow)]">2025</span></p>
                 </div>
             </div>
@@ -417,7 +423,20 @@
 
         btnConta.onclick = () => {
             divSair.classList.toggle("hidden");
-        }
+        };
+
+        window.onload = () => {
+            if(window.location.hash) {
+                history.replaceState(null, null, window.location.pathname + window.location.search);
+            }
+        };
+
+        if (window.location.hash) {
+            window.history.scrollRestoration = "manual";
+            setTimeout(() => {
+                window.scrollTo(0, 0); 
+            }, 1);
+        };
      </script>
 
      <script>
@@ -480,7 +499,7 @@
 
                 shakeCard.classList.add("shake");
             }
-        })
+        });
      </script>
 </body>
 </html>

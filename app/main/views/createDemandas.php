@@ -1,3 +1,8 @@
+<?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,6 +114,24 @@
         #spanH1Planilha{
             animation: spanLeft 0.9s ease-in-out;
         }
+
+        .nav-bar::after{
+            content: "";
+            position: absolute;
+            display: block;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            transform-origin: center;
+            background-color: var(--accent-yellow);
+            transition: 0.3s ease-in-out;
+            transform: scaleX(0);
+        }
+
+        .nav-bar:hover::after{
+            transform: scaleX(1);
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-[#191919] via-[#262626]/90 to-[#121212] h-[100vh]">
@@ -119,14 +142,54 @@
 
         <div class="fixed bg-gradient-to-r from-[var(--accent-yellow)] via-[var(--primary-green)] to-[var(--accent-yellow)] h-[75px] pb-1 z-[9999]">
             <header class="bg-gradient-to-r from-[var(--dark-green)] to-[#005A24] h-full flex justify-between items-center w-screen z-[9999]">
-                <div class="flex items-center space-x-3 ml-4">
-                    <a href="inicio_demandas.php"><img class="object-contain w-14 hover:scale-105 transition ease-in-out duration-300" src="../assets/S.png" alt=""></a>
-                    <h1 id="h1SecPlanilha" class="text-[#fff] lg:text-xl font-semibold ml-5">Criação de <span class="text-[var(--accent-yellow)]">Planilhas</span></h1>
+                <div class="flex items-center space-x-1 sm:space-x-2 ml-4">
+                    <a href="../index.php">
+                        <img class="object-contain w-14 hover:scale-105 transition ease-in-out duration-300" src="../assets/S.png" alt="">
+                    </a>
+                    <h1 id="h1SecPlanilha" class="text-[#fff] lg:text-xl font-semibold">Criação de <span class="text-[var(--accent-yellow)]">Planilhas</span></h1>
                 </div>
-                <div class="transform translate-x-[-30px]">
-                    <button>
-                        <i class="bi bi-three-dots-vertical text-xl text-gray-300"></i>
-                    </button>
+                
+                <div class="flex items-center space-x-10">
+                    <div class="flex items-center space-x-4 ">
+                        <div class="flex flex-col items-end">
+                            <p class="text-white text-sm hidden sm:block">
+                                <?= isset($_SESSION['nome']) ? htmlspecialchars(implode(" ", array_slice(explode(" ", trim($_SESSION['nome'])), 0, 2))) : '' ?>
+                            </p>
+                        </div>
+                        <div>
+                            <button class="btnConta">
+                                <?php if (isset($_SESSION['nome'])): ?>
+                                    <div class="w-10 h-10 rounded-full flex items-center justify-center"
+                                        style="background-color: <?= $_SESSION['perfil']; ?>;">
+                                        <p class="text-white font-semibold text-md">
+                                            <?= htmlspecialchars(mb_substr($_SESSION['nome'], 0, 1, 'UTF-8')); ?>
+                                        </p>
+                                    </div>
+                                <?php endif; ?>
+                            </button>
+
+                            <?php if(isset($_SESSION['id_usuario'])) : ?>
+                                <div class="absolute bg-[#262626] text-[var(--primary-green)] py-2 px-4 translate-x-[-20px] transform translate-y-1 rounded-md hidden divSair">
+                                    <form action="../index.php" method="POST">
+                                        <button class="flex items-center space-x-2 hover:text-[var(--accent-yellow)] hover:scale-105 transition ease-in-out duration-300 nav-bar botao-sair" type="submit">
+                                            <i class="bi bi-box-arrow-in-right text-xl"></i>
+                                            <p>Sair</p>
+                                        </button>
+                                    </form>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="transform translate-x-[-30px]">
+                        <?php if (!isset($_SESSION['id_usuario'])): ?>
+                            <a href="./views/formLogin.php">
+                                <button class="flex items-center space-x-2 text-white hover:text-[var(--accent-yellow)] hover:scale-105 transition ease-in-out duration-300 nav-bar botao-entrar">
+                                    <i class="bi bi-box-arrow-in-right text-xl"></i>
+                                    <p>Entrar</p>
+                                </button>
+                            </a>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </header>
         </div>
@@ -201,6 +264,15 @@
         
     </div>
 
+    <script>
+        const btnConta = document.querySelector(".btnConta");
+        const divSair = document.querySelector(".divSair");
+
+        btnConta.onclick = () => {
+            divSair.classList.toggle("hidden");
+        };
+     </script>
+
 
     <script>
 
@@ -227,69 +299,12 @@
 
         let nomePlanilhaFinal = null;
 
-        btnCreatePlanilha.onclick = () => {
-            secPlanilhaNotCreated.classList.add("hidden");
-            modalCreatePlanilha.classList.remove("hidden");
-            shadowDiv.classList.remove("hidden");
-        };
-
-        btnCreateFINAL.onclick = () => {
-            const nomePlanilha = inptNamePlanilha.value.trim();
-
-            if(!nomePlanilha) {
-                pError.classList.remove("hidden");
-                return;
-            }
-
-            nomePlanilhaFinal = nomePlanilha;
-            planilhaCriada = true;
-
-            if(planilhaCriada) {
-                modalCreatePlanilha.classList.add("hidden");
-                modalConfirmado.classList.remove("hidden");
-            }
-
-        };
-
-
-        btnConfirmado.onclick = () => {
-            if(planilhaCriada) {
-                modalConfirmado.classList.add("hidden");
-                shadowDiv.classList.add("hidden");
-
-                secPlanilhaYesCreated.classList.remove("hidden");
-                h1NomePlanilha.textContent = nomePlanilhaFinal;
-
-                const firstSection = createSection();
-                containerGeralSecs.appendChild(firstSection);
-                updateCreateButtons();
-            }
-        }
-
-        inptNamePlanilha.oninput = () => {
-            if(inptNamePlanilha.value.trim().length === 0) {
-                pError.classList.remove("hidden");
-                return;
-            }else{
-                pError.classList.add("hidden");
-            }
-        }
-    </script>
-
-
-    <!-- Pre Pronto -->
-    <script>
         
         const containerGeralSecs = document.getElementById("containerGeralSecs");
-        let secIdCounter = 0;
 
         function createSection() {
 
-            const id = "sec-" + secIdCounter++;
-    
             const containerSec = document.createElement("div");
-            containerSec.dataset.id = id;
-
             containerSec.innerHTML = `
             
            <div class="flex flex-col justify-center items-center mx-auto space-x-4 containerSec pt-12">
@@ -319,14 +334,14 @@
 
                         <!-- Btn de criar mais seções -->
                         <div>
-                            <button class="bg-[var(--dark-green)] hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 py-5 px-6 rounded-full text-white cursor-pointer btnCreate">
+                            <button class="bg-[var(--dark-green)] hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 py-5 px-6 rounded-full text-white cursor-pointer btnCreateSec">
                                 <i class="bi bi-plus-lg"></i>
                             </button>
                         </div>
                     </div>
 
                     <!-- Btn de comentarios -->
-                    <button class="w-[220px] py-2 rounded-xl bg-[#121212] flex justify-center items-center text-gray-300 hover:text-white hover:bg-[#323232] transition ease-in-out duration-300 btnComents btnSpecial">
+                    <button class="w-[220px] py-2 rounded-xl bg-[#121212] flex justify-center items-center text-gray-300 hover:text-white hover:bg-[#323232] transition ease-in-out duration-300 btnComments btnSpecial">
                         <i class="bi bi-chat-dots"></i>
                     </button>
                 </div>
@@ -343,32 +358,79 @@
 
         };
 
-        // Controle de newButton
 
+        btnCreatePlanilha.onclick = () => {
+            secPlanilhaNotCreated.classList.add("hidden");
+            modalCreatePlanilha.classList.remove("hidden");
+            shadowDiv.classList.remove("hidden");
+        };
+
+        inptNamePlanilha.oninput = () => {
+            if(inptNamePlanilha.value.trim().length === 0) {
+                pError.classList.remove("hidden");
+                return;
+            }else{
+                pError.classList.add("hidden");
+            }
+        };
+
+        btnCreateFINAL.onclick = () => {
+            const nomePlanilha = inptNamePlanilha.value.trim();
+
+            if(!nomePlanilha) {
+                pError.classList.remove("hidden");
+                return;
+            }
+
+            nomePlanilhaFinal = nomePlanilha;
+            planilhaCriada = true;
+
+            if(planilhaCriada) {
+                modalCreatePlanilha.classList.add("hidden");
+                modalConfirmado.classList.remove("hidden");
+            }
+
+        };
+
+        // Controle de newButton
         function updateCreateButtons() {
             const sections = document.querySelectorAll(".containerSec");
 
             sections.forEach(sec => {
-                const btn = sec.parentElement.querySelector(".btnCreate");
+                const btn = sec.parentElement.querySelector(".btnCreateSec");
                 if (btn) {
                     btn.classList.add("opacity-0", "pointer-events-none");
-                }
+                };
             });
 
             const lastSec = sections[sections.length - 1];
             if (!lastSec) return;
 
-            const lastBtn = lastSec.parentElement.querySelector(".btnCreate");
+            const lastBtn = lastSec.parentElement.querySelector(".btnCreateSec");
             if (lastBtn) {
                 lastBtn.classList.remove("opacity-0", "pointer-events-none");
             }
-        }
+        };
 
+
+        btnConfirmado.onclick = () => {
+            if(planilhaCriada) {
+                modalConfirmado.classList.add("hidden");
+                shadowDiv.classList.add("hidden");
+
+                secPlanilhaYesCreated.classList.remove("hidden");
+                h1NomePlanilha.textContent = nomePlanilhaFinal;
+
+                const firstSection = createSection();
+                containerGeralSecs.appendChild(firstSection);
+                updateCreateButtons();
+            }
+        };
 
 
         // Criação de novas sessões
         containerGeralSecs.addEventListener("click", (e) => {
-            const btn = e.target.closest(".btnCreate");
+            const btn = e.target.closest(".btnCreateSec");
 
             if(btn) {
                 const newSection = createSection();
@@ -385,7 +447,7 @@
                 modalSecConfig.classList.toggle("hidden");
             };
 
-            const deleteSecBtn = e.target.closest(".deleteSecBtn");
+            const deleteSecBtn = e.target.closest(".modalSecConfig").querySelector(".deleteSecBtn");
 
             if(deleteSecBtn) {
                 const secToDelete = deleteSecBtn.closest(".containerSec").parentElement;
@@ -485,40 +547,32 @@
 
             `
 
+            const btnClose = modalComment.querySelector(".btnCloseModalComments");
+
+            btnClose.addEventListener("click", () => {
+                modalComment.remove();
+                shadowDiv.classList.add("hidden"); 
+            });
+
             return modalComment;
         }
 
         containerGeralSecs.addEventListener("click", (e) => {
             const shadowDiv = document.querySelector(".shadowDiv");
-            const btnCommnent = e.target.closest(".btnComents");
+            const btnCommnent = e.target.closest(".btnComments");
 
-            if(btnCommnent) {
+            if(!btnCommnent) return; 
 
-                const section = btnCommnent.closest(".conatainerSec");
+            const section = btnCommnent.closest(".containerSec");
 
-                const newModalComment = createModalComment();
+            if(!section) return;
 
-                // Guardando o ID único da section
-                newModalComment.dataset.sectionId = section.dataset.id;
+            const newModalComment = createModalComment();
 
-                containerGeralSecs.appendChild(newModalComment);
-                shadowDiv.classList.remove("hidden");
-            }
+            document.body.appendChild(newModalComment); 
+            shadowDiv.classList.remove("hidden");
 
-            const btnCloseModalComments = e.target.closest(".btnCloseModalComments");
-
-            if(btnCloseModalComments) {
-                const modalToDelete = btnCloseModalComments.closest(".modalComment");
-                modalToDelete.remove();
-                shadowDiv.classList.add("hidden");
-            }
-
-            const btnFile = e.target.closest(".btnFile");
-            if(btnFile) {
-                const fileInput = btnFile.parentElement.querySelector(".fileInput");
-                fileInput.click();
-            }
-
+    
         });
 
 
@@ -534,11 +588,11 @@
                         <span class="bg-[var(--accent-yellow)] h-0.5 w-[50px] block"></span>
                     </span>
                     <div class="flex items-center space-x-2">
-                        <i class="bi bi-three-dots-vertical text-white cursor-pointer hover:text-[var(--primary-green)] transition ease-in-out duration-300 configSecBtn"></i>
+                        <i class="bi bi-three-dots-vertical text-white cursor-pointer hover:text-[var(--primary-green)] transition ease-in-out duration-300 configCommentBtn"></i>
                         <!-- Modal de Config Commnet  -->
-                        <div class="bg-[#242527] rounded-xl absolute transform translate-x-6 sm:translate-x-6 lg:translate-x-6 p-4 transform z-[7000] modalSecConfig text-sm hidden">
+                        <div class="bg-[#242527] rounded-xl absolute transform translate-x-6 sm:translate-x-6 lg:translate-x-6 p-4 transform z-[7000] modalDivCommentConfig text-sm hidden">
                             <ul class="space-y-3">
-                                <li class="flex items-center space-x-2 cursor-pointer group deleteSecBtn">
+                                <li class="flex items-center space-x-2 cursor-pointer group deleteComentDivBtn">
                                     <i class="bi bi-trash3 text-red-500 group-hover:rotate-[-20deg] transition ease-in-out duration-300"></i>
                                     <p class="text-red-500">Excluir</p>
                                 </li>
@@ -564,22 +618,8 @@
         containerGeralSecs.addEventListener("click", (e) => {
             const btnPublicar = e.target.closest(".btnPublicarComment");
 
-            if(btnPublicar) {
-                const modalComment = btnPublicar.closest(".modalComment");
-
-                const sectionId = modalComment.dataset.sectionId;
-
-                const section = document.querySelector(`.containerSec[data-id="${sectionId}"]`);
-
-                const containerComentsGeral = section.querySelector(".containerComentsGeral");
-
-                newCommentDiv = createComment();
-                containerComentsGeral.appendChild(newCommentDiv);
-
-                modalComment.remove();
-                shadowDiv.classList.add("hidden");
-            }
-
+           
+            //Fazer
         });
 
 
