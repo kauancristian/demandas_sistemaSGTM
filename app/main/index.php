@@ -190,8 +190,8 @@
             
         <!-- Inicio -->
         <div class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 relative w-full text-center">
-            <div id="textSec1" class="flex flex-col items-center justify-center">
-                <h3 class="epi text-4xl lg:text-[6vw] font-bold text-white drop-shadow-[0_0_1px_gray]">SEJA BEM <span class="text-[#FFA500] epi">VINDO!</span></h3>
+            <div id="textSec1" class="flex flex-col items-center justify-center ">
+                <h3 class="epi text-4xl lg:text-[6vw] font-bold text-white drop-shadow-[0_0_1px_gray] transform translate-y-[-15px]">SEJA BEM <span class="text-[#FFA500] epi">VINDO!</span></h3>
 
                 <p class="px-4 sm:px-0 sm:w-[610px] text-gray-200 text-center text-sm pt-5">Nosso sistema de demandas foi desenvolvido para melhorar o atendimento interno, conectando equipes, setores e gestores em uma plataforma inteligente, prática e segura. Aqui, cada solicitação é organizada, acompanhada e resolvida com agilidade, garantindo processos mais eficientes e comunicação clara entre todos os envolvidos.</p>
 
@@ -384,32 +384,37 @@
                 <div class="text-white flex flex-col items-start transform translate-x-2 lg:items-center text-start text-sm sm:text-[15px] ">
                     <div class="space-y-2">
                         <h1 class="text-xl text-[var(--primary-green)]">Desenvolvedores</h1>
-                        <div class="flex items-center gap-3">
+                        <div class="flex flex-col items-start gap-3">
                             <div class="flex items-center space-x-2">
-                                <i class="bi bi-code-slash text-[var(--accent-yellow)]"></i>
-                                <p class="text-gray-200">Kauan Cristian</p>
+                                <div class="flex items-center space-x-2">
+                                    <i class="bi bi-code-slash text-[var(--accent-yellow)]"></i>
+                                    <p class="text-gray-200">Kauan Cristian</p>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <a href="https://www.instagram.com/kauanxrs_/" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
+                                        <i class="bi bi-instagram"></i>
+                                    </a>
+                                    <a href="https://github.com/kauancristian" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
+                                        <i class="bi bi-github"></i>
+                                    </a>
+                                </div>
                             </div>
+
                             <div class="flex items-center space-x-2">
-                                <a href="https://www.instagram.com/kauanxrs_/" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
-                                    <i class="bi bi-instagram"></i>
-                                </a>
-                                <a href="https://github.com/kauancristian" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
-                                    <i class="bi bi-github"></i>
-                                </a>
+                                <div class="flex items-center space-x-2">
+                                    <i  class="bi bi-code-slash text-[var(--accent-yellow)]"></i>
+                                    <p class="text-gray-200">Cássio Holanda</p>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <a href="https://www.instagram.com/cassioholanda_/" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
+                                        <i class="bi bi-instagram"></i>
+                                    </a>
+                                    <a href="https://github.com/cassioholandaS" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
+                                        <i class="bi bi-github"></i>
+                                    </a>
+                                </div>
                             </div>
-                        <div class="flex space-x-2 items-center">
-                            <div class="flex items-center space-x-2">
-                                <i class="bi bi-code-slash text-[var(--accent-yellow)]"></i>
-                                <p class="text-gray-200">Cassio Holanda</p>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <a href="https://www.instagram.com/cassioholanda_/" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
-                                    <i class="bi bi-instagram"></i>
-                                </a>
-                                <a href="https://github.com/cassioholandaS" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
-                                    <i class="bi bi-github"></i>
-                                </a>
-                            </div>
+                            
                         </div>
 
                         <h1 class="text-xl text-[var(--primary-green)] pt-4">Colaboradores</h1>
