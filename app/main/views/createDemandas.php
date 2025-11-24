@@ -248,9 +248,21 @@
 
         <!-- Seção de Planilha criada -->
         <div id="secPlanilhaYesCreated" class="hidden pt-8">
-            <div id="divNamePlanilha" class="flex flex-col items-center translate-y-16">
-                <h1 id="h1NomePlanilha" class="text-white text-2xl font-semibold px-6 pb-1 transition ease-in-out duration-300"></h1>
-                <span id="spanH1Planilha" class="bg-[var(--accent-yellow)] h-0.5 w-[100px] mx-auto block"></span>
+            <div class="flex flex-col items-center translate-y-16">
+                <div id="divNamePlanilha" class="flex flex-col items-center">
+                    <h1 id="h1NomePlanilha" class="text-white text-2xl font-semibold px-6 pb-1 transition ease-in-out duration-300"></h1>
+                    <span id="spanH1Planilha" class="bg-[var(--accent-yellow)] h-0.5 w-[100px] mx-auto block"></span>
+                </div>
+
+                <!-- Btn se não houver seções -->
+                <div class="pt-6">
+                    <button class="bg-gradient-to-br p-5 w-[150.267px] rounded-lg text-white btnSpecial hover:translate-y-[-3px] hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300 btnSemSec hidden">
+                        <div class="flex flex-col items-center space-y-2 text-[var(--primary-green)]">
+                            <i class="bi bi-plus-circle-fill text-4xl "></i>
+                            <p class= "font-semibold">Gerar Seção</p>
+                        </div>
+                    </button>
+                </div>
             </div>
 
             <!-- Sessão de organização das tarefas -->
@@ -303,8 +315,8 @@
         const containerGeralSecs = document.getElementById("containerGeralSecs");
 
         let sectionCounter = 1;
+        
         let quantidadeDeSecs = 0;
-
 
         function createSection() {
             const containerSec = document.createElement("div");
@@ -352,6 +364,11 @@
 
             quantidadeDeSecs++;
             console.log(quantidadeDeSecs);
+
+
+            if (quantidadeDeSecs === 1) {
+                document.querySelector(".btnSemSec").classList.add("hidden");
+            }
 
             return containerSec;
         };
@@ -422,7 +439,7 @@
                 const firstSection = createSection();
                 containerGeralSecs.appendChild(firstSection);
                 updateCreateButtons();
-            }
+            };
         };
 
 
@@ -434,6 +451,10 @@
                 const newSection = createSection();
                 containerGeralSecs.appendChild(newSection);
                 updateCreateButtons();
+
+                if (quantidadeDeSecs === 1) {
+                    document.querySelector(".btnSemSec").classList.add("hidden");
+                };
             };
 
             // Modal Config Secs
@@ -451,9 +472,31 @@
                 const secToDelete = deleteSecBtn.closest(".containerSec");
                 secToDelete.remove();
                 updateCreateButtons();
+
                 quantidadeDeSecs--;
                 console.log(quantidadeDeSecs);
+
+                const btnSemSec = document.querySelector(".btnSemSec");
+                if(quantidadeDeSecs === 0) {
+                    btnSemSec.classList.remove("hidden");
+                };
             };
+
+            // BtnSemSec ativado
+            const btnSemSec = document.querySelector(".btnSemSec");
+            btnSemSec.onclick = () => {
+                sectionCounter = 0;
+                sectionCounter++;
+                newSection = createSection();
+                containerGeralSecs.appendChild(newSection);
+
+                if(quantidadeDeSecs === 1) {
+                    btnSemSec.classList.add("hidden");
+                }else if(quantidadeDeSecs === 0) {
+                    btnSemSec.classList.remove("hidden");
+                }
+            };
+
 
             const title = e.target.closest(".secTitle");
 
