@@ -397,20 +397,18 @@
                                     <i class="bi bi-github"></i>
                                 </a>
                             </div>
-                        <div class="flex space-x-2 items-center">
-                            <div class="flex items-center space-x-2">
-                                <i class="bi bi-code-slash text-[var(--accent-yellow)]"></i>
-                                <p class="text-gray-200">Cassio Holanda</p>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <a href="https://www.instagram.com/cassioholanda_/" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
-                                    <i class="bi bi-instagram"></i>
-                                </a>
-                                <a href="https://github.com/cassioholandaS" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
-                                    <i class="bi bi-github"></i>
-                                </a>
-                            </div>
                         </div>
+                        <div class="flex space-x-2 items-center">
+                            <i class="bi bi-code-slash text-[var(--accent-yellow)]"></i>
+                            <p class="text-gray-200">Cassio Holanda</p>
+                            <a href="https://www.instagram.com/cassioholanda_/" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a href="https://github.com/cassioholandaS" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
+                                <i class="bi bi-github"></i>
+                            </a>
+                        </div>
+
 
                         <h1 class="text-xl text-[var(--primary-green)] pt-4">Colaboradores</h1>
                         <div class="flex items-center space-x-2">
