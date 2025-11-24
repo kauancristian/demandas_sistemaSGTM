@@ -96,13 +96,25 @@
 
         @media (min-width: 1020px) {
             .xl\:h-620screen {
-                height: 620px;
+                height: 650px;
+            }
+
+            .xgg2\:h-620screen {
+                height: 850px;
             }
         }
 
         @media (min-width: 1900px) {
             .xgg\:h-650screen {
-                height: 650px;
+                height: 680px;
+            }
+
+            .xgg\:pt-10 {
+                padding-top: 40px;
+            }
+
+            .xgg\:pt60px {
+                padding-top: 60px;
             }
         }
 
@@ -121,7 +133,7 @@
     ?>
 
     <!-- Modal doFormulario -->
-    <div id="modalForm" class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 fixed m-auto rounded-xl w-[90%] sm:w-[550px] lg:w-[85%] grid lg:grid-cols-2 xl:h-620screen xgg:h-650screen">
+    <div id="modalForm" class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 fixed m-auto rounded-xl w-[90%] sm:w-[550px] lg:w-[75%] grid lg:grid-cols-2 xl:h-620screen xgg:h-650screen">
         <div class="bg-gradient-to-br from-[#193823] via-[#22411B] to-[var(--accent-yellow)] h-full hidden lg:block rounded-l-xl">
             <div class="flex flex-col items-center justify-center h-full gap-8">
                 <i class="bi bi-mortarboard-fill text-9xl text-[var(--accent-yellow)]"></i>
@@ -144,7 +156,7 @@
             </div>
         </div>
         <div id="ladoForm" class="bg-gradient-to-br from-[#121212]/90 via-[#262626]/90 to-[#121212] h-full overflow-y-auto pb-16 sm:pb-12 rounded-r-xl">
-            <div class="flex flex-col items-center justify-center pt-6 gap-3 w-full justify-between">
+            <div class="flex flex-col items-center justify-center pt-10 gap-3 w-full justify-between">
                 <div class="flex flex-col items-center gap-5">
                     <img class="object-cover w-20" src="../assets/S.png" alt="">
                     <h1 class="text-white text-2xl">Seja bem-vindo!</h1>
@@ -188,7 +200,7 @@
                 <div class="w-full flex">
                     <!-- Form Login -->
                     <form novalidate id="formLogin" class="flex flex-col items-center justify-center w-full gap-6 px-4 transform translate-y-4 formSite" action="../controllers/authController.php?action=login" method="POST">
-                        <div class="w-full relative flex flex-col items-center gap-6">
+                        <div class="w-full relative flex flex-col items-center gap-7">
                             <div class="w-[85%] relative flex items-center">
                                 <i class="bi bi-envelope-fill absolute left-3 text-xl text-[var(--dark-green)]"></i>
                                 <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="email" name="email" id="" placeholder="" maxlength="200">
@@ -200,7 +212,7 @@
                                 <label class="absolute pl-10 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Senha</label>
                             </div>
                         </div>
-                        <div class="pt-6 w-full flex justify-center">
+                        <div class="pt-6 xgg:pt-10 w-full flex justify-center">
                             <button class="flex w-[85%] py-3 bg-gradient-to-br from-[var(--dark-green)] to-white/40 hover:from-[var(--dark-green)] text-center rounded-md text-white font-semibold space-x-2 justify-center hover:translate-y-[-3px] transition ease-in-out duration-300 btnSpecial" type="submit">
                                 <i class="bi bi-box-arrow-in-right"></i>
                                 <p>Acessar Sistema</p>
@@ -212,7 +224,7 @@
                     </form>
                     <!-- Form Cad -->
                     <form id="formCad" class="flex flex-col items-center justify-center w-full gap-3 px-4 hidden formSite" action="../controllers/authController.php?action=cadastro" method="POST">
-                        <div class="w-full relative flex flex-col items-center gap-5">
+                        <div class="w-full relative flex flex-col items-center gap-6">
                             <div class="w-[85%] relative flex items-center">
                                 <i class="bi bi-person-fill absolute left-3 text-xl text-[var(--dark-green)]"></i>
                                 <input tabindex="0" class="w-full p-3 outline-none border-b-2 border-b-[var(--dark-green)] bg-transparent text-gray-300 indent-7" type="text" name="nome" id="" placeholder="" maxlength="200">
@@ -230,7 +242,7 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-col items-center transform ">
-                            <div class="pt-6 w-full flex justify-center transform translate-y-[-10px]">
+                            <div class="pt-6 xgg:pt60px w-full flex justify-center transform">
                                 <button class="flex w-[85%] py-3 bg-gradient-to-br from-[var(--dark-green)] to-white/40 hover:from-[var(--dark-green)] text-center rounded-md text-white font-semibold space-x-2 justify-center hover:translate-y-[-3px] transition ease-in-out duration-300 btnSpecial" type="submit">
                                     <i class="bi bi-key-fill"></i>
                                     <p>Verificar Primeiro Acesso</p>

@@ -72,7 +72,7 @@
             left: -100%;
             top: 0;
             background-image: linear-gradient(120deg, transparent, #00b3481a, transparent);
-            transition: left 0.5s ease-in-out;
+            transition: left 0.3s ease-in-out;
         }
 
         .btnSpecial:hover::after{
@@ -202,9 +202,9 @@
             </div>
 
             <div class="pt-12">
-                <button id="btnCreatePlanilha" class="bg-[#156635] p-5 rounded-lg text-white hover:bg-white hover:text-[#156635] hover:translate-y-[-3px] transition ease-in-out duration-300">
-                    <div class="flex flex-col items-center space-y-2">
-                        <i class="bi bi-plus-circle-fill text-4xl"></i>
+                <button id="btnCreatePlanilha" class="bg-gradient-to-br p-5 rounded-lg text-white btnSpecial hover:translate-y-[-3px] hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300">
+                    <div class="flex flex-col items-center space-y-2 text-[var(--primary-green)]">
+                        <i class="bi bi-plus-circle-fill text-4xl "></i>
                         <p class= "font-semibold">Criar Planilha</p>
                     </div>
                 </button>
@@ -216,12 +216,12 @@
         <div id="modalCreatePlanilha" class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 fixed mx-auto bg-[#1C1C1C] p-3 w-[90%] sm:w-[400px] pb-6 rounded-lg hidden z-[3000]">
             <div class="flex flex-col justify-between space-y-5 h-full pt-5">
                 <form id="formNamePlanilha" class="w-full flex flex-col justify-between space-y-3 h-full" action="" onsubmit="return false">
-                    <input id="inptNamePlanilha" class="w-[90%] mx-auto p-2 rounded-lg bg-[#404040] outline-none text-white" type="text" name="" id="" placeholder="Nome Planilha:">
+                    <input id="inptNamePlanilha" class="w-[90%] mx-auto p-3 rounded-lg bg-[#404040] outline-none text-white" type="text" name="" id="" placeholder="Nome Planilha:">
                     <!-- pError -->
                      <div class="px-5 hidden" id="pError">
                         <p class="text-red-500">Preencha o campo vazio!</p>
                      </div>
-                    <button type="button" id="btnCreateFINAL" class="flex justify-center items-center space-x-2 bg-[#156635] py-3 rounded-lg hover:translate-y-[-3px] hover:drop-shadow-[0_0_6px_var(--primary-green)] transition ease-in-out duration-300 w-[90%] group mx-auto">
+                    <button type="button" id="btnCreateFINAL" class="flex justify-center items-center space-x-2 bg-[var(--dark-green)] py-3 rounded-lg hover:translate-y-[-3px] hover:drop-shadow-[0_0_6px_var(--primary-green)] transition ease-in-out duration-300 w-[90%] group mx-auto">
                         <p class="font-semibold text-white text-sm">Criar</p>
                         <i class="bi bi-arrow-right group-hover:translate-x-1 transition ease-in-out duration-300 text-white"></i>
                     </button>
@@ -237,7 +237,7 @@
                     <h1>Planilha criada com sucesso!</h1>
                 </div>
                 <div class="pt-1 w-full">
-                    <button type="button" id="btnConfirmado" class="flex justify-center items-center space-x-2 bg-[#156635] py-3 rounded-lg hover:translate-y-[-3px] hover:drop-shadow-[0_0_6px_var(--primary-green)] transition ease-in-out duration-300 w-[90%] group mx-auto">
+                    <button type="button" id="btnConfirmado" class="flex justify-center items-center space-x-2 bg-[var(--dark-green)] py-3 rounded-lg hover:translate-y-[-3px] hover:drop-shadow-[0_0_6px_var(--primary-green)] transition ease-in-out duration-300 w-[90%] group mx-auto">
                         <p class="font-semibold text-white text-sm">Avançar</p>
                         <i class="bi bi-arrow-right group-hover:translate-x-1 transition ease-in-out duration-300 text-white"></i>
                     </button>
@@ -303,6 +303,7 @@
         const containerGeralSecs = document.getElementById("containerGeralSecs");
 
         let sectionCounter = 1;
+        let quantidadeDeSecs = 0;
 
 
         function createSection() {
@@ -349,8 +350,11 @@
                 </div>
             `;
 
+            quantidadeDeSecs++;
+            console.log(quantidadeDeSecs);
+
             return containerSec;
-        }
+        };
 
 
         btnCreatePlanilha.onclick = () => {
@@ -388,7 +392,7 @@
 
         // Controle de newButton
         function updateCreateButtons() {
-            const sections = document.querySelectorAll(".containerSec");
+            const sections = document.querySelectorAll(".secContent");
 
             sections.forEach(sec => {
                 const btn = sec.parentElement.querySelector(".btnCreateSec");
@@ -434,7 +438,6 @@
 
             // Modal Config Secs
             const configSecBtn = e.target.closest(".configSecBtn");
-            if(!configSecBtn) return;
 
             if(configSecBtn) {
                 const modalSecConfig = configSecBtn.closest(".flex").querySelector(".modalSecConfig");
@@ -442,13 +445,14 @@
                 modalSecConfig.classList.toggle("hidden");
             };
 
-            const deleteSecBtn = e.target.closest(".modalSecConfig").querySelector(".deleteSecBtn");
-            if(!deleteSecBtn) return;
+            const deleteSecBtn = e.target.closest(".deleteSecBtn");
 
             if(deleteSecBtn) {
-                const secToDelete = deleteSecBtn.closest(".containerSec").parentElement;
+                const secToDelete = deleteSecBtn.closest(".containerSec");
                 secToDelete.remove();
                 updateCreateButtons();
+                quantidadeDeSecs--;
+                console.log(quantidadeDeSecs);
             };
 
             const title = e.target.closest(".secTitle");
