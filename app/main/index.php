@@ -105,6 +105,24 @@
         .nav-bar:hover::after{
             transform: scaleX(1);
         }
+
+        @keyframes shake {
+            0%   { transform: translateX(0); }
+            10%  { transform: translateX(-8px); }
+            20%  { transform: translateX(8px); }
+            30%  { transform: translateX(-6px); }
+            40%  { transform: translateX(6px); }
+            50%  { transform: translateX(-4px); }
+            60%  { transform: translateX(4px); }
+            70%  { transform: translateX(-2px); }
+            80%  { transform: translateX(2px); }
+            90%  { transform: translateX(-1px); }
+            100% { transform: translateX(0); }
+        }
+
+        .shake {
+            animation: shake 0.6s ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-[#191919] via-[#262626]/90 to-[#121212] h-[100vh]">
@@ -205,24 +223,39 @@
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 px-4 sm:px-10 pt-12">
             <div id="func1" class="bg-gradient-to-br btnSpecial p-3 rounded-lg cursor-pointer w-[95%] h-[320px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300 flex flex-col justify-between">
+
+                <?php if(!isset($_SESSION['id_usuario'])): ?>
+                    <div id tabindex="0" class="bg-black/80 inset-0 absolute z-50  h-full items-center justify-center shakeCard">
+                        <div class="flex flex-col items-center justify-center h-full space-y-3">
+                            <i class="ri-lock-2-fill text-[#E00507] z-50 text-5xl"></i>
+                            <p class="text-[#E00507] font-semibold">Funcionalidade Bloqueada!</p>
+                            <p class="text-white text-center text-sm px-4">Acesse sua conta, ou crie-a para acesso total.</p>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div id tabindex="0" class="bg-black/80 inset-0 absolute z-50  h-full items-center justify-center shakeCard hidden"> <!-- esconde -->
+                        <div class="flex flex-col items-center justify-center h-full space-y-3 hidden"> 
+                            <i class="ri-lock-2-fill text-[#E00507] z-50 text-5xl"></i>
+                            <p class="text-[#E00507] font-semibold">Funcionalidade Bloqueada!</p>
+                            <p class="text-white text-center text-sm px-4">Acesse sua conta, ou crie-a para acesso total.</p>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
                 <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
                     <i class="bi bi-plus-lg text-5xl text-[var(--accent-yellow)]"></i>
                     <p class="font-semibold text-white text-xl">Nova <span class="text-[var(--primary-green)]">Planilha</span></p>
                 </div>
-
                 <div class="transform translate-y-2">
                     <p class="text-center text-gray-300 px-4">Crie uma nova planilha para registrar e organizar suas demandas.</p>
                 </div>
-
                 <div class="pt-3 transform translate-y-[-10px] flex flex-col items-center">
                     <div class="span bg-[#404040] h-[1px] w-[85%] block"></div>
-
                     <div class="flex justify-between items-center w-[85%] pt-6">
                         <div class="flex items-center space-x-2 text-[--primary-green] bg-[#404040] py-1.5 px-3 rounded-full border border-[--primary-green] text-center justify-center">
                             <i class="bi bi-circle-fill text-xs"></i>
                             <p class="font-semibold text-xs">ATIVA</p>
                         </div>
-
                         <div>
                             <a href="createDemandas.html">
                                 <button class="flex items-center space-x-2 bg-[#156635] py-2 px-4 rounded-xl hover:translate-y-[-3px] hover:drop-shadow-[0_0_6px_var(--primary-green)] transition ease-in-out duration-300">
@@ -236,6 +269,25 @@
             </div>
 
             <div id="func2" class="bg-gradient-to-br btnSpecial p-3 rounded-lg cursor-pointer w-[95%] h-[320px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300 flex flex-col justify-between">
+
+                <?php if(!isset($_SESSION['id_usuario'])): ?>
+                    <div id tabindex="0" class="bg-black/80 inset-0 absolute z-50  h-full items-center justify-center shakeCard">
+                        <div class="flex flex-col items-center justify-center h-full space-y-3">
+                            <i class="ri-lock-2-fill text-[#E00507] z-50 text-5xl"></i>
+                            <p class="text-[#E00507] font-semibold">Funcionalidade Bloqueada!</p>
+                            <p class="text-white text-center text-sm px-4">Acesse sua conta, ou crie-a para acesso total.</p>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div id tabindex="0" class="bg-black/80 inset-0 absolute z-50  h-full items-center justify-center shakeCard hidden"> <!-- esconde -->
+                        <div class="flex flex-col items-center justify-center h-full space-y-3"> 
+                            <i class="ri-lock-2-fill text-[#E00507] z-50 text-5xl"></i>
+                            <p class="text-[#E00507] font-semibold">Funcionalidade Bloqueada!</p>
+                            <p class="text-white text-center text-sm px-4">Acesse sua conta, ou crie-a para acesso total.</p>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
                 <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
                     <i class="bi bi-clipboard2-data text-5xl text-[var(--accent-yellow)]"></i>
                     <p class="font-semibold text-white text-xl">Gerenciar <span class="text-[var(--primary-green)]">Tarefas</span></p>
@@ -249,9 +301,9 @@
                     <div class="span bg-[#404040] h-[1px] w-[85%] block"></div>
 
                     <div class="flex justify-between items-center w-[85%] pt-6">
-                        <div class="flex items-center space-x-2 text-[--primary-green] bg-[#404040] py-1.5 px-3 rounded-full border border-[--primary-green] text-center justify-center">
+                        <div class="flex items-center space-x-2 text-red-500 bg-[#404040] py-1.5 px-3 rounded-full border border-red-500 text-center justify-center">
                             <i class="bi bi-circle-fill text-xs"></i>
-                            <p class="font-semibold text-xs">ATIVA</p>
+                            <p class="font-semibold text-xs">INATIVO</p>
                         </div>
 
                         <div>
@@ -267,6 +319,25 @@
             </div>
 
             <div id="func3" class="bg-gradient-to-br btnSpecial p-3 rounded-lg cursor-pointer w-[95%] h-[320px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300 flex flex-col justify-between">
+
+                <?php if(!isset($_SESSION['id_usuario'])): ?>
+                    <div id tabindex="0" class="bg-black/80 inset-0 absolute z-50  h-full items-center justify-center shakeCard">
+                        <div class="flex flex-col items-center justify-center h-full space-y-3">
+                            <i class="ri-lock-2-fill text-[#E00507] z-50 text-5xl"></i>
+                            <p class="text-[#E00507] font-semibold">Funcionalidade Bloqueada!</p>
+                            <p class="text-white text-center text-sm px-4">Acesse sua conta, ou crie-a para acesso total.</p>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div id tabindex="0" class="bg-black/80 inset-0 absolute z-50  h-full items-center justify-center shakeCard hidden"> <!-- esconde -->
+                        <div class="flex flex-col items-center justify-center h-full space-y-3 "> 
+                            <i class="ri-lock-2-fill text-[#E00507] z-50 text-5xl"></i>
+                            <p class="text-[#E00507] font-semibold">Funcionalidade Bloqueada!</p>
+                            <p class="text-white text-center text-sm px-4">Acesse sua conta, ou crie-a para acesso total.</p>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
                 <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
                     <i class="bi bi-file-earmark-arrow-up-fill text-5xl text-[var(--accent-yellow)]"></i>
                     <p class="font-semibold text-white text-xl">Gerar <span class="text-[var(--primary-green)]">Relatórios</span></p>
@@ -280,9 +351,9 @@
                     <div class="span bg-[#404040] h-[1px] w-[85%] block"></div>
 
                     <div class="flex justify-between items-center w-[85%] pt-6">
-                        <div class="flex items-center space-x-2 text-[--primary-green] bg-[#404040] py-1.5 px-3 rounded-full border border-[--primary-green] text-center justify-center">
+                        <div class="flex items-center space-x-2 text-red-500 bg-[#404040] py-1.5 px-3 rounded-full border border-red-500 text-center justify-center">
                             <i class="bi bi-circle-fill text-xs"></i>
-                            <p class="font-semibold text-xs">ATIVA</p>
+                            <p class="font-semibold text-xs">INATIVO</p>
                         </div>
 
                         <div>
@@ -399,6 +470,17 @@
             easing: 'ease-in-out'
         });
         
+        const shakeCards = document.querySelectorAll(".shakeCard");
+
+        shakeCards.forEach((shakeCard) => {
+            shakeCard.onclick = () => {
+                shakeCard.classList.remove("shake");
+
+                void shakeCard.offsetWidth;
+
+                shakeCard.classList.add("shake");
+            }
+        })
      </script>
 </body>
 </html>
