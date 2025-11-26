@@ -1,8 +1,3 @@
-<?php
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <title>Início | Demandas</title>
+    <title>Login | Sistema de demandas</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Allura&family=Anton&family=Assistant:wght@200..800&family=Bangers&family=Bebas+Neue&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Comfortaa:wght@300..700&family=Epilogue:ital,wght@0,100..900;1,100..900&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lilita+One&family=Love+Ya+Like+A+Sister&family=Monsieur+La+Doulaise&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Oxanium:wght@200..800&family=Passion+One:wght@400;700;900&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Rock+Salt&family=Smooch+Sans:wght@100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Space+Grotesk:wght@300..700&family=Vina+Sans&display=swap');
 
@@ -21,27 +14,18 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Poppins", sans-serif;
-            outline: none;
         }
 
-        html, body{
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-            outline: none;
-        }
-
-        h1, h2, p {
+        h2, p {
             font-family: "Poppins", sans-serif;
         }
 
         .textComf{
             font-family: "Comfortaa", sans-serif;
-            font-weight: 800;
         }
 
-        .epi{
-            font-family: "Epilogue", sans-serif;
+        .mont{
+            font-family: "Montserrat", sans-serif !important;
         }
 
         :root {
@@ -51,7 +35,7 @@
             --accent-yellow: #FFA500;
             --bg-dark: #0f0f0f;
             --bg-card: #1a1a1a;
-            --bg-elevated: #393939;
+            --bg-elevated: #242424;
             --text-primary: #ffffff;
             --text-secondary: #a0a0a0;
             --text-muted: #6b7280;
@@ -76,325 +60,297 @@
             height: 100%;
             left: -100%;
             top: 0;
-            background-image: linear-gradient(120deg, transparent, #00b3481a, transparent);
-            transition: left 0.3s ease-in-out;
+            background-image: linear-gradient(120deg, transparent, #ffffff4c, transparent);
+            transition: left 0.4s ease-in-out;
         }
 
         .btnSpecial:hover::after{
             left: 100%;
-        }   
+        }
 
-        .nav-bar{
+        .elementSpecial {
             position: relative;
-            overflow: hidden;
-            color: #c8f8db;
-        }
-
-        
-        .nav-bar::after{
-            content: "";
-            position: absolute;
-            width: 4px;
-            height: 100%;
-            left: 0;
-            top: 0;
-            background-color: var(--accent-yellow);
-            transform-origin: center;
-            transform: scaleY(0);
-            transition: transform 0.4s ease-in-out;
-        }
-
-        .nav-bar:hover::after{
-            transform: scaleY(1);
-        }
-
-        .btnScaleGray{
-            position: relative;
-            overflow: hidden;
+            overflow: hidden; 
             z-index: 1;
         }
 
-        .btnScaleGray::after{
+        /* .elementSpecial::after{
             content: "";
             position: absolute;
+            width: 0;
+            height: 0;
             left: 50%;
             top: 50%;
-            width: 300px;
-            height: 300px;
+            background-color: #ffffff41;
             border-radius: 50%;
-            transform-origin: center;
-            background-color: #60796aff;
             transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.6s ease-in-out;
             z-index: -1;
         }
 
-        .btnScaleGray:hover::after{
+        .elementSpecial:hover::after{
+            width: 100%;
+            height: 300px;
             transform: translate(-50%, -50%) scale(1);
+        } */
+
+
+        label{
+            pointer-events: none;
+        }
+
+        input:focus ~ label,
+        input:not(:placeholder-shown) ~ label{
+            transform: translateY(-30px);
+            font-size: 12px;
+            background-color: #f1f1f1;
+            color: var(--accent-yellow);
+            padding: 2px 8px 2px 8px;
+            font-weight: 700;
+            border-radius: 6px;
+        }
+
+        .btn-active {
+            background: #fff;
+            color: black;
+            font-weight: 600;
+        }
+
+        @keyframes scaleModal {
+            0%{
+                opacity: 0;
+                margin-top: -10px;
+            }
+
+            100%{
+                opacity: 1;
+                margin-top: 0px;
+            }
+        }
+
+        #modalForm{
+            animation: scaleModal 1.5s ease-in-out;
+        }
+
+        @media (min-width: 1020px) {
+            .xl\:h-620screen {
+                height: 620px;
+            }
+        }
+
+        @media (min-width: 1900px) {
+            .xgg\:h-650screen {
+                height: 650px;
+            }
+        }
+
+        @media (max-width:648px) {
+            #ladoForm{
+                border-radius: 15px;
+            }
         }
     </style>
 </head>
-<body class="">
+<body class="lg:bg-[#e9fafa]/40 min-h-screen">
 
-    <div class="grid lg:grid-cols-[0.4fr_1.2fr]">
-        <!-- Menu Lateral -->
-        <div class="bg-gradient-to-br from-[#025221] to-[#2D5236] hidden lg:block h-screen overflow-y-auto">
-            <div class="flex items-center justify-center pt-5">
-                <img class="object-contain w-16" src="assets/S.png" alt="">
-                <div class="flex flex-col items-center justify-center translate-x-[-6px] space-y-1">
-                    <h1 class="text-white font-semibold transform text-xl">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
-                    <span class="bg-[var(--accent-yellow)] h-0.5 w-full block"></span>
+    <?php
+        $sucesso = $_GET['sucesso'] ?? null;
+        $erro = $_GET['erro'] ?? null;
+    ?>
+
+    <!-- Modal do Formulario -->
+    <div id="modalForm" class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 fixed m-auto rounded-xl w-[90%] sm:w-[550px] lg:w-[90%] grid lg:grid-cols-2 lg:h-[95vh] lg:shadow-2xl">
+        <div class="bg-gradient-to-br from-[#025221] via-[#47643C] to-[#FFA500] h-full hidden lg:block rounded-l-2xl shadow-xl">
+            <div class="flex flex-col items-center justify-center h-full gap-8">
+                <i class="bi bi-mortarboard-fill text-9xl text-[var(--accent-yellow)]"></i>
+                <h2 class="text-white flex items-center text-5xl font-semibold">EEEP <span class="text-[var(--accent-yellow)] pl-2 font-semibold"> SALABERGA</span></h2>
+                <p class="text-center px-6 text-gray-200 textComf">Transformando o futuro através da organização e gestão inteligente de demandas.</p>
+                <div class="flex text-sm space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <i class="bi bi-diagram-3 text-[var(--accent-yellow)]"></i>
+                        <p class="text-gray-200">Integração</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="bi bi-speedometer2 text-[var(--accent-yellow)]"></i>
+                        <p class="text-gray-200">Performance</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="bi bi-cpu text-[var(--accent-yellow)]"></i>
+                        <p class="text-gray-200">Automação</p>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div id="ladoForm" class="bg-transparent lg:bg-white h-full lg:overflow-y-auto pb-16 sm:pb-12 rounded-r-2xl">
+            <div class="flex flex-col items-center justify-center pt-10 gap-6 w-full justify-between">
+                <div class="flex flex-col items-center gap-3">
+                    <img class="object-cover w-20" src="./assets/S.png" alt="">
+                    <h1 class="text-black text-2xl lg:text-4xl font-bold mont">Bem-vindo!</h1>
+                    <p id="textInstru" class="text-center text-sm sm:text-lg px-12 text-[var(--text-secondary)]">Acesse o Sistema de Demandas</p>
+                </div>
+                <div class="bg-[#F3F4F6] w-[95%] lg:w-[85%] rounded-xl flex items-center p-2 space-x-2">
+                    <button id="btnLogin" class="py-3 btn-active rounded-xl w-[50%] flex items-center space-x-2 justify-center">
+                        <i class="bi bi-box-arrow-in-right text-[#154231]"></i>
+                        <p class="text-[#154231]">Login</p>
+                    </button>
+                    <button id="btnCad" class="py-3 rounded-xl w-[50%] flex items-center space-x-2 justify-center">
+                        <i class="bi bi-person-fill-add text-[#154231]"></i>
+                        <p class="text-[#154231]">Cadastro</p>
+                    </button>
+                </div>
 
-            <div class="pt-12 w-full">
-                <nav class="flex justify-center w-full px-7">
-                    <ul class="space-y-5 flex flex-col items-center w-full">
-                        <div class="flex justify-center items-center w-full">
-                            <i class="bi bi-plus-circle bg-gray-100/50 py-3 px-4 text-xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
-                            <button class="w-[90%] flex py-3 rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
-                                <li class="font-semibold">Criar Planilha</li>
-                            </button>
-                        </div>
+                <!-- ISSO FOI EU -->
+                <!-- <?php if ($sucesso === "cadastro_realizado"): ?>
+                    <div class="text-[var(--primary-green)] mt-3 font-semibold text-centeer">
+                        Cadastro realizado com sucesso! Agora faça login.
+                    </div>
+                <?php endif; ?> -->
 
-                        <div class="flex justify-center items-center w-full">
-                            <i class="bi bi-clipboard2-data bg-gray-100/50 py-3 px-4 text-xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
-                            <button class="w-[90%] py-3 rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
-                                <li class="font-semibold">Gerenciar Tarefas</li>
-                            </button>
-                        </div>
+                <!-- <?php if ($erro): ?>
+                    <div class="mx-auto mt-3 text-red-600 font-semibold text-center">
+                        <?php
+                            switch ($erro) {
+                                case "campos_vazios": echo "Preencha todos os campos."; break;
+                                case "email_invalido": echo "O e-mail informado não é válido."; break;
+                                case "senha_fraca": echo "A senha deve ter no mínimo 6 caracteres."; break;
+                                case "usuario_existe": echo "Já existe um usuário com esse e-mail."; break;
+                                case "usuario_nao_encontrado": echo "Usuário não encontrado."; break;
+                                case "senha_incorreta": echo "Senha incorreta."; break;
+                                default: echo "Ocorreu um erro. Tente novamente.";
+                            }
+                        ?>
+                    </div>
+                <?php endif; ?> -->
 
-                        <div class="flex justify-center items-center w-full">
-                            <i class="bi bi-file-earmark-arrow-down bg-gray-100/50 py-3 px-4 text-xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
-                            <button class="w-[90%] py-3 rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
-                                <li class="font-semibold">Gerar Relatórios</li>
-                            </button>
+
+                <div class="w-full flex">
+                    <!-- Form Login -->
+                    <form novalidate id="formLogin" class="flex flex-col items-center justify-center w-full transform translate-y-4 formSite" action="./controllers/authController.php?action=login" method="POST">
+                        <div class="w-full relative flex flex-col items-center gap-4">
+                            <div class="w-[95%] lg:w-[85%] relative flex items-center">
+                                <i class="bi bi-envelope-fill absolute left-3 text-xl text-[#025725]"></i>
+                                <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-transparent text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="email" name="email" id="" placeholder="" maxlength="200">
+                                <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="nomeCad">E-mail</label>
+                            </div>
+                            <div class="w-[95%] lg:w-[85%] relative flex items-center">
+                                <i class="bi bi-key-fill absolute left-3 text-xl text-[#025725]"></i>
+                                <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-transparent text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="password" name="senha" id="" placeholder="" minlength="6" maxlength="200">
+                                <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Senha</label>
+                            </div>
                         </div>
-                    </ul>
-                </nav>
+                        <div class="w-full flex flex-col items-center transform space-y-8">
+                            <div class="pt-6 w-full flex justify-center">
+                                <button class="flex w-[95%] lg:w-[85%] py-4 bg-gradient-to-br from-[#025725] to-[#183E33] text-center rounded-xl text-white font-semibold space-x-2 justify-center hover:translate-y-[-3px] transition ease-in-out duration-500 btnSpecial" type="submit">
+                                    <i class="bi bi-box-arrow-in-right"></i>
+                                    <p>Acessar Sistema</p>
+                                </button>
+                            </div>
+                            <span class="bg-[#E5E7EB] w-[95%] lg:w-[85%] h-0.5 block text-center"></span>
+                            
+                            <div class="text-[var(--accent-yellow)] translate-y-1 text-[14px] flex items-center space-x-2">
+                                <i class="bi bi-question-circle-fill"></i>
+                                <p>Precisando de ajuda?<a class="font-semibold" href=""> Fale conosco.</a></p>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Form Cad -->
+                    <form id="formCad" class="flex flex-col items-center justify-center w-full gap-3 hidden formSite" action="./controllers/authController.php?action=cadastro" method="POST">
+                        <div class="w-full relative flex flex-col items-center gap-4 pt-4">
+                            <div class="w-[95%] lg:w-[85%] relative flex items-center">
+                                <i class="bi bi-person-fill absolute left-3 text-xl text-[#025725]"></i>
+                                <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-transparent text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="text" name="nome" id="" placeholder="" maxlength="200">
+                                <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Nome</label>
+                            </div>
+                            <div class="w-[95%] lg:w-[85%] relative flex items-center">
+                                <i class="bi bi-envelope-fill absolute left-3 text-xl text-[#025725]"></i>
+                                <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-transparent text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="email" name="email" id="" placeholder="" maxlength="200">
+                                <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="nomeCad">E-mail</label>
+                            </div>
+                            <div class="w-[95%] lg:w-[85%] relative flex items-center">
+                                <i class="bi bi-key-fill absolute left-3 text-xl text-[#025725]"></i>
+                                <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-transparent text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="password" name="senha" id="" placeholder="" minlength="6" maxlength="200">
+                                <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Senha</label>
+                            </div>
+                        </div>
+                        <div class="w-full flex flex-col items-center transform space-y-8">
+                            <div class="pt-6 w-full flex justify-center transform translate-y-[-10px]">
+                                <button class="flex w-[95%] lg:w-[85%] py-3 py-4 bg-gradient-to-br from-[#025725] to-[#183E33] text-center rounded-xl text-white font-semibold space-x-2 justify-center hover:translate-y-[-3px] transition ease-in-out duration-300 btnSpecial" type="submit">
+                                    <i class="bi bi-key-fill"></i>
+                                    <p>Verificar Primeiro Acesso</p>
+                                </button>
+                            </div>
+                            
+                            <span class="bg-[#E5E7EB] w-[95%] lg:w-[85%] h-0.5 block text-center"></span>
+
+                            <div class="text-[var(--accent-yellow)] translate-y-1 text-[14px] flex items-center space-x-2">
+                                <i class="bi bi-question-circle-fill"></i>
+                                <p>Precisando de ajuda?<a class="font-semibold" href=""> Fale conosco.</a></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-
-        <main class="h-[100vh] overflow-y-auto">
-
-            <!-- Incial -->
-            <div>
-                <header class="h-[65px] flex justify-between items-center z-[9999] border-b-2 px-5">
-
-                    <div>
-                        
-                    </div>
-
-                    <div class="flex items-center transform">
-
-                        <div class="flex items-center space-x-4 ">
-                            <div class="flex flex-col items-end">
-                                <p class="text-[#025221] text-sm hidden sm:block">
-                                    <?= isset($_SESSION['nome']) ? htmlspecialchars(implode(" ", array_slice(explode(" ", trim($_SESSION['nome'])), 0, 2))) : '' ?>
-                                </p>
-                            </div>
-
-                           
-                            <div class="flex items-center space-x-4">
-                                <button class="btnConta">
-                                    <?php if (isset($_SESSION['nome'])): ?>
-                                        <div class="w-10 h-10 rounded-full flex items-center justify-center"
-                                            style="background-color: <?= $_SESSION['perfil']; ?>;">
-                                            <p class="text-white font-semibold text-md">
-                                                <?= htmlspecialchars(mb_substr($_SESSION['nome'], 0, 1, 'UTF-8')); ?>
-                                            </p>
-                                        </div>
-                                    <?php endif; ?>
-                                </button>
-
-                                <!-- Btn Sair -->
-                                <?php if(isset($_SESSION['id_usuario'])) : ?>
-                                    <form action="../main/controllers/authController.php?action=logout" method="POST">
-                                        <button class="flex items-center space-x-2 bg-[#025221] text-white py-1 px-3 rounded-md hover:translate-x-[3px] transition ease-in-out duration-150 botao-sair btnScaleGray" type="submit">
-                                            <i class="bi bi-box-arrow-in-right text-xl"></i>
-                                            <p>Sair</p>
-                                        </button>
-                                    </form>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    </div>
-                </header>
-            </div>
-
-            <!-- Criação de Planilhas -->
-            <div class="secFunc hidden">
-                <h1>Criar</h1>
-            </div>
-
-            <!-- Gerenciamento de Tarefas -->
-            <div class="secFunc hidden">
-                <h1>Gerenciar</h1>
-            </div>
-
-            <!-- Geração de Relatórios -->
-            <div class="secFunc hidden">
-                <h1>Gerar</h1>
-            </div>
-            
-            <div class="bg-gradient-to-t from-[var(--primary-green)] to-[var(--accent-yellow)] lg:h-[260px] pt-[2px] hidden">
-                <footer class="bg-[#1C1C1C] h-full px-5 pb-12 flex justify-center items-center bottom-0 p-8 text-center">
-                    <div class="grid lg:grid-cols-3 h-full w-full flex items-center">
-                        <div class="text-white flex flex-col items-start transform translate-x-2 lg:items-center text-start text-sm sm:text-[15px] ">
-                            <div class="space-y-2">
-                                <h1 class="text-xl text-[var(--primary-green)]">Desenvolvedores</h1>
-                                <div class="flex items-center space-x-2">
-                                    <i class="bi bi-code-slash text-[var(--accent-yellow)]"></i>
-                                    <p class="text-gray-200">Kauan Cristian</p>
-                                </div>
-                                <div class="flex space-x-2 items-center">
-                                    <i class="bi bi-code-slash text-[var(--accent-yellow)]"></i>
-                                    <p class="text-gray-200">Cassio Holanda</p>
-                                </div>
-
-                                <h1 class="text-xl text-[var(--primary-green)] pt-4">Colaboradores</h1>
-                                <div class="flex items-center space-x-2">
-                                    <i class="bi bi-heart-fill text-[var(--accent-yellow)]"></i>
-                                    <p class="text-gray-200">Thalyta Helen</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <i class="bi bi-bar-chart-line-fill text-[var(--accent-yellow)]"></i>
-                                    <p class="text-gray-200">Kauanna Tiburcio</p>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="text-white flex flex-col items-center justify-center space-y-5 pt-9 lg:pt-3 sm:pt-0">
-                            <p class="text-sm">Otimize a gestão da sua escola com um sistema inteligente de demandas: organize solicitações, acompanhe tarefas, conecte equipes e mantenha tudo funcionando de forma clara, simples e eficiente.</p>
-                            <p>&#169 Todos os direitos reservados</p>
-                        </div>
-                        <div class="w-full h-full flex flex-col items-center space-y-5 justify-center pt-12 lg:pt-0">
-                            <img class="object-contain w-[24vw] lg:w-[6vw] translate-x-1 hover:scale-105 transition ease-in-out duration-300" src="./assets//S.png" alt="">
-                            <p class="text-gray-200 font-semibold text-sm">Salaberga - <span class="text-[var(--accent-yellow)]">2025</span></p>
-                        </div>
-                    </div>
-                </footer>
-        </main>
-
     </div>
-    
+
     <script>
-        const btnSec = document.querySelectorAll(".btnSec");
-        const iconReference = document.querySelectorAll(".iconReference");
-        const secFunc = document.querySelectorAll(".secFunc");
-
-        btnSec.forEach((btn, index) => {
-            btn.onmouseenter = () => {
-                iconReference[index].classList.remove("bg-gray-100/50");
-                iconReference[index].classList.remove("text-[var(--accent-yellow)]");
-
-                
-                iconReference[index].classList.add("bg-[var(--accent-yellow)]");
-                iconReference[index].classList.add("text-white");
-
-            };
-
-            btn.onmouseleave = () => { 
-                iconReference[index].classList.remove("bg-[var(--accent-yellow)]");
-                iconReference[index].classList.remove("text-white");
-
-                iconReference[index].classList.add("bg-gray-100/50");
-                iconReference[index].classList.add("text-[var(--accent-yellow)]");
-            };
-
-            btn.onclick = () => {
-                secFunc.forEach((sec) => {
-                    sec.classList.add("hidden");
-                    secFunc[index].classList.remove("hidden");
-                })
-            };
-        })
-
-        iconReference.forEach((icon, index) => {
-            icon.onclick = () => {
-                btnSec[index].click();
-            }
-        });
-    </script>
-
-     <script>
-        const btnConta = document.querySelector(".btnConta");
 
         window.onload = () => {
-            if(window.location.hash) {
-                history.replaceState(null, null, window.location.pathname + window.location.search);
-            }
+            document.getElementById("formCad").reset();
         };
 
-        if (window.location.hash) {
-            window.history.scrollRestoration = "manual";
-            setTimeout(() => {
-                window.scrollTo(0, 0); 
-            }, 1);
+        window.onload = () => {
+            document.getElementById("formLogin").reset();  
         };
-     </script>
 
-     <script>
-        ScrollReveal().reveal('#h1Sec2', {
-            delay: 200,
-            origin: 'bottom',
-            distance: '30px',
-            duration: 800,
-            easing: 'ease-in-out'
-        });
+        const btnLogin = document.getElementById("btnLogin");
+        const btnCad = document.getElementById("btnCad");
+        const textInstru = document.getElementById("textInstru");
 
-        ScrollReveal().reveal('#func1', {
-            delay: 300,
-            origin: 'bottom',
-            distance: '30px',
-            duration: 800,
-            easing: 'ease-in-out'
-        });
+        const formLogin = document.getElementById("formLogin");
+        const formCad = document.getElementById("formCad");
 
-        ScrollReveal().reveal('#func2', {
-            delay: 400,
-            origin: 'bottom',
-            distance: '30px',
-            duration: 800,
-            easing: 'ease-in-out'
-        });
+        const modalForm = document.getElementById("modalForm");
 
-        ScrollReveal().reveal('#func3', {
-            delay: 600,
-            origin: 'bottom',
-            distance: '30px',
-            duration: 800,
-            easing: 'ease-in-out'
-        });
+        btnLogin.onclick = () => {
+            formLogin.classList.remove("hidden");
+            formCad.classList.add("hidden");
+            btnLogin.classList.add("btn-active");
+            btnCad.classList.remove("btn-active");
+        }
 
-        ScrollReveal().reveal('#h1Header', {
-            delay: 200,
-            origin: 'left',
-            distance: '30px',
-            duration: 800,
-            easing: 'ease-in-out'
-        });
+        btnCad.onclick = () => {
+            formLogin.classList.add("hidden");
+            formCad.classList.remove("hidden");
+            btnCad.classList.add("btn-active");
+            btnLogin.classList.remove("btn-active");
+        }
 
+    </script>
 
-        ScrollReveal().reveal('#textSec1', {
-            delay: 200,
-            origin: 'top',
-            distance: '30px',
-            duration: 800,
-            easing: 'ease-in-out'
-        });
-        
-        const shakeCards = document.querySelectorAll(".shakeCard");
+    <script>
+        // Isso foi a IA
+        // Detectar mensagens do PHP
+        const urlParams = new URLSearchParams(window.location.search);
+        const sucesso = urlParams.get('sucesso');
+        const erro = urlParams.get('erro');
 
-        shakeCards.forEach((shakeCard) => {
-            shakeCard.onclick = () => {
-                shakeCard.classList.remove("shake");
+        // Se acabou de cadastrar → abrir formLogin
+        if (sucesso === "cadastro_realizado") {
+            btnLogin.click();
+        }
 
-                void shakeCard.offsetWidth;
+        // Se erro no cadastro → mostrar formCad
+        if (erro === "usuario_existe" || erro === "senha_fraca" || erro === "email_invalido") {
+            btnCad.click();
+        }
 
-                shakeCard.classList.add("shake");
-            }
-        });
-     </script>
+        // Erros de login → abrir Login sempre
+        if (erro === "usuario_nao_encontrado" || erro === "senha_incorreta") {
+            btnLogin.click();
+        }
+
+    </script>
 </body>
+
 </html>
