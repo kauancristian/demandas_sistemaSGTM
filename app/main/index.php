@@ -48,7 +48,7 @@
             --primary-green: #00b348;
             --dark-green: #007A33;
             --dark-green2: #173625;
-            --accent-yellow: #ffae18;
+            --accent-yellow: #FFA500;
             --bg-dark: #0f0f0f;
             --bg-card: #1a1a1a;
             --bg-elevated: #393939;
@@ -87,367 +87,238 @@
         .nav-bar{
             position: relative;
             overflow: hidden;
+            color: #c8f8db;
         }
 
+        
         .nav-bar::after{
             content: "";
             position: absolute;
-            display: block;
+            width: 4px;
+            height: 100%;
             left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 2px;
-            transform-origin: center;
+            top: 0;
             background-color: var(--accent-yellow);
-            transition: 0.3s ease-in-out;
-            transform: scaleX(0);
+            transform-origin: center;
+            transform: scaleY(0);
+            transition: transform 0.4s ease-in-out;
         }
 
         .nav-bar:hover::after{
-            transform: scaleX(1);
+            transform: scaleY(1);
         }
 
-        @keyframes shake {
-            0%   { transform: translateX(0); }
-            10%  { transform: translateX(-8px); }
-            20%  { transform: translateX(8px); }
-            30%  { transform: translateX(-6px); }
-            40%  { transform: translateX(6px); }
-            50%  { transform: translateX(-4px); }
-            60%  { transform: translateX(4px); }
-            70%  { transform: translateX(-2px); }
-            80%  { transform: translateX(2px); }
-            90%  { transform: translateX(-1px); }
-            100% { transform: translateX(0); }
+        .btnScaleGray{
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        .shake {
-            animation: shake 0.6s ease-in-out;
+        .btnScaleGray::after{
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            transform-origin: center;
+            background-color: #60796aff;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s ease-in-out;
+            z-index: -1;
+        }
+
+        .btnScaleGray:hover::after{
+            transform: translate(-50%, -50%) scale(1);
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-[#191919] via-[#262626]/90 to-[#121212] h-[100vh]">
+<body class="">
 
-    <!-- Sec 1 -->
-    <div id="sec1" class="h-screen"> 
-
-        
-        <div class="fixed bg-gradient-to-r from-[var(--accent-yellow)] via-[var(--primary-green)] to-[var(--accent-yellow)] h-[75px] pb-1 z-[9999]">
-            <header class="bg-gradient-to-r from-[var(--dark-green)] to-[#005A24] h-full flex justify-between items-center w-screen z-[9999]">
-
-                <div class="flex items-center space-x-1 ml-4">
-                    <img class="object-contain w-14 hover:scale-105 transition ease-in-out duration-300" src="assets/S.png" alt="">
-                    <h1 id="h1Header" class="text-[#fff] lg:text-xl font-semibold">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
+    <div class="grid lg:grid-cols-[0.4fr_1.2fr]">
+        <!-- Menu Lateral -->
+        <div class="bg-gradient-to-br from-[#025221] to-[#2D5236] hidden lg:block h-screen overflow-y-auto">
+            <div class="flex items-center justify-center pt-5">
+                <img class="object-contain w-16" src="assets/S.png" alt="">
+                <div class="flex flex-col items-center justify-center translate-x-[-6px] space-y-1">
+                    <h1 class="text-white font-semibold transform text-xl">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
+                    <span class="bg-[var(--accent-yellow)] h-0.5 w-full block"></span>
                 </div>
+            </div>
 
-                <div class="flex items-center space-x-10">
-
-                    <div class="flex items-center space-x-4 ">
-                        <div class="flex flex-col items-end">
-                            <p class="text-white text-sm hidden sm:block">
-                                <?= isset($_SESSION['nome']) ? htmlspecialchars(implode(" ", array_slice(explode(" ", trim($_SESSION['nome'])), 0, 2))) : '' ?>
-                            </p>
-                        </div>
-                        <div class="flex flex-col">
-                            <button class="btnConta">
-                                <?php if (isset($_SESSION['nome'])): ?>
-                                    <div class="w-10 h-10 rounded-full flex items-center justify-center"
-                                        style="background-color: <?= $_SESSION['perfil']; ?>;">
-                                        <p class="text-white font-semibold text-md">
-                                            <?= htmlspecialchars(mb_substr($_SESSION['nome'], 0, 1, 'UTF-8')); ?>
-                                        </p>
-                                    </div>
-                                <?php endif; ?>
+            <div class="pt-12 w-full">
+                <nav class="flex justify-center w-full px-7">
+                    <ul class="space-y-5 flex flex-col items-center w-full">
+                        <div class="flex justify-center items-center w-full">
+                            <i class="bi bi-plus-circle bg-gray-100/50 py-3 px-4 text-xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
+                            <button class="w-[90%] flex py-3 rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
+                                <li class="font-semibold">Criar Planilha</li>
                             </button>
+                        </div>
 
-                            <?php if(isset($_SESSION['id_usuario'])) : ?>
-                                <div class="absolute bg-[#262626] text-[var(--primary-green)] py-2 px-4 translate-y-[50px] translate-x-[-25px] transform translate-y-1 rounded-md hidden divSair">
+                        <div class="flex justify-center items-center w-full">
+                            <i class="bi bi-clipboard2-data bg-gray-100/50 py-3 px-4 text-xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
+                            <button class="w-[90%] py-3 rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
+                                <li class="font-semibold">Gerenciar Tarefas</li>
+                            </button>
+                        </div>
+
+                        <div class="flex justify-center items-center w-full">
+                            <i class="bi bi-file-earmark-arrow-down bg-gray-100/50 py-3 px-4 text-xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
+                            <button class="w-[90%] py-3 rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
+                                <li class="font-semibold">Gerar Relatórios</li>
+                            </button>
+                        </div>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <main class="h-[100vh] overflow-y-auto">
+
+            <!-- Incial -->
+            <div>
+                <header class="h-[65px] flex justify-between items-center z-[9999] border-b-2 px-5">
+
+                    <div>
+                        
+                    </div>
+
+                    <div class="flex items-center transform">
+
+                        <div class="flex items-center space-x-4 ">
+                            <div class="flex flex-col items-end">
+                                <p class="text-[#025221] text-sm hidden sm:block">
+                                    <?= isset($_SESSION['nome']) ? htmlspecialchars(implode(" ", array_slice(explode(" ", trim($_SESSION['nome'])), 0, 2))) : '' ?>
+                                </p>
+                            </div>
+
+                           
+                            <div class="flex items-center space-x-4">
+                                <button class="btnConta">
+                                    <?php if (isset($_SESSION['nome'])): ?>
+                                        <div class="w-10 h-10 rounded-full flex items-center justify-center"
+                                            style="background-color: <?= $_SESSION['perfil']; ?>;">
+                                            <p class="text-white font-semibold text-md">
+                                                <?= htmlspecialchars(mb_substr($_SESSION['nome'], 0, 1, 'UTF-8')); ?>
+                                            </p>
+                                        </div>
+                                    <?php endif; ?>
+                                </button>
+
+                                <!-- Btn Sair -->
+                                <?php if(isset($_SESSION['id_usuario'])) : ?>
                                     <form action="../main/controllers/authController.php?action=logout" method="POST">
-                                        <button class="flex items-center space-x-2 hover:text-[var(--accent-yellow)] hover:scale-105 transition ease-in-out duration-300 nav-bar botao-sair" type="submit">
+                                        <button class="flex items-center space-x-2 bg-[#025221] text-white py-1 px-3 rounded-md hover:translate-x-[3px] transition ease-in-out duration-150 botao-sair btnScaleGray" type="submit">
                                             <i class="bi bi-box-arrow-in-right text-xl"></i>
                                             <p>Sair</p>
                                         </button>
                                     </form>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-
-                    <div class="transform translate-x-[-30px]">
-                        <?php if (!isset($_SESSION['id_usuario'])): ?>
-                            <a href="./views/formLogin.php">
-                                <button class="flex items-center space-x-2 text-white hover:text-[var(--accent-yellow)] hover:scale-105 transition ease-in-out duration-300 nav-bar botao-entrar">
-                                    <i class="bi bi-box-arrow-in-right text-xl"></i>
-                                    <p>Entrar</p>
-                                </button>
-                            </a>
-                        <?php endif; ?>
-                    </div>
-
-                </div>
-            </header>
-        </div>
-            
-        <!-- Inicio -->
-        <div class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 relative w-full text-center">
-            <div id="textSec1" class="flex flex-col items-center justify-center ">
-                <h3 class="epi text-4xl lg:text-[6vw] font-bold text-white drop-shadow-[0_0_1px_gray] transform translate-y-[-15px]">SEJA BEM <span class="text-[#FFA500] epi">VINDO!</span></h3>
-
-                <p class="px-4 sm:px-0 sm:w-[610px] text-gray-200 text-center text-sm pt-5">Nosso sistema de demandas foi desenvolvido para melhorar o atendimento interno, conectando equipes, setores e gestores em uma plataforma inteligente, prática e segura. Aqui, cada solicitação é organizada, acompanhada e resolvida com agilidade, garantindo processos mais eficientes e comunicação clara entre todos os envolvidos.</p>
-
-                <div class="pt-5 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-5 items-center">
-                    <a href="#sec2">
-                        <button class="bg-[#156635] btnSpecial py-3 text-lg text-white w-[200px] rounded-xl btnSpecialGreen hover:translate-y-[-5px] transition ease-in-out duration-500 flex items-center space-x-2 justify-center group">
-                            <p>Comece Agora</p>
-                            <i id="chevron" class="bi bi-chevron-down group-hover:translate-y-1 transition ease-in-out duration-300"></i>
-                        </button>
-                    </a>
-
-                    <div class="pt-5 lg:pt-0">
-                        <div class="flex items-center space-x-3">
-                            <i class="bi bi-buildings-fill text-[var(--accent-yellow)] text-4xl"></i>
-                            <div class="flex flex-col items-center justify-center">
-                                <p class="text-sm text-white"> - EEEP Salaberga 2025</p>
-                                <p class="text-sm text-[#FFA400] transform translate-x-[-10px]">Sistema Integrado</p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>  
-        </div>
-    </div>
-
-    </div>
-
-    <div id="sec2" class="pb-14">
-        <div id="h1Sec2" class="pt-16 flex flex-col items-center justify-center space-y-3 text-center">
-            <h1 class="text-2xl lg:text-4xl font-semibold text-white epi">Serviços <span class="text-[var(--accent-yellow)]">Disponíveis</span></h1>
-            <span class="bg-gray-500 h-[2px] w-[130px] block mx-auto"></span>
-
-            <p class="pt-2 text-xl text-gray-300 px-5 text-center lg:text-start lg:px-0">Conheça um pouco mais sobre nossas funcionalidades</p>
-        </div>
-
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 px-4 sm:px-10 pt-12">
-            <div id="func1" class="bg-gradient-to-br btnSpecial p-3 rounded-lg cursor-pointer w-[95%] h-[320px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300 flex flex-col justify-between">
-
-                <?php if(!isset($_SESSION['id_usuario'])): ?>
-                    <div id tabindex="0" class="bg-black/80 inset-0 absolute z-50  h-full items-center justify-center shakeCard">
-                        <div class="flex flex-col items-center justify-center h-full space-y-3">
-                            <i class="ri-lock-2-fill text-[#E00507] z-50 text-5xl"></i>
-                            <p class="text-[#E00507] font-semibold">Funcionalidade Bloqueada!</p>
-                            <p class="text-white text-center text-sm px-4">Acesse sua conta, ou crie-a para acesso total.</p>
-                        </div>
-                    </div>
-                <?php else: ?>
-                    <div id tabindex="0" class="bg-black/80 inset-0 absolute z-50  h-full items-center justify-center shakeCard hidden"> <!-- esconde -->
-                        <div class="flex flex-col items-center justify-center h-full space-y-3 hidden"> 
-                            <i class="ri-lock-2-fill text-[#E00507] z-50 text-5xl"></i>
-                            <p class="text-[#E00507] font-semibold">Funcionalidade Bloqueada!</p>
-                            <p class="text-white text-center text-sm px-4">Acesse sua conta, ou crie-a para acesso total.</p>
-                        </div>
-                    </div>
-                <?php endif; ?>
-
-                <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
-                    <i class="bi bi-plus-lg text-5xl text-[var(--accent-yellow)]"></i>
-                    <p class="font-semibold text-white text-xl">Nova <span class="text-[var(--primary-green)]">Planilha</span></p>
-                </div>
-                <div class="transform translate-y-2">
-                    <p class="text-center text-gray-300 px-4">Crie uma nova planilha para registrar e organizar suas demandas.</p>
-                </div>
-                <div class="pt-3 transform translate-y-[-10px] flex flex-col items-center">
-                    <div class="span bg-[#404040] h-[1px] w-[85%] block"></div>
-                    <div class="flex justify-between items-center w-[85%] pt-6">
-                        <div class="flex items-center space-x-2 text-[--primary-green] bg-[#404040] py-1.5 px-3 rounded-full border border-[--primary-green] text-center justify-center">
-                            <i class="bi bi-circle-fill text-xs"></i>
-                            <p class="font-semibold text-xs">ATIVA</p>
-                        </div>
-                        <div>
-                            <a href="./views/createDemandas.php">
-                                <button class="flex items-center space-x-2 bg-[#156635] py-2 px-4 rounded-xl hover:translate-y-[-3px] hover:drop-shadow-[0_0_6px_var(--primary-green)] transition ease-in-out duration-300">
-                                    <i class="bi bi-box-arrow-up-right text-white"></i>
-                                    <p class="font-semibold text-white text-sm">Acessar</p>
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                </header>
             </div>
 
-            <div id="func2" class="bg-gradient-to-br btnSpecial p-3 rounded-lg cursor-pointer w-[95%] h-[320px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300 flex flex-col justify-between">
-
-                <?php if(!isset($_SESSION['id_usuario'])): ?>
-                    <div id tabindex="0" class="bg-black/80 inset-0 absolute z-50  h-full items-center justify-center shakeCard">
-                        <div class="flex flex-col items-center justify-center h-full space-y-3">
-                            <i class="ri-lock-2-fill text-[#E00507] z-50 text-5xl"></i>
-                            <p class="text-[#E00507] font-semibold">Funcionalidade Bloqueada!</p>
-                            <p class="text-white text-center text-sm px-4">Acesse sua conta, ou crie-a para acesso total.</p>
-                        </div>
-                    </div>
-                <?php else: ?>
-                    <div id tabindex="0" class="bg-black/80 inset-0 absolute z-50  h-full items-center justify-center shakeCard hidden"> <!-- esconde -->
-                        <div class="flex flex-col items-center justify-center h-full space-y-3"> 
-                            <i class="ri-lock-2-fill text-[#E00507] z-50 text-5xl"></i>
-                            <p class="text-[#E00507] font-semibold">Funcionalidade Bloqueada!</p>
-                            <p class="text-white text-center text-sm px-4">Acesse sua conta, ou crie-a para acesso total.</p>
-                        </div>
-                    </div>
-                <?php endif; ?>
-
-                <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
-                    <i class="bi bi-clipboard2-data text-5xl text-[var(--accent-yellow)]"></i>
-                    <p class="font-semibold text-white text-xl">Gerenciar <span class="text-[var(--primary-green)]">Tarefas</span></p>
-                </div>
-
-                <div class="transform translate-y-2">
-                    <p class="text-center text-gray-300 px-4">Acompanhe, edite e organize todas as tarefas em andamento.</p>
-                </div>
-
-                <div class="pt-3 transform translate-y-[-10px] flex flex-col items-center">
-                    <div class="span bg-[#404040] h-[1px] w-[85%] block"></div>
-
-                    <div class="flex justify-between items-center w-[85%] pt-6">
-                        <div class="flex items-center space-x-2 text-red-500 bg-[#404040] py-1.5 px-3 rounded-full border border-red-500 text-center justify-center">
-                            <i class="bi bi-circle-fill text-xs"></i>
-                            <p class="font-semibold text-xs">INATIVO</p>
-                        </div>
-
-                        <div>
-                            <a href="tarefasDemandas.html">
-                                <button class="flex items-center space-x-2 bg-[#156635] py-2 px-4 rounded-xl hover:translate-y-[-3px] hover:drop-shadow-[0_0_6px_var(--primary-green)] transition ease-in-out duration-300">
-                                    <i class="bi bi-box-arrow-up-right text-white"></i>
-                                    <p class="font-semibold text-white text-sm">Acessar</p>
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <!-- Criação de Planilhas -->
+            <div class="secFunc hidden">
+                <h1>Criar</h1>
             </div>
 
-            <div id="func3" class="bg-gradient-to-br btnSpecial p-3 rounded-lg cursor-pointer w-[95%] h-[320px] lg:w-[25vw] mx-auto hover:ring-2 ring-[var(--dark-green)] transition ease-in-out duration-300 flex flex-col justify-between">
-
-                <?php if(!isset($_SESSION['id_usuario'])): ?>
-                    <div id tabindex="0" class="bg-black/80 inset-0 absolute z-50  h-full items-center justify-center shakeCard">
-                        <div class="flex flex-col items-center justify-center h-full space-y-3">
-                            <i class="ri-lock-2-fill text-[#E00507] z-50 text-5xl"></i>
-                            <p class="text-[#E00507] font-semibold">Funcionalidade Bloqueada!</p>
-                            <p class="text-white text-center text-sm px-4">Acesse sua conta, ou crie-a para acesso total.</p>
-                        </div>
-                    </div>
-                <?php else: ?>
-                    <div id tabindex="0" class="bg-black/80 inset-0 absolute z-50  h-full items-center justify-center shakeCard hidden"> <!-- esconde -->
-                        <div class="flex flex-col items-center justify-center h-full space-y-3 "> 
-                            <i class="ri-lock-2-fill text-[#E00507] z-50 text-5xl"></i>
-                            <p class="text-[#E00507] font-semibold">Funcionalidade Bloqueada!</p>
-                            <p class="text-white text-center text-sm px-4">Acesse sua conta, ou crie-a para acesso total.</p>
-                        </div>
-                    </div>
-                <?php endif; ?>
-
-                <div class="flex flex-col justify-center items-center space-y-4 transform translate-y-4">
-                    <i class="bi bi-file-earmark-arrow-up-fill text-5xl text-[var(--accent-yellow)]"></i>
-                    <p class="font-semibold text-white text-xl">Gerar <span class="text-[var(--primary-green)]">Relatórios</span></p>
-                </div>
-
-                <div class="transform translate-y-2">
-                    <p class="text-center text-gray-300 px-4">Gere relatórios completos para análise e acompanhamento das demandas.</p>
-                </div>
-
-                <div class="pt-3 transform translate-y-[-10px] flex flex-col items-center">
-                    <div class="span bg-[#404040] h-[1px] w-[85%] block"></div>
-
-                    <div class="flex justify-between items-center w-[85%] pt-6">
-                        <div class="flex items-center space-x-2 text-red-500 bg-[#404040] py-1.5 px-3 rounded-full border border-red-500 text-center justify-center">
-                            <i class="bi bi-circle-fill text-xs"></i>
-                            <p class="font-semibold text-xs">INATIVO</p>
-                        </div>
-
-                        <div>
-                            <a href="relatoriosDemandas.html">
-                                <button class="flex items-center space-x-2 bg-[#156635] py-2 px-4 rounded-xl hover:translate-y-[-3px] hover:drop-shadow-[0_0_6px_var(--primary-green)] transition ease-in-out duration-300">
-                                    <i class="bi bi-box-arrow-up-right text-white"></i>
-                                    <p class="font-semibold text-white text-sm">Acessar</p>
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <!-- Gerenciamento de Tarefas -->
+            <div class="secFunc hidden">
+                <h1>Gerenciar</h1>
             </div>
 
-        </div>
-    </div>
-    
-
-     <div class="bg-gradient-to-t from-[var(--primary-green)] to-[var(--accent-yellow)] lg:h-[260px] pt-[2px]">
-         <footer class="bg-[#1C1C1C] h-full px-5 pb-12 flex justify-center items-center bottom-0 p-8 text-center">
-            <div class="grid lg:grid-cols-3 h-full w-full flex items-center">
-                <div class="text-white flex flex-col items-start transform translate-x-2 lg:items-center text-start text-sm sm:text-[15px] ">
-                    <div class="space-y-2">
-                        <h1 class="text-xl text-[var(--primary-green)]">Desenvolvedores</h1>
-                        <div class="flex flex-col items-start gap-3">
-                            <div class="flex items-center space-x-2">
+            <!-- Geração de Relatórios -->
+            <div class="secFunc hidden">
+                <h1>Gerar</h1>
+            </div>
+            
+            <div class="bg-gradient-to-t from-[var(--primary-green)] to-[var(--accent-yellow)] lg:h-[260px] pt-[2px] hidden">
+                <footer class="bg-[#1C1C1C] h-full px-5 pb-12 flex justify-center items-center bottom-0 p-8 text-center">
+                    <div class="grid lg:grid-cols-3 h-full w-full flex items-center">
+                        <div class="text-white flex flex-col items-start transform translate-x-2 lg:items-center text-start text-sm sm:text-[15px] ">
+                            <div class="space-y-2">
+                                <h1 class="text-xl text-[var(--primary-green)]">Desenvolvedores</h1>
                                 <div class="flex items-center space-x-2">
                                     <i class="bi bi-code-slash text-[var(--accent-yellow)]"></i>
                                     <p class="text-gray-200">Kauan Cristian</p>
                                 </div>
-                                <div class="flex items-center space-x-2">
-                                    <a href="https://www.instagram.com/kauanxrs_/" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
-                                        <i class="bi bi-instagram"></i>
-                                    </a>
-                                    <a href="https://github.com/kauancristian" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
-                                        <i class="bi bi-github"></i>
-                                    </a>
+                                <div class="flex space-x-2 items-center">
+                                    <i class="bi bi-code-slash text-[var(--accent-yellow)]"></i>
+                                    <p class="text-gray-200">Cassio Holanda</p>
                                 </div>
+
+                                <h1 class="text-xl text-[var(--primary-green)] pt-4">Colaboradores</h1>
+                                <div class="flex items-center space-x-2">
+                                    <i class="bi bi-heart-fill text-[var(--accent-yellow)]"></i>
+                                    <p class="text-gray-200">Thalyta Helen</p>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="bi bi-bar-chart-line-fill text-[var(--accent-yellow)]"></i>
+                                    <p class="text-gray-200">Kauanna Tiburcio</p>
+                                </div>
+
                             </div>
-
-                            <div class="flex items-center space-x-2">
-                                <div class="flex items-center space-x-2">
-                                    <i  class="bi bi-code-slash text-[var(--accent-yellow)]"></i>
-                                    <p class="text-gray-200">Cássio Holanda</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <a href="https://www.instagram.com/cassioholanda_/" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
-                                        <i class="bi bi-instagram"></i>
-                                    </a>
-                                    <a href="https://github.com/cassioholandaS" class="hover:scale-105 transition ease-in-out duration-200 hover:drop-shadow-[0_0_6px_var(--accent-yellow)] hover:text-[var(--accent-yellow)]">
-                                        <i class="bi bi-github"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            
                         </div>
-
-                        <h1 class="text-xl text-[var(--primary-green)] pt-4">Colaboradores</h1>
-                        <div class="flex items-center space-x-2">
-                            <i class="bi bi-heart-fill text-[var(--accent-yellow)]"></i>
-                            <p class="text-gray-200">Thalyta Helen</p>
+                        <div class="text-white flex flex-col items-center justify-center space-y-5 pt-9 lg:pt-3 sm:pt-0">
+                            <p class="text-sm">Otimize a gestão da sua escola com um sistema inteligente de demandas: organize solicitações, acompanhe tarefas, conecte equipes e mantenha tudo funcionando de forma clara, simples e eficiente.</p>
+                            <p>&#169 Todos os direitos reservados</p>
                         </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="bi bi-bar-chart-line-fill text-[var(--accent-yellow)]"></i>
-                            <p class="text-gray-200">Kauanna Tiburcio</p>
+                        <div class="w-full h-full flex flex-col items-center space-y-5 justify-center pt-12 lg:pt-0">
+                            <img class="object-contain w-[24vw] lg:w-[6vw] translate-x-1 hover:scale-105 transition ease-in-out duration-300" src="./assets//S.png" alt="">
+                            <p class="text-gray-200 font-semibold text-sm">Salaberga - <span class="text-[var(--accent-yellow)]">2025</span></p>
                         </div>
-
                     </div>
-                </div>
-                <div class="text-white flex flex-col items-center justify-center space-y-5 pt-9 lg:pt-3 sm:pt-0">
-                    <p class="text-sm">Otimize a gestão da sua escola com um sistema inteligente de demandas: organize solicitações, acompanhe tarefas, conecte equipes e mantenha tudo funcionando de forma clara, simples e eficiente.</p>
-                    <p>&#169 Todos os direitos reservados</p>
-                </div>
-                <div class="w-full h-full flex flex-col items-center space-y-5 justify-center pt-12 lg:pt-0">
-                    <img class="object-contain w-[24vw] lg:w-[6vw] translate-x-1 hover:scale-105 transition ease-in-out duration-300" src="./assets//S.png" alt="">
-                    <p class="text-gray-200 font-semibold text-sm">Salaberga - <span class="text-[var(--accent-yellow)]">2025</span></p>
-                </div>
-            </div>
-        </footer>
-     </div>
+                </footer>
+        </main>
+
+    </div>
+    
+    <script>
+        const btnSec = document.querySelectorAll(".btnSec");
+        const iconReference = document.querySelectorAll(".iconReference");
+        const secFunc = document.querySelectorAll(".secFunc");
+
+        btnSec.forEach((btn, index) => {
+            btn.onmouseenter = () => {
+                iconReference[index].classList.remove("bg-gray-100/50");
+                iconReference[index].classList.remove("text-[var(--accent-yellow)]");
+
+                
+                iconReference[index].classList.add("bg-[var(--accent-yellow)]");
+                iconReference[index].classList.add("text-white");
+
+            };
+
+            btn.onmouseleave = () => { 
+                iconReference[index].classList.remove("bg-[var(--accent-yellow)]");
+                iconReference[index].classList.remove("text-white");
+
+                iconReference[index].classList.add("bg-gray-100/50");
+                iconReference[index].classList.add("text-[var(--accent-yellow)]");
+            };
+
+            btn.onclick = () => {
+                secFunc.forEach((sec) => {
+                    sec.classList.add("hidden");
+                    secFunc[index].classList.remove("hidden");
+                })
+            };
+        })
+
+        iconReference.forEach((icon, index) => {
+            icon.onclick = () => {
+                btnSec[index].click();
+            }
+        });
+    </script>
 
      <script>
         const btnConta = document.querySelector(".btnConta");
-        const divSair = document.querySelector(".divSair");
-
-        btnConta.onclick = () => {
-            divSair.classList.toggle("hidden");
-        };
 
         window.onload = () => {
             if(window.location.hash) {
