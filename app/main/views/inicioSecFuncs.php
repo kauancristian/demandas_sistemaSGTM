@@ -141,7 +141,7 @@
 
     <div class="grid lg:grid-cols-[0.4fr_1.2fr]">
         <!-- Menu Lateral -->
-        <div class="bg-gradient-to-br from-[#025221] to-[#2D5236] hidden lg:block h-screen overflow-y-auto">
+        <div class="bg-gradient-to-br from-[var(--dark-green2)] to-[#025221] hidden lg:block h-screen overflow-y-auto">
             <div class="flex items-center justify-center pt-5">
                 <img class="object-contain w-16" src="../assets/S.png" alt="">
                 <div class="flex flex-col items-center justify-center translate-x-[-6px] space-y-1">
