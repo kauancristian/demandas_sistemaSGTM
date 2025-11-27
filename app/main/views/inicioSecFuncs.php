@@ -139,7 +139,7 @@
 </head>
 <body class="">
 
-    <div class="grid lg:grid-cols-[0.4fr_1.2fr]">
+    <div class="grid lg:grid-cols-[0.3fr_1.2fr]">
         <!-- Menu Lateral -->
         <div class="bg-gradient-to-br from-[var(--dark-green2)] to-[#025221] hidden lg:block h-screen overflow-y-auto">
             <div class="flex items-center justify-center pt-5">
@@ -154,22 +154,22 @@
                 <nav class="flex justify-center w-full px-7">
                     <ul class="space-y-5 flex flex-col items-center w-full">
                         <div class="flex justify-center items-center w-full">
-                            <i class="bi bi-plus-circle bg-gray-100/50 py-3 px-4 text-xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
-                            <button class="w-[90%] flex py-3 rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
+                            <i class="bi bi-plus-circle py-3 px-4 text-2xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
+                            <button class="w-[90%] flex py-3 text-[1vw] rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
                                 <li class="font-semibold">Criar Planilha</li>
                             </button>
                         </div>
 
                         <div class="flex justify-center items-center w-full">
-                            <i class="bi bi-clipboard2-data bg-gray-100/50 py-3 px-4 text-xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
-                            <button class="w-[90%] py-3 rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
-                                <li class="font-semibold">Gerenciar Tarefas</li>
+                            <i class="bi bi-clipboard2-data py-3 px-4 text-2xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
+                            <button class="w-[90%] py-3 text-[1vw] rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
+                                <li class="font-semibold">Gerenciar Planilhas</li>
                             </button>
                         </div>
 
                         <div class="flex justify-center items-center w-full">
-                            <i class="bi bi-file-earmark-arrow-down bg-gray-100/50 py-3 px-4 text-xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
-                            <button class="w-[90%] py-3 rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
+                            <i class="bi bi-file-earmark-arrow-down py-3 px-4 text-2xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
+                            <button class="w-[90%] py-3 text-[1vw] rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
                                 <li class="font-semibold">Gerar Relatórios</li>
                             </button>
                         </div>
@@ -192,7 +192,7 @@
 
                     <div class="flex items-center space-x-4 ">
                         <div class="flex flex-col items-end">
-                            <p class="text-[#025221] text-sm hidden sm:block">
+                            <p class="text-[#025221] text-sm sm:text-[0.8vw] hidden sm:block">
                                 <?= isset($_SESSION['nome']) ? htmlspecialchars(implode(" ", array_slice(explode(" ", trim($_SESSION['nome'])), 0, 2))) : '' ?>
                             </p>
                         </div>
@@ -229,7 +229,7 @@
                 <h1>Criar</h1>
             </div>
 
-            <!-- Gerenciamento de Tarefas -->
+            <!-- Gerenciamento de Planilha -->
             <div class="secFunc hidden">
                 <h1>Gerenciar</h1>
             </div>
@@ -287,7 +287,6 @@
 
         btnSec.forEach((btn, index) => {
             btn.onmouseenter = () => {
-                iconReference[index].classList.remove("bg-gray-100/50");
                 iconReference[index].classList.remove("text-[var(--accent-yellow)]");
 
                 
@@ -300,7 +299,6 @@
                 iconReference[index].classList.remove("bg-[var(--accent-yellow)]");
                 iconReference[index].classList.remove("text-white");
 
-                iconReference[index].classList.add("bg-gray-100/50");
                 iconReference[index].classList.add("text-[var(--accent-yellow)]");
             };
 

@@ -151,7 +151,7 @@
         }
     </style>
 </head>
-<body class="lg:bg-[#e9fafa]/40 min-h-screen">
+<body class="lg:bg-[#e9fafa]/60 min-h-screen">
 
     <?php
         $sucesso = $_GET['sucesso'] ?? null;
@@ -159,7 +159,7 @@
     ?>
 
     <!-- Modal do Formulario -->
-    <div id="modalForm" class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 fixed m-auto rounded-xl w-[90%] sm:w-[550px] lg:w-[90%] grid lg:grid-cols-2 lg:h-[95vh] lg:shadow-2xl">
+    <div id="modalForm" class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 fixed m-auto rounded-xl w-[90%] sm:w-[550px] lg:w-[65%] grid lg:grid-cols-2 lg:h-[650px] lg:shadow-2xl">
         <div class="bg-gradient-to-br from-[#025221] via-[#47643C] to-[#FFA500] h-full hidden lg:block rounded-l-2xl shadow-xl">
             <div class="flex flex-col items-center justify-center h-full gap-8">
                 <i class="bi bi-mortarboard-fill text-9xl text-[var(--accent-yellow)]"></i>
@@ -182,24 +182,26 @@
             </div>
         </div>
         <div id="ladoForm" class="bg-transparent lg:bg-white h-full lg:overflow-y-auto pb-16 sm:pb-12 rounded-r-2xl">
-            <div class="flex flex-col items-center justify-center pt-10 gap-6 w-full justify-between">
-                <div class="flex flex-col items-center gap-3">
-                    <img class="object-cover w-20" src="./assets/S.png" alt="">
-                    <h1 class="text-black text-2xl lg:text-4xl font-bold mont">Bem-vindo!</h1>
-                    <p id="textInstru" class="text-center text-sm sm:text-lg px-12 text-[var(--text-secondary)]">Acesse o Sistema de Demandas</p>
-                </div>
-                <div class="bg-[#F3F4F6] w-[95%] lg:w-[85%] rounded-xl flex items-center p-2 space-x-2">
-                    <button id="btnLogin" class="py-3 btn-active rounded-xl w-[50%] flex items-center space-x-2 justify-center">
-                        <i class="bi bi-box-arrow-in-right text-[#154231]"></i>
-                        <p class="text-[#154231]">Login</p>
-                    </button>
-                    <button id="btnCad" class="py-3 rounded-xl w-[50%] flex items-center space-x-2 justify-center">
-                        <i class="bi bi-person-fill-add text-[#154231]"></i>
-                        <p class="text-[#154231]">Cadastro</p>
-                    </button>
+            <div class="flex flex-col items-center pt-10 gap-6 w-full justify-between h-full">
+                <div class="w-full flex flex-col items-center">
+                    <div class="flex flex-col items-center gap-3">
+                        <img class="object-cover w-20" src="./assets/S.png" alt="">
+                        <h1 class="text-black text-2xl lg:text-4xl font-bold mont">Bem-vindo!</h1>
+                        <p id="textInstru" class="text-center text-sm sm:text-lg px-12 text-[var(--text-secondary)]">Acesse o Sistema de Demandas</p>
+                    </div>
+                    <div class="bg-[#F3F4F6] w-[95%] lg:w-[85%] rounded-xl flex items-center p-2 space-x-2">
+                        <button id="btnLogin" class="py-3 btn-active rounded-xl w-[50%] flex items-center space-x-2 justify-center">
+                            <i class="bi bi-box-arrow-in-right text-[#154231]"></i>
+                            <p class="text-[#154231]">Login</p>
+                        </button>
+                        <button id="btnCad" class="py-3 rounded-xl w-[50%] flex items-center space-x-2 justify-center">
+                            <i class="bi bi-person-fill-add text-[#154231]"></i>
+                            <p class="text-[#154231]">Cadastro</p>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- ISSO FOI EU -->
+               
                 <!-- <?php if ($sucesso === "cadastro_realizado"): ?>
                     <div class="text-[var(--primary-green)] mt-3 font-semibold text-centeer">
                         Cadastro realizado com sucesso! Agora faça login.
@@ -223,9 +225,9 @@
                 <?php endif; ?> -->
 
 
-                <div class="w-full flex">
+                <div class="w-full flex transform translate-y-[-45px]  ">
                     <!-- Form Login -->
-                    <form novalidate id="formLogin" class="flex flex-col items-center justify-center w-full transform translate-y-4 formSite" action="./controllers/authController.php?action=login" method="POST">
+                    <form novalidate id="formLogin" class="flex flex-col items-center justify-center w-full transform translate-y-10 formSite" action="./controllers/authController.php?action=login" method="POST">
                         <div class="w-full relative flex flex-col items-center gap-4">
                             <div class="w-[95%] lg:w-[85%] relative flex items-center">
                                 <i class="bi bi-envelope-fill absolute left-3 text-xl text-[#025725]"></i>
@@ -245,16 +247,12 @@
                                     <p>Acessar Sistema</p>
                                 </button>
                             </div>
-                            <span class="bg-[#E5E7EB] w-[95%] lg:w-[85%] h-0.5 block text-center"></span>
-                            
-                            <div class="text-[var(--accent-yellow)] translate-y-1 text-[14px] flex items-center space-x-2">
-                                <i class="bi bi-question-circle-fill"></i>
-                                <p>Precisando de ajuda?<a class="font-semibold" href=""> Fale conosco.</a></p>
-                            </div>
                         </div>
-                    </form>
+
+                    </form> 
+
                     <!-- Form Cad -->
-                    <form id="formCad" class="flex flex-col items-center justify-center w-full gap-3 hidden formSite" action="./controllers/authController.php?action=cadastro" method="POST">
+                    <form id="formCad" class="flex flex-col items-center justify-center w-full gap-3 hidden formSite translate-y-6" action="./controllers/authController.php?action=cadastro" method="POST">
                         <div class="w-full relative flex flex-col items-center gap-4 pt-4">
                             <div class="w-[95%] lg:w-[85%] relative flex items-center">
                                 <i class="bi bi-person-fill absolute left-3 text-xl text-[#025725]"></i>
@@ -279,16 +277,21 @@
                                     <p>Verificar Primeiro Acesso</p>
                                 </button>
                             </div>
-                            
-                            <span class="bg-[#E5E7EB] w-[95%] lg:w-[85%] h-0.5 block text-center"></span>
-
-                            <div class="text-[var(--accent-yellow)] translate-y-1 text-[14px] flex items-center space-x-2">
-                                <i class="bi bi-question-circle-fill"></i>
-                                <p>Precisando de ajuda?<a class="font-semibold" href=""> Fale conosco.</a></p>
-                            </div>
                         </div>
+
                     </form>
+
                 </div>
+
+
+                <div class="w-full flex flex-col items-center transform translate-y-[-10px] space-y-4 pb-10">
+                    <span class="bg-[#E5E7EB] w-[95%] lg:w-[85%] h-0.5 block text-center"></span>
+                    <div class="text-[var(--accent-yellow)] translate-y-1 text-[14px] flex items-center space-x-2">
+                        <i class="bi bi-question-circle-fill"></i>
+                        <p>Precisando de ajuda?<a class="font-semibold" href=""> Fale conosco.</a></p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
