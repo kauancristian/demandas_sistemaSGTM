@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . "/../models/Usuario.php";
 require_once __DIR__ . "/../models/Planilha.php";
-require_once __DIR__ . "/../models/Comentario.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
