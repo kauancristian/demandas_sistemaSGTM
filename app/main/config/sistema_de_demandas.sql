@@ -82,15 +82,11 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `perfil`) VALUES
-(1, 'Cássio Holanda Gomes Severiano', 'cassio.holanda@gmail.com', '$2y$10$AgqCALRH6Vo0T/jvgAwkJ.T4yebRtfreufruaqp8I1imDdgBoQcHK', '#201C56'),
-(2, 'Kauan Cristian Santos de Lima', 'kauan.cristian@gmail.com', '$2y$10$Cdcs6Yzx5FnYJYXBGm2hQunQo5k2O3vKDsTawCH3A.yaVj6VOdGQy', '#4C829F');
+(3, 'Cássio Holanda Gomes Severiano', 'cassio.holanda@gmail.com', '$2y$10$AgqCALRH6Vo0T/jvgAwkJ.T4yebRtfreufruaqp8I1imDdgBoQcHK', '#201C56');
 
 --
--- Reestartando AUTO_INCREMENT para a tabela `usuarios`
+-- Índices para tabelas despejadas
 --
-
-ALTER TABLE `usuarios`
-  AUTO_INCREMENT = 3;
 
 --
 -- Índices de tabela `comentarios`
