@@ -108,6 +108,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
     }
+ 
+    else if ($action === 'criar_planilha') {
+        header('Content-Type: application/json; charset=utf-8');
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
+        if (strpos($contentType, 'application/json') !== false) {
+            $input = json_decode(file_get_contents('php://input'), true);
+            $titulo = trim($input['titulo'] ?? '');
+        } else {
+            $titulo = trim($_POST['titulo'] ?? '');
+        }
+
+        if (empty($titulo)) {
+            http_response_code(422);
+            echo json_encode(['status' => 'error', 'message' => 'Título é obrigatório']);
+            exit;
+        }
+
+        if (!isset($_SESSION['id_usuario'])) {
+            http_response_code(401);
+            echo json_encode(['status' => 'error', 'message' => 'Usuário não autenticado']);
+            exit;
+        }
+
+        try {
+            $planilha = new Planilha();
+            $result = $planilha->criarPlanilha($titulo, intval($_SESSION['id_usuario']));
+
+            switch ($result) {
+                case Planilha::STATUS_OK:
+                    http_response_code(201);
+                    echo json_encode(['status' => 'ok', 'message' => 'Planilha criada']);
+                    exit;
+
+                case Planilha::STATUS_INSERT_ERROR:
+                case Planilha::STATUS_EXCEPTION:
+                default:
+                    http_response_code(500);
+                    echo json_encode(['status' => 'error', 'message' => 'Falha ao criar planilha']);
+                    exit;
+            }
+        } catch (Exception $e) {
+            error_log('Erro criar_planilha: ' . $e->getMessage());
+            http_response_code(500);
+            echo json_encode(['status' => 'error', 'message' => 'Exceção no servidor']);
+            exit;
+        }
+    }
 
     else if ($action === 'logout') {
         session_start();
