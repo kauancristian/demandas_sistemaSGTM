@@ -126,11 +126,11 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            width: 300px;
+            width: 100%;
             height: 300px;
             border-radius: 50%;
             transform-origin: center;
-            background-color: #60796aff;
+            background-color: #3f8159ff;
             transform: translate(-50%, -50%) scale(0);
             transition: transform 0.2s ease-in-out;
             z-index: -1;
@@ -139,13 +139,17 @@
         .btnScaleGray:hover::after{
             transform: translate(-50%, -50%) scale(1);
         }
+
+        .noScroll{
+            overflow-y: hidden;
+        }
     </style>
 </head>
 <body class="">
 
     <div class="grid lg:grid-cols-[0.4fr_1.2fr]">
         <!-- Menu Lateral -->
-        <div id="side-bar" class="bg-gradient-to-br from-[var(--dark-green2)] to-[#025221] hidden lg:block h-screen overflow-y-auto w-screen lg:w-full transform translate-x-[-100%] lg:translate-x-0 transition ease-in-out duration-300">
+        <div id="side-bar" class="bg-gradient-to-br from-[var(--dark-green2)] to-[#025221] hidden lg:block h-screen overflow-y-auto w-screen lg:w-full transform translate-x-[-100%] lg:translate-x-0 transition ease-in-out duration-300 z-[9999]">
             <div class="flex justify-center items-center space-x-4 lg:space-x-0">
                 <div class="flex items-center justify-center pt-5">
                     <img class="object-contain w-16" src="../assets/S.png" alt="">
@@ -188,10 +192,13 @@
 
         <main class="h-[100vh] overflow-y-auto bg-gradient-to-br from-[#F6F9F7] to-[#EBF6F3]">
 
+            <!-- Shadow-->
+            <div class="bg-black inset-0 opacity-50 h-screen absolute shadow hidden"></div>
+
             <header class="h-[65px] flex justify-between items-center z-[9999] border-b-2 px-5">
 
                 <!-- Btn menu Mobile -->
-                <div>
+                <div class="z-[9999] relative">
                     <button id="btnMenuMb" class="lg:hidden">
                         <i class="bi bi-list text-[#025221] text-2xl"></i>
                     </button>
@@ -199,7 +206,7 @@
 
                 <div class="flex items-center transform">
 
-                    <div class="flex items-center space-x-4 ">
+                    <div class="flex items-center space-x-4 z-[9999] relative">
                         <div class="flex flex-col items-end">
                             <p class="text-[#025221] text-sm sm:text-[14px] hidden sm:block">
                                 <?= isset($_SESSION['nome']) ? htmlspecialchars(implode(" ", array_slice(explode(" ", trim($_SESSION['nome'])), 0, 2))) : '' ?>
@@ -234,27 +241,82 @@
             </header>
 
             <!-- Sec Incial -->
-            <div class="pt-12">
+            <div id="secInicial" class="pt-12 hidden">
                 <div class="flex flex-col items-center justify-center gap-3">
                     <div class="flex flex-col items-center space-y-2">
                         <h1 class="text-center text-xl">Bem-vindo ao Sistema de Demandas SGTM</h1>
                         <span class="bg-[var(--accent-yellow)] h-0.5 w-[200px] mx-auto block"></span>
                     </div>
-                    <p class="text-gray-800">Gerencie solicitações, acompanhe prazos e visualize informações essenciais.</p>
+                    <p class="text-gray-800 px-6 text-center pt-3">Gerencie solicitações, acompanhe prazos e visualize informações essenciais.</p>
                 </div>
 
-                <div class="pt-12">
-                    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                        <div>
-                            
-                        </div>
-                    </div>       
-                </div>
             </div>
 
             <!-- Criação de Planilhas -->
-            <div class="secFunc hidden">
-                <h1>Criar</h1>
+            <div class="secFunc">
+                <!-- Btn New Planilha -->
+                <div id="divNew" class="flex flex-col items-center justify-center items-center pt-8 space-y-6">
+                    <p class="text-gray-600 text-center px-4 sm:px-0">Você ainda não possui nenhuma planilha criada. Crie a sua primeira logo abaixo.</p>
+                    <div class="bg-gradient-to-br from-white via-white to-gray-200 shadow-2xl py-6 px-4 rounded-xl btnSpecial flex flex-col items-center space-y-7 w-[220px]">
+                         <i class="bi bi-plus-circle text-5xl text-[var(--accent-yellow)]"></i>
+                         <button id="btnNewPlanilha" class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleGray">
+                            <p class="text-white py-2">Nova Planilha</p>
+                         </button>
+                    </div>
+                </div>
+
+                <!-- Modal de Name Planilha -->
+                <div class="w-full h-screen transform translate-y-[-120px] flex justify-center items-center z-[200] relative hidden modalCreatePlanilha">
+                    <div class="bg-white py-6 px-3 pb-6 rounded-xl">
+
+                        <div class="px-3 translate-y-[-10px]"><i id="fecharModalName" class="bi bi-arrow-return-left text-xl cursor-pointer hover:text-[var(--accent-yellow)] transition ease-in-out duration-300"></i></div>
+
+                        <div class="flex flex-col px-2 space-y-4">
+                            <div class="w-full flex items-center relative group">
+                                <i class="bi bi-x absolute left-2"></i>
+                                <input class="p-2 outline-none border-2 border-[#025221] rounded-lg indent-5 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="text" name="namePlanilha" id="inptNamePlanilha" placeholder="Nome...Planilha">
+                            </div>
+
+                            <!-- pError -->
+                            <p id="pError" class="text-red-500 text-sm hidden">Preencha os campos vázios!</p>
+                
+
+                            <!-- btnCriarPlanilha -->
+                            <button id="btnCriarPlanilha" class="py-2 w-full bg-[#025221] rounded-lg text-white btnScaleGray hover:translate-y-[-3px] transition ease-in-out duration-300">
+                                <p>Criar Planilha</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal de Confirmação -->
+                <div class="w-full h-screen transform translate-y-[-120px] flex justify-center items-center z-[200] relative hidden modalConfirmation">
+                    <div class="bg-white py-6 px-5 pb-6 rounded-xl flex flex-col justify-center items-center gap-4">
+                        <div class="flex flex-col items-center space-y-3">
+                            <i class="bi bi-check-circle text-[#025221] text-3xl"></i>
+                            <p class="text-gray-600 ">Planilha criada com sucesso!</p>
+                        </div>
+
+                        <!-- btnConfirmar -->
+                         <button id="btnProsseguir" class="py-2 w-full bg-[#025221] rounded-lg text-white btnScaleGray hover:translate-y-[-3px] transition ease-in-out duration-300">
+                            <p>Prosseguir</p>
+                        </button>
+                    </div>
+                </div>
+
+
+                <!-- Container Planilhas -->
+                 <div id="divPlanilhaCriada" class="hidden">
+                    <div class="flex flex-col space-y-2 pt-6">
+                        <h1 class="text-center text-xl nomePlanilha text-[#025221]"></h1>
+                        <span class="bg-[var(--accent-yellow)] h-0.5 w-[120px] mx-auto block"></span>
+                    </div>
+
+
+                    <div id="containerGeralPlanilhas" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+
+                    </div>
+                 </div>
             </div>
 
             <!-- Gerenciamento de Planilha -->
@@ -307,6 +369,69 @@
         </main>
 
     </div>
+
+    <script>
+        let quantidadePlanilhas = 0;
+        let idPlanilha = 1;
+        let planilhaCriada = false;
+
+        const shadow = document.querySelector(".shadow");
+        const btnNewPlanilha = document.getElementById("btnNewPlanilha");
+        const btnCriarPlanilha = document.getElementById("btnCriarPlanilha");
+        const btnProsseguir = document.getElementById("btnProsseguir");
+        const inptNamePlanilha = document.getElementById("inptNamePlanilha");
+        const fecharModalName = document.getElementById("fecharModalName");
+
+        const nomePlanilha = document.querySelector(".nomePlanilha");
+        let nomePlanilhaPassado = "";
+
+        btnNewPlanilha.onclick = () => {
+            shadow.classList.remove("hidden");
+            document.getElementById("divNew").classList.add("hidden");
+            document.querySelector(".modalCreatePlanilha").classList.remove("hidden");
+        };
+
+        btnCriarPlanilha.onclick = () => {
+            if(inptNamePlanilha.value.trim().length === 0) {
+                document.getElementById("pError").classList.remove("hidden");
+                return;
+            }else{
+                planilhaCriada = true;
+                document.querySelector(".modalCreatePlanilha").classList.add("hidden");
+                document.querySelector(".modalConfirmation").classList.remove("hidden");
+
+                nomePlanilhaPassado = inptNamePlanilha.value.trim();
+            };
+
+            inptNamePlanilha.oninput = () => {
+                if(inptNamePlanilha.value.trim().length > 0) {
+                    document.getElementById("pError").classList.add("hidden");
+                }else{
+                    document.getElementById("pError").classList.remove("hidden");
+                };
+            };
+        };
+
+        btnProsseguir.onclick = () => {
+            document.querySelector(".modalConfirmation").classList.add("hidden");
+            shadow.classList.add("hidden");
+            document.getElementById("divPlanilhaCriada").classList.remove("hidden");
+
+            nomePlanilha.textContent = nomePlanilhaPassado;
+        }
+
+        inptNamePlanilha.oninput = () => {
+            if(inptNamePlanilha.value.trim().length > 0) {
+                document.getElementById("pError").classList.add("hidden");
+            };
+        };
+        
+        fecharModalName.onclick = () => {
+            document.querySelector(".modalCreatePlanilha").classList.add("hidden");
+            shadow.classList.add("hidden");
+            document.getElementById("divNew").classList.remove("hidden");
+        }
+    </script>
     
     <script>
         const btnSec = document.querySelectorAll(".btnSec");
@@ -332,6 +457,7 @@
             btn.onclick = () => {
                 secFunc.forEach((sec) => {
                     sec.classList.add("hidden");
+                    document.getElementById("secInicial").classList.add("hidden");
                 });
 
                 secFunc[index].classList.remove("hidden");
