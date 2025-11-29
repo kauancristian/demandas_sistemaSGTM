@@ -160,7 +160,7 @@
     ?>
 
     <!-- Modal do Formulario -->
-    <div id="modalForm" class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 fixed m-auto rounded-xl w-[90%] sm:w-[550px] lg:w-[75%] grid lg:grid-cols-[1.8fr_2fr] lg:h-[650px] lg:shadow-2xl">
+    <div id="modalForm" class="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 fixed m-auto rounded-xl w-[90%] sm:w-[550px] lg:w-[1100px] grid lg:grid-cols-[1.8fr_2fr] lg:h-[650px] lg:shadow-2xl">
         <div class="bg-gradient-to-br from-[#025221] via-[#47643C] to-[#FFA500] h-full hidden lg:block rounded-l-2xl shadow-xl">
             <div class="flex flex-col items-center justify-center h-full gap-8">
                 <i class="bi bi-mortarboard-fill text-9xl text-[var(--accent-yellow)]"></i>
@@ -294,7 +294,7 @@
                 </div>
 
                 <!-- Ajuda Cad -->
-                <div id="ajudaCad" class="w-full flex flex-col items-center transform translate-y-[-36px] space-y-4 pb-8 hidden">
+                <div id="ajudaCad" class="w-full flex flex-col items-center transform translate-y-[-36px] space-y-4 pb-12 hidden">
                     <span class="bg-[#E5E7EB] w-[95%] lg:w-[85%] h-0.5 block text-center"></span>
                     <div class="text-[var(--accent-yellow)] translate-y-1 text-[14px] flex items-center space-x-2">
                         <i class="bi bi-question-circle-fill"></i>

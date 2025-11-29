@@ -95,20 +95,24 @@
 
         
         .nav-bar::after{
-            content: "";
-            position: absolute;
-            width: 4px;
-            height: 100%;
-            left: 0;
-            top: 0;
-            background-color: var(--accent-yellow);
-            transform-origin: center;
-            transform: scaleY(0);
-            transition: transform 0.4s ease-in-out;
+           content: "";
+           position: absolute;
+           width: 4px;
+           height: 100%;
+           left: 0;
+           bottom: 0;
+           background-color: var(--accent-yellow);
+           transform-origin: center;
+           transform: scaleY(0);
+           transition: transform 0.4s;
         }
 
         .nav-bar:hover::after{
             transform: scaleY(1);
+        }
+
+        .nav-bar-active::after{
+            transform: scaleY(1) !important;
         }
 
         .btnScaleGray{
@@ -128,7 +132,7 @@
             transform-origin: center;
             background-color: #60796aff;
             transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.2s ease-in-out;
             z-index: -1;
         }
 
@@ -139,37 +143,41 @@
 </head>
 <body class="">
 
-    <div class="grid lg:grid-cols-[0.3fr_1.2fr]">
+    <div class="grid lg:grid-cols-[0.4fr_1.2fr]">
         <!-- Menu Lateral -->
-        <div class="bg-gradient-to-br from-[var(--dark-green2)] to-[#025221] hidden lg:block h-screen overflow-y-auto">
-            <div class="flex items-center justify-center pt-5">
-                <img class="object-contain w-16" src="../assets/S.png" alt="">
-                <div class="flex flex-col items-center justify-center translate-x-[-6px] space-y-1">
-                    <h1 class="text-white font-semibold transform text-xl">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
-                    <span class="bg-[var(--accent-yellow)] h-0.5 w-full block"></span>
+        <div id="side-bar" class="bg-gradient-to-br from-[var(--dark-green2)] to-[#025221] hidden lg:block h-screen overflow-y-auto w-screen lg:w-full transform translate-x-[-100%] lg:translate-x-0 transition ease-in-out duration-300">
+            <div class="flex justify-center items-center space-x-4 lg:space-x-0">
+                <div class="flex items-center justify-center pt-5">
+                    <img class="object-contain w-16" src="../assets/S.png" alt="">
+                    <div class="flex flex-col items-center justify-center translate-x-[-6px] space-y-1">
+                        <h1 class="text-white font-semibold transform text-xl">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
+                        <span class="bg-[var(--accent-yellow)] h-0.5 w-full block"></span>
+                    </div>
                 </div>
+
+                <i id="btnMenuClose" class="bi bi-x-lg lg:hidden text-xl text-white"></i>
             </div>
 
             <div class="pt-12 w-full">
-                <nav class="flex justify-center w-full px-7">
+                <nav class="flex justify-center w-full px-4 lg:px-5">
                     <ul class="space-y-5 flex flex-col items-center w-full">
                         <div class="flex justify-center items-center w-full">
-                            <i class="bi bi-plus-circle py-3 px-4 text-2xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
-                            <button class="w-[90%] flex py-3 text-[1vw] rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
+                            <i class="bi bi-plus-circle h-[55px] flex items-center justify-center px-4 text-2xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
+                            <button class="w-[90%] h-[55px] text-sm lg:text-[1.2vw] rounded-md text-white text-start indent-5 hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 nav-bar btnSec">
                                 <li class="font-semibold">Criar Planilha</li>
                             </button>
                         </div>
 
                         <div class="flex justify-center items-center w-full">
-                            <i class="bi bi-clipboard2-data py-3 px-4 text-2xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
-                            <button class="w-[90%] py-3 text-[1vw] rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
+                            <i class="bi bi-clipboard2-data h-[55px] flex items-center justify-center px-4 text-2xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
+                            <button class="w-[90%] h-[55px] text-sm lg:text-[1.2vw] rounded-md text-white text-start indent-5 hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 nav-bar btnSec">
                                 <li class="font-semibold">Gerenciar Planilhas</li>
                             </button>
                         </div>
 
                         <div class="flex justify-center items-center w-full">
-                            <i class="bi bi-file-earmark-arrow-down py-3 px-4 text-2xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
-                            <button class="w-[90%] py-3 text-[1vw] rounded-md text-white hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 text-start indent-5 nav-bar btnSec">
+                            <i class="bi bi-file-earmark-arrow-down h-[55px] flex items-center justify-center px-4 text-2xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
+                            <button class="w-[90%] h-[55px] text-sm lg:text-[1.2vw] rounded-md text-white text-start indent-5 hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 nav-bar btnSec">
                                 <li class="font-semibold">Gerar Relatórios</li>
                             </button>
                         </div>
@@ -178,12 +186,13 @@
             </div>
         </div>
 
-        <main class="h-[100vh] overflow-y-auto">
+        <main class="h-[100vh] overflow-y-auto bg-gradient-to-br from-[#F6F9F7] to-[#EBF6F3]">
 
             <header class="h-[65px] flex justify-between items-center z-[9999] border-b-2 px-5">
 
+                <!-- Btn menu Mobile -->
                 <div>
-                    <button class="lg:hidden">
+                    <button id="btnMenuMb" class="lg:hidden">
                         <i class="bi bi-list text-[#025221] text-2xl"></i>
                     </button>
                 </div>
@@ -192,7 +201,7 @@
 
                     <div class="flex items-center space-x-4 ">
                         <div class="flex flex-col items-end">
-                            <p class="text-[#025221] text-sm sm:text-[0.8vw] hidden sm:block">
+                            <p class="text-[#025221] text-sm sm:text-[14px] hidden sm:block">
                                 <?= isset($_SESSION['nome']) ? htmlspecialchars(implode(" ", array_slice(explode(" ", trim($_SESSION['nome'])), 0, 2))) : '' ?>
                             </p>
                         </div>
@@ -223,6 +232,25 @@
                     </div>
                 </div>
             </header>
+
+            <!-- Sec Incial -->
+            <div class="pt-12">
+                <div class="flex flex-col items-center justify-center gap-3">
+                    <div class="flex flex-col items-center space-y-2">
+                        <h1 class="text-center text-xl">Bem-vindo ao Sistema de Demandas SGTM</h1>
+                        <span class="bg-[var(--accent-yellow)] h-0.5 w-[200px] mx-auto block"></span>
+                    </div>
+                    <p class="text-gray-800">Gerencie solicitações, acompanhe prazos e visualize informações essenciais.</p>
+                </div>
+
+                <div class="pt-12">
+                    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                        <div>
+                            
+                        </div>
+                    </div>       
+                </div>
+            </div>
 
             <!-- Criação de Planilhas -->
             <div class="secFunc hidden">
@@ -288,7 +316,6 @@
         btnSec.forEach((btn, index) => {
             btn.onmouseenter = () => {
                 iconReference[index].classList.remove("text-[var(--accent-yellow)]");
-
                 
                 iconReference[index].classList.add("bg-[var(--accent-yellow)]");
                 iconReference[index].classList.add("text-white");
@@ -305,33 +332,54 @@
             btn.onclick = () => {
                 secFunc.forEach((sec) => {
                     sec.classList.add("hidden");
-                    secFunc[index].classList.remove("hidden");
-                })
+                });
+
+                secFunc[index].classList.remove("hidden");
             };
-        })
+        });
+        
 
         iconReference.forEach((icon, index) => {
             icon.onclick = () => {
                 btnSec[index].click();
+            };
+
+            icon.onmouseenter = () => {
+                btnSec[index].classList.replace("text-white" ,"text-[var(--accent-yellow)]");
+                btnSec[index].classList.add("bg-gray-100/50");
+                btnSec[index].classList.add("translate-x-[5px]");
+
+                btnSec[index].classList.add("nav-bar-active");
+            };
+
+            icon.onmouseleave = () => {
+                btnSec[index].classList.replace("text-[var(--accent-yellow)]" ,"text-white");
+                btnSec[index].classList.remove("bg-gray-100/50");
+                btnSec[index].classList.remove("translate-x-[5px]");
+                
+                btnSec[index].classList.remove("nav-bar-active");
             }
         });
+
     </script>
 
      <script>
-        const btnConta = document.querySelector(".btnConta");
-
-        window.onload = () => {
-            if(window.location.hash) {
-                history.replaceState(null, null, window.location.pathname + window.location.search);
-            }
-        };
-
-        if (window.location.hash) {
-            window.history.scrollRestoration = "manual";
+        const side_bar =  document.getElementById("side-bar");
+        const btnMenuMb =  document.getElementById("btnMenuMb");
+        
+        btnMenuMb.onclick = () => {
+            side_bar.classList.remove("hidden");
             setTimeout(() => {
-                window.scrollTo(0, 0); 
-            }, 1);
-        };
+                side_bar.classList.remove("translate-x-[-100%]");
+            },50);
+        }
+
+        btnMenuClose.onclick = () => {
+            side_bar.classList.add("translate-x-[-100%]");
+            setTimeout(() => {
+                side_bar.classList.add("hidden");
+            },500);
+        }
      </script>
 
      <script>
