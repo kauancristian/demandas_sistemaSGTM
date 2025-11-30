@@ -210,20 +210,20 @@
                 <div class="flex items-center justify-center">
                     <div class="flex flex-col items-center justify-center translate-x-[-6px] space-y-1">
                         <div class="flex items-center space-x-3">
-                            <i class="fa-solid fa-school text-[2.5vw] text-[var(--accent-yellow)]"></i>
+                            <i class="fa-solid fa-school text-2xl md:text-[2.5vw] text-[var(--accent-yellow)]"></i>
                             <div class="flex flex-col space-y-1">
-                                <h1 class="text-white font-semibold transform text-[1.5vw]">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
+                                <h1 class="text-white font-semibold transform text-xl md:text-[1.5vw]">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
                                 <span class="bg-[var(--accent-yellow)] h-0.5 w-full block"></span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <i id="btnMenuClose" class="bi bi-x-lg lg:hidden text-xl text-white translate-x-4"></i>
+                <i id="btnMenuClose" class="bi bi-x-lg lg:hidden text-xl text-white translate-x-1"></i>
             </div>
 
             <div class="pt-12 w-full">
-                <nav class="flex justify-center w-full px-4 lg:px-5">
+                <nav class="flex justify-center w-full px-4 lg:px-3">
                     <ul class="space-y-5 flex flex-col items-center w-full">
                         <div class="flex justify-center items-center w-full">
                             <i class="bi bi-plus-circle h-[55px] flex items-center justify-center px-4 text-2xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
@@ -265,16 +265,24 @@
             <div class="h-[65px] bg-gradient-to-r from-[#025221] via-[var(--accent-yellow)] to-[#025221] fixed w-screen lg:w-[75%] z-[8000]">
                 <header class="h-[62px] flex justify-between items-center z-[8000] fixed border-b-2 px-5 bg-white w-full lg:w-[75%]">
                     <!-- Btn menu Mobile -->
-                    <div class="z-[9999] relative lg:hidden">
+                    <div class="z-[9999] relative lg:hidden flex items-center">
                         <button id="btnMenuMb" class="lg:hidden">
                             <i class="bi bi-list text-[#025221] text-2xl"></i>
                         </button>
+
+                        <div class="flex items-center lg:hidden">
+                            <img class="object-contain w-9" src="../assets/S.png" alt="">
+                            <p class="text-[#025221] font-semibold nomeSec pr-1">Página</p>
+                            <span class="text-[var(--accent-yellow)] font-semibold subNomeSec">Inicial</span>
+                        </div>
                     </div>
 
-                    <div class="flex items-center">
-                        <img class="object-contain w-9" src="../assets/S.png" alt="">
-                        <p class="text-[#025221] font-semibold nomeSec pr-1">Página</p>
-                        <span class="text-[var(--accent-yellow)] font-semibold subNomeSec">Inicial</span>
+                    <div class="hidden lg:block">
+                        <div class="flex items-center">
+                            <img class="object-contain w-9" src="../assets/S.png" alt="">
+                            <p class="text-[#025221] font-semibold nomeSec pr-1">Página</p>
+                            <span class="text-[var(--accent-yellow)] font-semibold subNomeSec">Inicial</span>
+                        </div>
                     </div>
 
                     <div class="flex items-center transform">
@@ -297,14 +305,16 @@
                                     <?php endif; ?>
                                 </button>
                                 <!-- Btn Sair -->
-                                <?php if(isset($_SESSION['id_usuario'])) : ?>
-                                    <form action="../controllers/authController.php?action=logout" method="POST">
-                                        <button class="flex items-center space-x-2 bg-[#025221] text-white py-1 px-3 rounded-lg hover:translate-x-[3px] transition ease-in-out duration-150 botao-sair btnScaleGray" type="submit">
-                                            <i class="bi bi-box-arrow-in-right text-xl"></i>
-                                            <p>Sair</p>
-                                        </button>
-                                    </form>
-                                <?php endif; ?>
+                                <div class="hidden md:block">
+                                    <?php if(isset($_SESSION['id_usuario'])) : ?>
+                                        <form action="../controllers/authController.php?action=logout" method="POST">
+                                            <button class="flex items-center space-x-2 bg-[#025221] text-white py-1 px-3 rounded-lg hover:translate-x-[3px] transition ease-in-out duration-150 botao-sair btnScaleGray" type="submit">
+                                                <i class="bi bi-box-arrow-in-right text-xl"></i>
+                                                <p>Sair</p>
+                                            </button>
+                                        </form>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
