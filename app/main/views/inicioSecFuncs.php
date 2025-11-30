@@ -163,6 +163,40 @@
         #divNomePlanilha {
             animation: topMovie 0.6s ease-in-out;
         }
+
+        .btnCreate{
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes btnPulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.3);
+            }
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+            }
+        }
+
+        .btnCreate::after{
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            transform-origin: center;
+            background-color: #00b3482a;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease-in-out;
+            z-index: -1;
+            animation: btnPulse 2s ease-in-out infinite;
+        }
+
     </style>
 </head>
 <body class="">
@@ -328,9 +362,19 @@
 
                 <!-- Container Planilhas -->
                  <div id="divPlanilhaCriada" class="hidden">
-                    <div id="divNomePlanilha" class="flex flex-col space-y-2 pt-6">
-                        <h1 class="text-center text-xl nomePlanilha text-[#025221]"></h1>
-                        <span class="bg-[var(--accent-yellow)] h-0.5 w-[120px] mx-auto block"></span>
+                    <div>
+                        <div id="divNomePlanilha" class="flex flex-col space-y-2 pt-6">
+                            <h1 class="text-center text-xl nomePlanilha text-[#025221]"></h1>
+                            <span class="bg-[var(--accent-yellow)] h-0.5 w-[120px] mx-auto block"></span>
+                        </div>
+
+                        
+                        <!-- Btn de criar mais seções -->
+                        <div id="divBtnCreate" class="flex justify-end">
+                            <button class="bg-[#025221] hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 py-5 px-6 rounded-full text-white cursor-pointer btnCreate fixed top-[75px] right-[15px]">
+                                <i class="bi bi-plus-lg"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- btnCreateSecs === 0 -->
@@ -341,8 +385,7 @@
                          </button>
                     </div>
 
-
-                    <div id="containerGeralPlanilhas" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-8 px-12">
+                    <div id="containerGeralPlanilhas" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-8 px-12 gap-20 w-full mx-auto pb-12">
 
                     </div>
                  </div>
@@ -410,6 +453,7 @@
         const btnNewPlanilha = document.getElementById("btnNewPlanilha");
         const btnCriarPlanilha = document.getElementById("btnCriarPlanilha");
         const btnProsseguir = document.getElementById("btnProsseguir");
+        const btnCreate = document.querySelector(".btnCreate");
         const inptNamePlanilha = document.getElementById("inptNamePlanilha");
         const fecharModalName = document.getElementById("fecharModalName");
 
@@ -449,6 +493,13 @@
             document.getElementById("divPlanilhaCriada").classList.remove("hidden");
 
             nomePlanilha.textContent = nomePlanilhaPassado;
+
+            
+            if(quantidadeSecs > 0) {
+                document.getElementById("divBtnCreate").classList.remove("hidden");
+            }else{
+                document.getElementById("divBtnCreate").classList.add("hidden");
+            };
         };        
 
         inptNamePlanilha.oninput = () => {
@@ -469,27 +520,21 @@
             sec.dataset.sectionId = secCounter++;
             sec.innerHTML = `
             
-            <div id="containerSec" class="flex justify-center items-center space-x-4">
+            <div class="flex justify-center items-center space-x-4 containerSec">
                 <div class="flex flex-col space-y-3">
-                    <div class="text-white border-2 border-[#025221] inline-flex w-[220px] py-2 rounded-xl shadow-2xl">
+                    <div class="text-white border-2 border-[#025221] inline-flex w-[200px] py-2 rounded-xl shadow-2xl">
                         <div class="flex justify-between items-center w-full px-2">
-                            <h2 class="text-2xl secTitle text-[#025221]">Seção </h2>
+                            <h2 class="text-2xl secTitle text-[#025221]">Seção ${secCounter}</h2>
                             <i class="bi bi-three-dots-vertical text-[#025221] cursor-pointer hover:text-[var(--accent-yellow)] transition ease-in-out duration-300"></i>
                         </div>
                     </div>
                     
                     <!-- Btn de comentarios -->
-                    <button class="w-[220px] py-2 rounded-xl flex justify-center items-center bg-[#025221] text-white transition ease-in-out duration-300">
+                    <button class="w-[200px] py-2 rounded-xl flex justify-center items-center bg-[#025221] text-white transition ease-in-out duration-300">
                         <i class="bi bi-chat-dots"></i>
                     </button>
                 </div>
 
-                <!-- Btn de criar mais seções -->
-                <div>
-                    <button class="bg-[#025221] hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 py-5 px-6 rounded-full text-white cursor-pointer btnCreate">
-                        <i class="bi bi-plus-lg"></i>
-                    </button>
-                </div>
             </div>
 
             `
@@ -499,14 +544,30 @@
             return sec;
         };
 
+       
         const btnIniciarSecs = document.getElementById("btnIniciarSecs");
         btnIniciarSecs.onclick = () => {
             document.getElementById("divBtnInciarSecs").classList.add("hidden");
 
             const firstSec = criarSecs();
             containerGeralPlanilhas.appendChild(firstSec);
+            quantidadeSecs++;
+            console.log("Quantidade de secs: " + quantidadeSecs);
+        
+            if(quantidadeSecs > 0) {
+                document.getElementById("divBtnCreate").classList.remove("hidden");
+            }else{
+                document.getElementById("divBtnCreate").classList.add("hidden");
+            };
+        };
 
-        }
+        btnCreate.onclick = () => {
+            const newSec = criarSecs();
+            containerGeralPlanilhas.appendChild(newSec);
+            quantidadeSecs++;
+            console.log("Quantidade de secs: " + quantidadeSecs);
+        };
+
     </script>
     
     <script>
