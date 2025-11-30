@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/../models/Usuario.php";
 require_once __DIR__ . "/../models/Planilha.php";
+require_once __DIR__ . "/../models/Secao.php";
 //require_once __DIR__ . "/../models/Comentario.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -167,5 +168,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_destroy();
         header("Location: ../index.php?sucesso=logout");
         exit;
+    }
+
+    else if ($action === 'criar_secao') {
+        header('Content-Type: application/json; charset=utf-8');
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['id_usuario'])) {
+            http_response_code(401);
+            echo json_encode(['status' => 'error', 'message' => 'Usuário não autenticado']);
+            exit;
+        }
+
+        $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
+        if (strpos($contentType, 'application/json') !== false) {
+            $input = json_decode(file_get_contents('php://input'), true);
+            $id_planilha = intval($input['id_planilha'] ?? 0);
+            $titulo = trim($input['titulo'] ?? '');
+        } else {
+            $id_planilha = intval($_POST['id_planilha'] ?? 0);
+            $titulo = trim($_POST['titulo'] ?? '');
+        }
+
+        if (empty($titulo) || $id_planilha <= 0) {
+            http_response_code(422);
+            echo json_encode(['status' => 'error', 'message' => 'ID da planilha e título são obrigatórios']);
+            exit;
+        }
+
+        try {
+            $secao = new Secao();
+            $result = $secao->criarSecao($id_planilha, $titulo);
+
+            switch ($result) {
+                case Secao::STATUS_OK:
+                    $id_secao = $secao->obterUltimaSecao($id_planilha);
+                    http_response_code(201);
+                    echo json_encode([
+                        'status' => 'ok', 
+                        'message' => 'Seção criada com sucesso',
+                        'id_secao' => $id_secao
+                    ]);
+                    exit;
+
+                case Secao::STATUS_INSERT_ERROR:
+                case Secao::STATUS_EXCEPTION:
+                default:
+                    http_response_code(500);
+                    echo json_encode(['status' => 'error', 'message' => 'Falha ao criar seção']);
+                    exit;
+            }
+        } catch (Exception $e) {
+            error_log('Erro criar_secao: ' . $e->getMessage());
+            http_response_code(500);
+            echo json_encode(['status' => 'error', 'message' => 'Exceção no servidor']);
+            exit;
+        }
     }
 }

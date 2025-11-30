@@ -41,4 +41,26 @@ class Planilha extends Database {
             return self::STATUS_EXCEPTION;
         }
     }
+
+    public function obterUltimaPlanilha(int $id_usuario): ?array {
+        try {
+            $sqlSelect = "SELECT id FROM {$this->table2} WHERE id_usuario = :id_usuario ORDER BY criado_em DESC LIMIT 1";
+            $stmtSelect = $this->conn->prepare($sqlSelect);
+            $stmtSelect->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+
+            if (!$stmtSelect->execute()) {
+                error_log("Falha ao obter última planilha. SQLSTATE: " . $this->conn->errorInfo()[0]);
+                return null;
+            }
+
+            return $stmtSelect->fetch();
+            
+        } catch (PDOException $e) {
+            error_log("PDOException ao obter última planilha: " . $e->getMessage());
+            return null;
+        } catch (Exception $e) {
+            error_log("Exception ao obter última planilha: " . $e->getMessage());
+            return null;
+        }
+    }
 }
