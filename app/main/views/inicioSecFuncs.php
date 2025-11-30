@@ -143,6 +143,26 @@
         .noScroll{
             overflow-y: hidden;
         }
+
+        @keyframes topMovie {
+            0%{
+                margin-top: -25px;
+                opacity: 0;
+            }
+
+            100%{
+                margin-top: 0;
+                opacity: 1;
+            }
+        }
+
+        .modalConfirmation{
+            animation: topMovie 0.6s ease-in-out;
+        }
+
+        #divNomePlanilha {
+            animation: topMovie 0.6s ease-in-out;
+        }
     </style>
 </head>
 <body class="">
@@ -167,21 +187,21 @@
                     <ul class="space-y-5 flex flex-col items-center w-full">
                         <div class="flex justify-center items-center w-full">
                             <i class="bi bi-plus-circle h-[55px] flex items-center justify-center px-4 text-2xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
-                            <button class="w-[90%] h-[55px] text-sm lg:text-[1.2vw] rounded-md text-white text-start indent-5 hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 nav-bar btnSec">
+                            <button class="w-[90%] h-[55px] text-sm lg:text-[1.2vw] rounded-md text-white text-start indent-5 hover:bg-gray-100/30 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 nav-bar btnSec">
                                 <li class="font-semibold">Criar Planilha</li>
                             </button>
                         </div>
 
                         <div class="flex justify-center items-center w-full">
                             <i class="bi bi-clipboard2-data h-[55px] flex items-center justify-center px-4 text-2xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
-                            <button class="w-[90%] h-[55px] text-sm lg:text-[1.2vw] rounded-md text-white text-start indent-5 hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 nav-bar btnSec">
+                            <button class="w-[90%] h-[55px] text-sm lg:text-[1.2vw] rounded-md text-white text-start indent-5 hover:bg-gray-100/30 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 nav-bar btnSec">
                                 <li class="font-semibold">Gerenciar Planilhas</li>
                             </button>
                         </div>
 
                         <div class="flex justify-center items-center w-full">
                             <i class="bi bi-file-earmark-arrow-down h-[55px] flex items-center justify-center px-4 text-2xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
-                            <button class="w-[90%] h-[55px] text-sm lg:text-[1.2vw] rounded-md text-white text-start indent-5 hover:bg-gray-100/50 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 nav-bar btnSec">
+                            <button class="w-[90%] h-[55px] text-sm lg:text-[1.2vw] rounded-md text-white text-start indent-5 hover:bg-gray-100/30 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 nav-bar btnSec">
                                 <li class="font-semibold">Gerar Relatórios</li>
                             </button>
                         </div>
@@ -298,8 +318,9 @@
                         </div>
 
                         <!-- btnConfirmar -->
-                         <button id="btnProsseguir" class="py-2 w-full bg-[#025221] rounded-lg text-white btnScaleGray hover:translate-y-[-3px] transition ease-in-out duration-300">
+                         <button id="btnProsseguir" class="py-2 w-full bg-[#025221] rounded-lg text-white btnScaleGray hover:translate-y-[-3px] transition ease-in-out duration-300 flex items-center justify-center space-x-2 group ">
                             <p>Prosseguir</p>
+                            <i class="bi bi-arrow-right group-hover:translate-x-[3px] transition ease-in-out duration-300 text-xl"></i>
                         </button>
                     </div>
                 </div>
@@ -307,13 +328,21 @@
 
                 <!-- Container Planilhas -->
                  <div id="divPlanilhaCriada" class="hidden">
-                    <div class="flex flex-col space-y-2 pt-6">
+                    <div id="divNomePlanilha" class="flex flex-col space-y-2 pt-6">
                         <h1 class="text-center text-xl nomePlanilha text-[#025221]"></h1>
                         <span class="bg-[var(--accent-yellow)] h-0.5 w-[120px] mx-auto block"></span>
                     </div>
 
+                    <!-- btnCreateSecs === 0 -->
+                    <div id="divBtnInciarSecs" class="bg-gradient-to-br from-white via-white to-gray-200 shadow-2xl py-6 px-4 rounded-xl btnSpecial flex flex-col mx-auto items-center space-y-7 w-[220px] mt-8">
+                         <i class="bi bi-collection text-5xl text-[var(--accent-yellow)]"></i>
+                         <button id="btnIniciarSecs" class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleGray">
+                            <p class="text-white py-2">Iniciar Seções</p>
+                         </button>
+                    </div>
 
-                    <div id="containerGeralPlanilhas" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+
+                    <div id="containerGeralPlanilhas" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-8 px-12">
 
                     </div>
                  </div>
@@ -371,8 +400,10 @@
     </div>
 
     <script>
-        let quantidadePlanilhas = 0;
-        let idPlanilha = 1;
+        const containerGeralPlanilhas = document.getElementById("containerGeralPlanilhas");
+
+        let quantidadeSecs = 0;
+        let secCounter = 0;
         let planilhaCriada = false;
 
         const shadow = document.querySelector(".shadow");
@@ -418,7 +449,7 @@
             document.getElementById("divPlanilhaCriada").classList.remove("hidden");
 
             nomePlanilha.textContent = nomePlanilhaPassado;
-        }
+        };        
 
         inptNamePlanilha.oninput = () => {
             if(inptNamePlanilha.value.trim().length > 0) {
@@ -430,6 +461,51 @@
             document.querySelector(".modalCreatePlanilha").classList.add("hidden");
             shadow.classList.add("hidden");
             document.getElementById("divNew").classList.remove("hidden");
+        }
+
+
+        function criarSecs() {
+            const sec = document.createElement("div");
+            sec.dataset.sectionId = secCounter++;
+            sec.innerHTML = `
+            
+            <div id="containerSec" class="flex justify-center items-center space-x-4">
+                <div class="flex flex-col space-y-3">
+                    <div class="text-white border-2 border-[#025221] inline-flex w-[220px] py-2 rounded-xl shadow-2xl">
+                        <div class="flex justify-between items-center w-full px-2">
+                            <h2 class="text-2xl secTitle text-[#025221]">Seção </h2>
+                            <i class="bi bi-three-dots-vertical text-[#025221] cursor-pointer hover:text-[var(--accent-yellow)] transition ease-in-out duration-300"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Btn de comentarios -->
+                    <button class="w-[220px] py-2 rounded-xl flex justify-center items-center bg-[#025221] text-white transition ease-in-out duration-300">
+                        <i class="bi bi-chat-dots"></i>
+                    </button>
+                </div>
+
+                <!-- Btn de criar mais seções -->
+                <div>
+                    <button class="bg-[#025221] hover:bg-[var(--accent-yellow)] transition ease-in-out duration-300 py-5 px-6 rounded-full text-white cursor-pointer btnCreate">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            `
+
+            console.log("sec" + secCounter);
+
+            return sec;
+        };
+
+        const btnIniciarSecs = document.getElementById("btnIniciarSecs");
+        btnIniciarSecs.onclick = () => {
+            document.getElementById("divBtnInciarSecs").classList.add("hidden");
+
+            const firstSec = criarSecs();
+            containerGeralPlanilhas.appendChild(firstSec);
+
         }
     </script>
     
@@ -472,7 +548,7 @@
 
             icon.onmouseenter = () => {
                 btnSec[index].classList.replace("text-white" ,"text-[var(--accent-yellow)]");
-                btnSec[index].classList.add("bg-gray-100/50");
+                btnSec[index].classList.add("bg-gray-100/30");
                 btnSec[index].classList.add("translate-x-[5px]");
 
                 btnSec[index].classList.add("nav-bar-active");
@@ -480,7 +556,7 @@
 
             icon.onmouseleave = () => {
                 btnSec[index].classList.replace("text-[var(--accent-yellow)]" ,"text-white");
-                btnSec[index].classList.remove("bg-gray-100/50");
+                btnSec[index].classList.remove("bg-gray-100/30");
                 btnSec[index].classList.remove("translate-x-[5px]");
                 
                 btnSec[index].classList.remove("nav-bar-active");
@@ -509,66 +585,15 @@
      </script>
 
      <script>
-        ScrollReveal().reveal('#h1Sec2', {
-            delay: 200,
-            origin: 'bottom',
-            distance: '30px',
-            duration: 800,
-            easing: 'ease-in-out'
-        });
-
-        ScrollReveal().reveal('#func1', {
-            delay: 300,
-            origin: 'bottom',
-            distance: '30px',
-            duration: 800,
-            easing: 'ease-in-out'
-        });
-
-        ScrollReveal().reveal('#func2', {
-            delay: 400,
-            origin: 'bottom',
-            distance: '30px',
-            duration: 800,
-            easing: 'ease-in-out'
-        });
-
-        ScrollReveal().reveal('#func3', {
-            delay: 600,
-            origin: 'bottom',
-            distance: '30px',
-            duration: 800,
-            easing: 'ease-in-out'
-        });
-
-        ScrollReveal().reveal('#h1Header', {
-            delay: 200,
-            origin: 'left',
-            distance: '30px',
-            duration: 800,
-            easing: 'ease-in-out'
-        });
-
-
-        ScrollReveal().reveal('#textSec1', {
+        ScrollReveal().reveal('#divNew', {
             delay: 200,
             origin: 'top',
             distance: '30px',
             duration: 800,
-            easing: 'ease-in-out'
+            easing: 'ease-in-out',
+            reset: true
         });
-        
-        const shakeCards = document.querySelectorAll(".shakeCard");
 
-        shakeCards.forEach((shakeCard) => {
-            shakeCard.onclick = () => {
-                shakeCard.classList.remove("shake");
-
-                void shakeCard.offsetWidth;
-
-                shakeCard.classList.add("shake");
-            }
-        });
      </script>
 </body>
 </html>
