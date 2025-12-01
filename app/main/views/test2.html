@@ -1,0 +1,541 @@
+<!-- <?php
+    session_start();
+
+    if (!isset($_SESSION['id_usuario'])) {
+        header("Location: /demandas_sistemaSGTM/app/main/index.php");
+        exit();
+    }
+?> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <title>Início | Demandas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Allura&family=Anton&family=Assistant:wght@200..800&family=Bangers&family=Bebas+Neue&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Comfortaa:wght@300..700&family=Epilogue:ital,wght@0,100..900;1,100..900&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lilita+One&family=Love+Ya+Like+A+Sister&family=Monsieur+La+Doulaise&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Oxanium:wght@200..800&family=Passion+One:wght@400;700;900&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Rock+Salt&family=Smooch+Sans:wght@100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Space+Grotesk:wght@300..700&family=Vina+Sans&display=swap');
+
+        
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+            outline: none;
+        }
+
+        html, body{
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            outline: none;
+        }
+
+        h1, h2, p {
+            font-family: "Poppins", sans-serif;
+        }
+
+        .textComf{
+            font-family: "Comfortaa", sans-serif;
+            font-weight: 800;
+        }
+
+        .epi{
+            font-family: "Epilogue", sans-serif;
+        }
+
+        :root {
+            --primary-green: #00b348;
+            --dark-green: #007A33;
+            --dark-green2: #173625;
+            --accent-yellow: #FFA500;
+            --bg-dark: #0f0f0f;
+            --bg-card: #1a1a1a;
+            --bg-elevated: #393939;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #6b7280;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-focus: rgba(0, 179, 72, 0.3);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btnSpecial{
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btnSpecial::after{
+            content: "";
+            position: absolute;
+            width: 75%;
+            height: 100%;
+            left: -100%;
+            top: 0;
+            background-image: linear-gradient(120deg, transparent, #00b3481a, transparent);
+            transition: left 0.3s ease-in-out;
+        }
+
+        .btnSpecial:hover::after{
+            left: 100%;
+        }   
+
+        .nav-bar{
+            position: relative;
+            overflow: hidden;
+            color: #c8f8db;
+        }
+
+        
+        .nav-bar::after{
+           content: "";
+           position: absolute;
+           width: 4px;
+           height: 100%;
+           left: 0;
+           bottom: 0;
+           background-color: var(--accent-yellow);
+           transform-origin: center;
+           transform: scaleY(0);
+           transition: transform 0.4s ease-in-out;
+        }
+
+        .nav-bar:hover::after{
+            transform: scaleY(1);
+        }
+
+        .nav-bar-active::after{
+            transform: scaleY(1) !important;
+        }
+        
+        .navBarElement::after{
+            content: "";
+            position: absolute;
+            width: 4px;
+            height: 100%;
+            left: 0;
+            bottom: 0;
+            transform-origin: center;
+            background-color: var(--accent-yellow);
+            transform: scaleY(1);
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .btnScaleEditar,
+        .btnScaleExcluir{
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btnScaleEditar::after{
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 100%;
+            height: 300px;
+            border-radius: 50%;
+            transform-origin: center;
+            background-color: #3f8159ff;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.2s ease-in-out;
+            z-index: -1;
+        }
+
+        .btnScaleExcluir::after{
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 100%;
+            height: 300px;
+            border-radius: 50%;
+            transform-origin: center;
+            background-color: #c57373;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.2s ease-in-out;
+            z-index: -1;
+        }
+
+        .btnScaleEditar:hover::after,
+        .btnScaleExcluir:hover::after{
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .noScroll{
+            overflow-y: hidden;
+        }
+
+        @keyframes topMovie {
+            0%{
+                margin-top: -25px;
+                opacity: 0;
+            }
+
+            100%{
+                margin-top: 0;
+                opacity: 1;
+            }
+        }
+
+        .modalConfirmation{
+            animation: topMovie 0.6s ease-in-out;
+        }
+
+        #divNomePlanilha {
+            animation: topMovie 0.6s ease-in-out;
+        }
+
+        .btnCreate::after{
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            transform-origin: center;
+            background-color: #00b3482a;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease-in-out;
+            z-index: -1;
+            animation: btnPulse 2s ease-in-out infinite;
+        }
+
+        .btnActive{
+            background-color: #557463;
+            color: var(--accent-yellow) !important;
+            transform: translateX(5px);
+        }
+
+        .iconActive{
+            background-color: var(--accent-yellow);
+            color: white !important;
+        }
+    </style>
+</head>
+<body class="">
+
+    <div class="grid lg:grid-cols-[0.4fr_1.2fr]">
+        <main class="h-[100vh] overflow-y-auto bg-gradient-to-br from-[#F6F9F7] to-[#EBF6F3]">
+            <!-- btnCreateSecs === 0 -->
+            <div id="divBtnInciarSecs" class="bg-white shadow-2xl py-5 px-4 rounded-xl btnSpecial flex flex-col mx-auto items-center space-y-7 w-[220px] mt-8">
+                <h2 class="text-[#025221] text-xl">Nome Planilha</h2>
+                    <i class="bi bi-collection text-5xl text-[var(--accent-yellow)]"></i>
+                    <div class="flex flex-col space-y-4 w-full">
+                        <button id="btnIniciarSecs" class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleEditar">
+                            <p class="text-white py-2">Editar
+                                <i class="bi bi-pencil-square"></i>
+                            </p>
+                        </button>
+                        <button id="btnIniciarSecs" class="bg-[#ba2c2c] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleExcluir">
+                            <p class="text-white py-2">Excluir
+                                <i class="bi bi-trash3-fill"></i>
+                            </p>
+                        </button>
+                    </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const containerGeralPlanilhas = document.getElementById("containerGeralPlanilhas");
+
+        let quantidadeSecs = 0;
+        let secCounter = 0;
+        let planilhaCriada = false;
+
+        const shadow = document.querySelector(".shadow");
+        const btnNewPlanilha = document.getElementById("btnNewPlanilha");
+        const btnCriarPlanilha = document.getElementById("btnCriarPlanilha");
+        const btnProsseguir = document.getElementById("btnProsseguir");
+        const btnCreate = document.querySelector(".btnCreate");
+        const inptNamePlanilha = document.getElementById("inptNamePlanilha");
+        const fecharModalName = document.getElementById("fecharModalName");
+
+        const nomePlanilha = document.querySelector(".nomePlanilha");
+        let nomePlanilhaPassado = "";
+
+        btnNewPlanilha.onclick = () => {
+            shadow.classList.remove("hidden");
+            document.getElementById("divNew").classList.add("hidden");
+            document.querySelector(".modalCreatePlanilha").classList.remove("hidden");
+        };
+
+        btnCriarPlanilha.onclick = async () => {
+            const titulo = inptNamePlanilha.value.trim();
+
+            if(titulo.length === 0) {
+                document.getElementById("pError").classList.remove("hidden");
+                return;
+            };
+
+            try {
+                const response = await fetch('../controllers/authController.php?action=criar_planilha', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ titulo })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.status === 'ok') {
+                    planilhaCriada = true;
+
+                    document.querySelector(".modalCreatePlanilha").classList.add("hidden");
+                    document.querySelector(".modalConfirmation").classList.remove("hidden");
+
+                    nomePlanilhaPassado = titulo;
+                } else {
+                    documnent.getElementById("pError").textContent = data.message || 'Erro ao criar a planilha.';
+                    document.getElementById("pError").classList.remove("hidden");
+                }
+            } catch (erro) {
+                console.error('Erro na requisição:', erro);
+                document.getElementById("pError").textContent = 'Erro de conexão com o servidor.';
+                document.getElementById("pError").classList.remove("hidden");
+            }
+
+            inptNamePlanilha.oninput = () => {
+                if(inptNamePlanilha.value.trim().length > 0) {
+                    document.getElementById("pError").classList.add("hidden");
+                }else{
+                    document.getElementById("pError").classList.remove("hidden");
+                };
+            };
+        }
+
+        // btnCriarPlanilha.onclick = () => {
+        //     if(inptNamePlanilha.value.trim().length === 0) {
+        //         document.getElementById("pError").classList.remove("hidden");
+        //         return;
+        //     }else{
+        //         planilhaCriada = true;
+        //         document.querySelector(".modalCreatePlanilha").classList.add("hidden");
+        //         document.querySelector(".modalConfirmation").classList.remove("hidden");
+
+        //         nomePlanilhaPassado = inptNamePlanilha.value.trim();
+        //     };
+
+        //     inptNamePlanilha.oninput = () => {
+        //         if(inptNamePlanilha.value.trim().length > 0) {
+        //             document.getElementById("pError").classList.add("hidden");
+        //         }else{
+        //             document.getElementById("pError").classList.remove("hidden");
+        //         };
+        //     };
+        // };
+
+        btnProsseguir.onclick = () => {
+            document.querySelector(".modalConfirmation").classList.add("hidden");
+            shadow.classList.add("hidden");
+            document.getElementById("divPlanilhaCriada").classList.remove("hidden");
+
+            nomePlanilha.textContent = nomePlanilhaPassado;
+
+            
+            if(quantidadeSecs > 0) {
+                document.getElementById("divBtnCreate").classList.remove("hidden");
+            }else{
+                document.getElementById("divBtnCreate").classList.add("hidden");
+            };
+        };        
+
+        inptNamePlanilha.oninput = () => {
+            if(inptNamePlanilha.value.trim().length > 0) {
+                document.getElementById("pError").classList.add("hidden");
+            };
+        };
+        
+        fecharModalName.onclick = () => {
+            document.querySelector(".modalCreatePlanilha").classList.add("hidden");
+            shadow.classList.add("hidden");
+            document.getElementById("divNew").classList.remove("hidden");
+        }
+
+
+        function criarSecs() {
+            const sec = document.createElement("div");
+            sec.dataset.sectionId = secCounter++;
+            sec.innerHTML = `
+            
+            <div class="flex justify-center items-center space-x-4 containerSec">
+                <div class="flex flex-col space-y-3">
+                    <div class="text-white border-2 border-[#025221] inline-flex w-[200px] py-2 rounded-xl shadow-2xl">
+                        <div class="flex justify-between items-center w-full px-2">
+                            <h2 class="text-2xl secTitle text-[#025221]">Seção ${secCounter}</h2>
+                            <i class="bi bi-three-dots-vertical text-[#025221] cursor-pointer hover:text-[var(--accent-yellow)] transition ease-in-out duration-300"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Btn de comentarios -->
+                    <button class="w-[200px] py-2 rounded-xl flex justify-center items-center bg-[#025221] text-white transition ease-in-out duration-300">
+                        <i class="bi bi-chat-dots"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            `
+
+            console.log("sec" + secCounter);
+
+            return sec;
+        };
+
+       
+        const btnIniciarSecs = document.getElementById("btnIniciarSecs");
+        btnIniciarSecs.onclick = () => {
+            document.getElementById("divBtnInciarSecs").classList.add("hidden");
+
+            const firstSec = criarSecs();
+            containerGeralPlanilhas.appendChild(firstSec);
+            quantidadeSecs++;
+            console.log("Quantidade de secs: " + quantidadeSecs);
+        
+            if(quantidadeSecs > 0) {
+                document.getElementById("divBtnCreate").classList.remove("hidden");
+            }else{
+                document.getElementById("divBtnCreate").classList.add("hidden");
+            };
+        };
+
+        btnCreate.onclick = () => {
+            const newSec = criarSecs();
+            containerGeralPlanilhas.appendChild(newSec);
+            quantidadeSecs++;
+            console.log("Quantidade de secs: " + quantidadeSecs);
+        };
+
+    </script>
+    
+    <script>
+        const nomesSecsHeader = [
+            {
+                nome: "Criação de",
+                subNome: "Planihas"
+            },
+
+            {
+                nome: "Gerenciamento de",
+                subNome: "Planilhas"
+            },
+
+            {
+                nome: "Geração de",
+                subNome: "Relatórios"
+            },
+
+            {
+                nome: "Perfil do", 
+                subNome: "Usuário"
+            },
+            
+        ];
+
+        const nomeSecPC = document.querySelector(".nomeSecPC");
+        const subNomeSecPC = document.querySelector(".subNomeSecPC");
+        const nomeSecMB = document.querySelector(".nomeSecMB");
+        const subNomeSecMB = document.querySelector(".subNomeSecMB");
+
+
+        const btnSec = document.querySelectorAll(".btnSec");
+        const iconReference = document.querySelectorAll(".iconReference");
+        const secFunc = document.querySelectorAll(".secFunc");
+
+        btnSec.forEach((btn, index) => {
+            btn.onmouseenter = () => {
+                iconReference[index].classList.remove("text-[var(--accent-yellow)]");
+                
+                iconReference[index].classList.add("bg-[var(--accent-yellow)]");
+                iconReference[index].classList.add("text-white");
+
+            };
+
+            btn.onmouseleave = () => { 
+                iconReference[index].classList.remove("bg-[var(--accent-yellow)]");
+                iconReference[index].classList.remove("text-white");
+
+                iconReference[index].classList.add("text-[var(--accent-yellow)]");
+            };
+
+            btn.onclick = () => {
+                secFunc.forEach((sec) => {
+                    sec.classList.add("hidden");
+                    document.getElementById("secInicial").classList.add("hidden");
+                });
+
+                secFunc[index].classList.remove("hidden");
+
+                nomeSecPC.innerHTML = nomesSecsHeader[index].nome;
+                subNomeSecPC.innerHTML = nomesSecsHeader[index].subNome;
+                nomeSecMB.innerHTML = nomesSecsHeader[index].nome;
+                subNomeSecMB.innerHTML = nomesSecsHeader[index].subNome;
+
+                btnSec.forEach((btn) => btn.classList.remove("btnActive"));
+                btnSec.forEach((btn) => btn.classList.remove("navBarElement"));
+                iconReference.forEach((icon) => icon.classList.remove("iconActive"));
+
+                btn.classList.add("btnActive");
+                btn.classList.add("navBarElement");
+                iconReference[index].classList.add("iconActive");
+            };
+        });
+        
+
+        iconReference.forEach((icon, index) => {
+            icon.onclick = () => {
+                btnSec[index].click();
+            };
+
+            icon.onmouseenter = () => {
+                btnSec[index].classList.replace("text-white" ,"text-[var(--accent-yellow)]");
+                btnSec[index].classList.add("bg-gray-100/30");
+                btnSec[index].classList.add("translate-x-[5px]");
+
+                btnSec[index].classList.add("nav-bar-active");
+            };
+
+            icon.onmouseleave = () => {
+                btnSec[index].classList.replace("text-[var(--accent-yellow)]" ,"text-white");
+                btnSec[index].classList.remove("bg-gray-100/30");
+                btnSec[index].classList.remove("translate-x-[5px]");
+                
+                btnSec[index].classList.remove("nav-bar-active");
+            }
+        });
+
+    </script>
+
+     <script>
+        const side_bar =  document.getElementById("side-bar");
+        const btnMenuMb =  document.getElementById("btnMenuMb");
+        
+        btnMenuMb.onclick = () => {
+            side_bar.classList.remove("hidden");
+            setTimeout(() => {
+                side_bar.classList.remove("translate-x-[-100%]");
+            },50);
+        }
+
+        btnMenuClose.onclick = () => {
+            side_bar.classList.add("translate-x-[-100%]");
+            setTimeout(() => {
+                side_bar.classList.add("hidden");
+            },500);
+        }
+     </script>
+</body>
+</html>

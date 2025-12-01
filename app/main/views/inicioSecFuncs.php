@@ -538,17 +538,41 @@
             document.querySelector(".modalCreatePlanilha").classList.remove("hidden");
         };
 
-        btnCriarPlanilha.onclick = () => {
-            if(inptNamePlanilha.value.trim().length === 0) {
+        btnCriarPlanilha.onclick = async () => {
+            const titulo = inptNamePlanilha.value.trim();
+
+            if(titulo.length === 0) {
                 document.getElementById("pError").classList.remove("hidden");
                 return;
-            }else{
-                planilhaCriada = true;
-                document.querySelector(".modalCreatePlanilha").classList.add("hidden");
-                document.querySelector(".modalConfirmation").classList.remove("hidden");
-
-                nomePlanilhaPassado = inptNamePlanilha.value.trim();
             };
+
+            try {
+                const response = await fetch('../controllers/authController.php?action=criar_planilha', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ titulo })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.status === 'ok') {
+                    planilhaCriada = true;
+
+                    document.querySelector(".modalCreatePlanilha").classList.add("hidden");
+                    document.querySelector(".modalConfirmation").classList.remove("hidden");
+
+                    nomePlanilhaPassado = titulo;
+                } else {
+                    documnent.getElementById("pError").textContent = data.message || 'Erro ao criar a planilha.';
+                    document.getElementById("pError").classList.remove("hidden");
+                }
+            } catch (erro) {
+                console.error('Erro na requisição:', erro);
+                document.getElementById("pError").textContent = 'Erro de conexão com o servidor.';
+                document.getElementById("pError").classList.remove("hidden");
+            }
 
             inptNamePlanilha.oninput = () => {
                 if(inptNamePlanilha.value.trim().length > 0) {
@@ -557,7 +581,28 @@
                     document.getElementById("pError").classList.remove("hidden");
                 };
             };
-        };
+        }
+
+        // btnCriarPlanilha.onclick = () => {
+        //     if(inptNamePlanilha.value.trim().length === 0) {
+        //         document.getElementById("pError").classList.remove("hidden");
+        //         return;
+        //     }else{
+        //         planilhaCriada = true;
+        //         document.querySelector(".modalCreatePlanilha").classList.add("hidden");
+        //         document.querySelector(".modalConfirmation").classList.remove("hidden");
+
+        //         nomePlanilhaPassado = inptNamePlanilha.value.trim();
+        //     };
+
+        //     inptNamePlanilha.oninput = () => {
+        //         if(inptNamePlanilha.value.trim().length > 0) {
+        //             document.getElementById("pError").classList.add("hidden");
+        //         }else{
+        //             document.getElementById("pError").classList.remove("hidden");
+        //         };
+        //     };
+        // };
 
         btnProsseguir.onclick = () => {
             document.querySelector(".modalConfirmation").classList.add("hidden");
