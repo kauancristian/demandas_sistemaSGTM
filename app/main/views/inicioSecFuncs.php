@@ -130,13 +130,14 @@
             transition: transform 0.4s ease-in-out;
         }
 
-        .btnScaleGray{
+        .btnScaleEditar,
+        .btnScaleExcluir{
             position: relative;
             overflow: hidden;
             z-index: 1;
         }
 
-        .btnScaleGray::after{
+        .btnScaleEditar::after{
             content: "";
             position: absolute;
             left: 50%;
@@ -151,7 +152,23 @@
             z-index: -1;
         }
 
-        .btnScaleGray:hover::after{
+        .btnScaleExcluir::after{
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 100%;
+            height: 300px;
+            border-radius: 50%;
+            transform-origin: center;
+            background-color: #e8b14b;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.2s ease-in-out;
+            z-index: -1;
+        }
+
+        .btnScaleEditar:hover::after,
+        .btnScaleExcluir:hover::after{
             transform: translate(-50%, -50%) scale(1);
         }
 
@@ -465,7 +482,22 @@
 
             <!-- Gerenciamento de Planilha -->
             <div class="secFunc hidden">
-                <h1>Gerenciar</h1>
+                <div class="pt-24">
+                    <div id="containerGerenciamentoPlanilhas" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-12 gap-8 w-full mx-auto pb-12">
+                        <!-- Planilhas carregadas aqui -->
+                    </div>
+
+                    <!-- Mensagem quando não há planilhas -->
+                    <div id="divSemPlanilhas" class="flex flex-col items-center justify-center items-center pt-12 space-y-6">
+                        <p class="text-gray-600 text-center px-4 sm:px-0">Você ainda não possui nenhuma planilha. Crie uma na seção de "Criação de Planilhas".</p>
+                        <div class="bg-white shadow-2xl py-6 px-4 rounded-xl btnSpecial flex flex-col items-center space-y-7 w-[220px]">
+                             <i class="bi bi-clipboard2-data text-5xl text-[var(--accent-yellow)]"></i>
+                             <button id="btnIrParaCreate" class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleGray">
+                                <p class="text-white py-2">Ir para Criação</p>
+                             </button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Geração de Relatórios -->
@@ -516,6 +548,8 @@
 
     <script>
         const containerGeralPlanilhas = document.getElementById("containerGeralPlanilhas");
+        const containerGerenciamentoPlanilhas = document.getElementById("containerGerenciamentoPlanilhas");
+        const divSemPlanilhas = document.getElementById("divSemPlanilhas");
 
         let quantidadeSecs = 0;
         let secCounter = 0;
@@ -528,9 +562,81 @@
         const btnCreate = document.querySelector(".btnCreate");
         const inptNamePlanilha = document.getElementById("inptNamePlanilha");
         const fecharModalName = document.getElementById("fecharModalName");
+        const btnIrParaCreate = document.getElementById("btnIrParaCreate");
 
         const nomePlanilha = document.querySelector(".nomePlanilha");
         let nomePlanilhaPassado = "";
+
+        // Função para carregar planilhas do gerenciamento
+        async function carregarPlanilhasGerenciamento() {
+            try {
+                const response = await fetch('../controllers/authController.php?action=obter_planilhas', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.status === 'ok' && data.data.length > 0) {
+                    containerGerenciamentoPlanilhas.innerHTML = '';
+                    divSemPlanilhas.classList.add("hidden");
+
+                    data.data.forEach(planilha => {
+                        const cardPlanilha = criarCardPlanilha(planilha);
+                        containerGerenciamentoPlanilhas.appendChild(cardPlanilha);
+                    });
+                } else {
+                    containerGerenciamentoPlanilhas.innerHTML = '';
+                    divSemPlanilhas.classList.remove("hidden");
+                }
+            } catch (erro) {
+                console.error('Erro ao carregar planilhas:', erro);
+                divSemPlanilhas.classList.remove("hidden");
+            }
+        }
+
+        // Função para criar card de planilha
+        function criarCardPlanilha(planilha) {
+            const card = document.createElement("div");
+            card.className = "bg-white shadow-2xl py-5 px-4 rounded-xl btnSpecial flex flex-col mx-auto items-center space-y-7 w-[220px]";
+            card.dataset.planilhaId = planilha.id;
+            
+            card.innerHTML = `
+                <h2 class="text-[#025221] text-center text-lg font-semibold line-clamp-2">${planilha.titulo}</h2>
+                <i class="bi bi-collection text-5xl text-[var(--accent-yellow)]"></i>
+                <p class="text-gray-500 text-xs">Criada em: ${new Date(planilha.criado_em).toLocaleDateString('pt-BR')}</p>
+                <div class="flex flex-col space-y-3 w-full">
+                    <button class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleEditar btnAbrir" data-id="${planilha.id}">
+                        <p class="text-white py-2">Abrir
+                            <i class="bi bi-box-arrow-up-right"></i>
+                        </p>
+                    </button>
+                    <button class="bg-[#FFA500] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleExcluir btnExcluir" data-id="${planilha.id}">
+                        <p class="text-white py-2">Excluir
+                            <i class="bi bi-trash3-fill"></i>
+                        </p>
+                    </button>
+                </div>
+            `;
+
+            // Event listeners para os botões
+            const btnAbrir = card.querySelector(".btnAbrir");
+            const btnExcluir = card.querySelector(".btnExcluir");
+
+            btnAbrir.addEventListener("click", () => {
+                console.log("Abrir planilha:", planilha.id);
+                // TODO: Implementar navegação para dentro da planilha
+            });
+
+            btnExcluir.addEventListener("click", () => {
+                console.log("Excluir planilha:", planilha.id);
+                // TODO: Implementar exclusão de planilha
+            });
+
+            return card;
+        }
 
         btnNewPlanilha.onclick = () => {
             shadow.classList.remove("hidden");
@@ -564,8 +670,9 @@
                     document.querySelector(".modalConfirmation").classList.remove("hidden");
 
                     nomePlanilhaPassado = titulo;
+                    inptNamePlanilha.value = '';
                 } else {
-                    documnent.getElementById("pError").textContent = data.message || 'Erro ao criar a planilha.';
+                    document.getElementById("pError").textContent = data.message || 'Erro ao criar a planilha.';
                     document.getElementById("pError").classList.remove("hidden");
                 }
             } catch (erro) {
@@ -582,27 +689,6 @@
                 };
             };
         }
-
-        // btnCriarPlanilha.onclick = () => {
-        //     if(inptNamePlanilha.value.trim().length === 0) {
-        //         document.getElementById("pError").classList.remove("hidden");
-        //         return;
-        //     }else{
-        //         planilhaCriada = true;
-        //         document.querySelector(".modalCreatePlanilha").classList.add("hidden");
-        //         document.querySelector(".modalConfirmation").classList.remove("hidden");
-
-        //         nomePlanilhaPassado = inptNamePlanilha.value.trim();
-        //     };
-
-        //     inptNamePlanilha.oninput = () => {
-        //         if(inptNamePlanilha.value.trim().length > 0) {
-        //             document.getElementById("pError").classList.add("hidden");
-        //         }else{
-        //             document.getElementById("pError").classList.remove("hidden");
-        //         };
-        //     };
-        // };
 
         btnProsseguir.onclick = () => {
             document.querySelector(".modalConfirmation").classList.add("hidden");
@@ -757,6 +843,11 @@
                 btn.classList.add("btnActive");
                 btn.classList.add("navBarElement");
                 iconReference[index].classList.add("iconActive");
+
+                // Carregar planilhas ao entrar na seção de gerenciamento
+                if (index === 1) {
+                    carregarPlanilhasGerenciamento();
+                }
             };
         });
         

@@ -230,4 +230,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
     }
+
+    else if ($action === 'obter_planilhas') {
+        header('Content-Type: application/json; charset=utf-8');
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['id_usuario'])) {
+            http_response_code(401);
+            echo json_encode(['status' => 'error', 'message' => 'Usuário não autenticado']);
+            exit;
+        }
+
+        try {
+            $planilha = new Planilha();
+            $resultado = $planilha->obterPlanilhas(intval($_SESSION['id_usuario']));
+
+            if ($resultado === null) {
+                http_response_code(500);
+                echo json_encode(['status' => 'error', 'message' => 'Falha ao obter planilhas']);
+                exit;
+            }
+
+            http_response_code(200);
+            echo json_encode([
+                'status' => 'ok',
+                'message' => 'Planilhas obtidas com sucesso',
+                'data' => $resultado,
+                'total' => count($resultado)
+            ]);
+            exit;
+
+        } catch (Exception $e) {
+            error_log('Erro obter_planilhas: ' . $e->getMessage());
+            http_response_code(500);
+            echo json_encode(['status' => 'error', 'message' => 'Exceção no servidor']);
+            exit;
+        }
+    }
 }

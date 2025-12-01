@@ -63,4 +63,26 @@ class Planilha extends Database {
             return null;
         }
     }
+
+    public function obterPlanilhas(int $id_usuario): ?array {
+        try {
+            $sqlSelect = "SELECT * FROM {$this->table2} WHERE id_usuario = :id_usuario ORDER BY criado_em DESC";
+            $stmtSelect = $this->conn->prepare($sqlSelect);
+            $stmtSelect->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+
+            if(!$stmtSelect->execute()) {
+                error_log("Falha ao obter todas as planilhas. SQLSTATE: " . $this->conn->errorInfo()[0]);
+                return null;
+            }
+
+            return $stmtSelect->fetchAll();
+
+        } catch (PDOException $e) {
+            error_log("PDOException ao obter todas as planilhas: " . $e->getMessage());
+            return null;
+        } catch (Exception $e) {
+            error_log("Exception ao obter todas as planilhas: " . $e->getMessage());
+            return null;
+        }
+    }
 }
