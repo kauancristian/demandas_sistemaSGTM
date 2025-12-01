@@ -205,12 +205,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             switch ($result) {
                 case Secao::STATUS_OK:
-                    $id_secao = $secao->obterUltimaSecao($id_planilha);
+                    $id = $secao->obterUltimaSecao($id_planilha);
                     http_response_code(201);
                     echo json_encode([
                         'status' => 'ok', 
                         'message' => 'Seção criada com sucesso',
-                        'id_secao' => $id_secao
+                        'id' => $id
                     ]);
                     exit;
 
