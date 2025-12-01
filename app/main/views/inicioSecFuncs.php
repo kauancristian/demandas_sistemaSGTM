@@ -106,7 +106,7 @@
            background-color: var(--accent-yellow);
            transform-origin: center;
            transform: scaleY(0);
-           transition: transform 0.4s;
+           transition: transform 0.4s ease-in-out;
         }
 
         .nav-bar:hover::after{
@@ -115,6 +115,19 @@
 
         .nav-bar-active::after{
             transform: scaleY(1) !important;
+        }
+        
+        .navBarElement::after{
+            content: "";
+            position: absolute;
+            width: 4px;
+            height: 100%;
+            left: 0;
+            bottom: 0;
+            transform-origin: center;
+            background-color: var(--accent-yellow);
+            transform: scaleY(1);
+            transition: transform 0.4s ease-in-out;
         }
 
         .btnScaleGray{
@@ -166,23 +179,6 @@
             animation: topMovie 0.6s ease-in-out;
         }
 
-        .btnCreate{
-            position: relative;
-            z-index: 2;
-        }
-
-        @keyframes btnPulse {
-            0% {
-                transform: translate(-50%, -50%) scale(0);
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.3);
-            }
-            0% {
-                transform: translate(-50%, -50%) scale(0);
-            }
-        }
-
         .btnCreate::after{
             content: "";
             position: absolute;
@@ -199,6 +195,16 @@
             animation: btnPulse 2s ease-in-out infinite;
         }
 
+        .btnActive{
+            background-color: #557463;
+            color: var(--accent-yellow) !important;
+            transform: translateX(5px);
+        }
+
+        .iconActive{
+            background-color: var(--accent-yellow);
+            color: white !important;
+        }
     </style>
 </head>
 <body class="">
@@ -272,16 +278,16 @@
 
                         <div class="flex items-center lg:hidden">
                             <img class="object-contain w-9" src="../assets/S.png" alt="">
-                            <p class="text-[#025221] font-semibold nomeSec pr-1">Página</p>
-                            <span class="text-[var(--accent-yellow)] font-semibold subNomeSec">Inicial</span>
+                            <p class="text-[#025221] font-semibold nomeSecMB pr-1">Página</p>
+                            <span class="text-[var(--accent-yellow)] font-semibold subNomeSecMB">Inicial</span>
                         </div>
                     </div>
 
                     <div class="hidden lg:block">
                         <div class="flex items-center">
                             <img class="object-contain w-9" src="../assets/S.png" alt="">
-                            <p class="text-[#025221] font-semibold nomeSec pr-1">Página</p>
-                            <span class="text-[var(--accent-yellow)] font-semibold subNomeSec">Inicial</span>
+                            <p class="text-[#025221] font-semibold nomeSecPC pr-1">Página</p>
+                            <span class="text-[var(--accent-yellow)] font-semibold subNomeSecPC">Inicial</span>
                         </div>
                     </div>
 
@@ -469,7 +475,39 @@
 
             <!-- Perfil do Usuário  -->
             <div class="secFunc hidden">
-                <h1>Usuario</h1>
+                <div class="pt-20">
+                    <div class="bg-[#fff]/10 rounded-xl w-[90%] mx-auto h-[420px] shadow-2xl">
+                        <div class="flex flex-col items-center justify-center h-full space-y-6">
+                
+                            <?php if (isset($_SESSION['nome'])): ?>
+                                <div class="w-24 h-24 rounded-full flex items-center justify-center drop-shadow-[0_0_10px_#025221] fotoPerfil"
+                                    style="background-color: <?= $_SESSION['perfil']; ?>;">
+                                    <p class="text-white font-semibold text-2xl">
+                                        <?= htmlspecialchars(mb_substr($_SESSION['nome'], 0, 1, 'UTF-8')); ?>
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+                    
+
+                            <p class="text-black text-sm sm:text-xl font-semibold">
+                                <?= isset($_SESSION['nome']) ? htmlspecialchars(implode(" ", array_slice(explode(" ", trim($_SESSION['nome'])), 0, 2))) : '' ?>
+                            </p>
+
+                            <div>
+                                <button class="bg-[#025221] text-white flex items-center space-x-2 py-2 px-4 rounded-xl btnScaleGray hover:translate-y-[-3px] transition ease-in-out duration-300 ">
+                                    <i class="bi bi-camera-fill"></i>
+                                    <p class="text-sm font-semibold">Alterar Foto de Perfil</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white w-[90%] rounded-xl shadow-2xl">
+                        <div class="grid sm:grid-cols-2 md:grid-cols-3">
+
+                        </div>
+                    </div>
+                </div>
             </div>
             
         </main>
@@ -628,8 +666,10 @@
             
         ];
 
-        const nomeSec = document.querySelector(".nomeSec");
-        const subNomeSec = document.querySelector(".subNomeSec");
+        const nomeSecPC = document.querySelector(".nomeSecPC");
+        const subNomeSecPC = document.querySelector(".subNomeSecPC");
+        const nomeSecMB = document.querySelector(".nomeSecMB");
+        const subNomeSecMB = document.querySelector(".subNomeSecMB");
 
 
         const btnSec = document.querySelectorAll(".btnSec");
@@ -659,8 +699,19 @@
                 });
 
                 secFunc[index].classList.remove("hidden");
-                nomeSec.innerHTML = nomesSecsHeader[index].nome;
-                subNomeSec.innerHTML = nomesSecsHeader[index].subNome;
+
+                nomeSecPC.innerHTML = nomesSecsHeader[index].nome;
+                subNomeSecPC.innerHTML = nomesSecsHeader[index].subNome;
+                nomeSecMB.innerHTML = nomesSecsHeader[index].nome;
+                subNomeSecMB.innerHTML = nomesSecsHeader[index].subNome;
+
+                btnSec.forEach((btn) => btn.classList.remove("btnActive"));
+                btnSec.forEach((btn) => btn.classList.remove("navBarElement"));
+                iconReference.forEach((icon) => icon.classList.remove("iconActive"));
+
+                btn.classList.add("btnActive");
+                btn.classList.add("navBarElement");
+                iconReference[index].classList.add("iconActive");
             };
         });
         
