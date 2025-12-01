@@ -249,8 +249,9 @@
                                 <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Nome</label>
                             </div>
                             <div class="w-[95%] lg:w-[85%] relative flex items-center">
-                                <input tabindex="0" class="inptForm w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-2 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="text" name="cpf" id="inptCpf" placeholder="" maxlength="14">
-                                <label class="absolute ml-4 text-gray-400 transition ease-in-out duration-300" for="cpf">CPF</label>
+                                <i class="bi bi-person-vcard-fill absolute left-3 text-xl text-[#025725]"></i>
+                                <input tabindex="0" class="inptForm w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="text" name="cpf" id="inptCpf" placeholder="" maxlength="14">
+                                <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="cpf">CPF</label>
                             </div>
                             <div class="w-[95%] lg:w-[85%] relative flex items-center">
                                 <i class="bi bi-telephone-fill absolute left-3 text-xl text-[#025725]"></i>
