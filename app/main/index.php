@@ -133,18 +133,6 @@
             animation: scaleModal 1.5s ease-in-out;
         }
 
-        @media (min-width: 1020px) {
-            .xl\:h-620screen {
-                height: 620px;
-            }
-        }
-
-        @media (min-width: 1900px) {
-            .xgg\:h-650screen {
-                height: 650px;
-            }
-        }
-
         @media (max-width:648px) {
             #ladoForm{
                 border-radius: 15px;
@@ -164,7 +152,7 @@
         <div class="bg-gradient-to-br from-[#025221] via-[#47643C] to-[#FFA500] h-full hidden lg:block rounded-l-2xl shadow-xl">
             <div class="flex flex-col items-center justify-center h-full gap-8">
                 <i class="bi bi-mortarboard-fill text-9xl text-[var(--accent-yellow)]"></i>
-                <h2 class="text-white flex items-center text-[40px] font-semibold textComf">EEEP <span class="text-[var(--accent-yellow)] pl-2 font-semibold"> SALABERGA</span></h2>
+                <h2 class="text-white flex items-center text-[40px] font-bold textComf">EEEP <span class="text-[var(--accent-yellow)] pl-2 font-bold"> SALABERGA</span></h2>
                 <p class="text-center px-6 text-gray-200 textComf">Transformando o futuro através da organização e gestão inteligente de demandas.</p>
                 <div class="flex text-sm space-x-4">
                     <div class="flex items-center space-x-2">
@@ -232,12 +220,12 @@
                         <div class="w-full relative flex flex-col items-center gap-4">
                             <div class="w-[95%] lg:w-[85%] relative flex items-center">
                                 <i class="bi bi-envelope-fill absolute left-3 text-xl text-[#025725]"></i>
-                                <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="email" name="email" id="" placeholder="" maxlength="200">
+                                <input tabindex="0" class="inptForm w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="email" name="email" id="" placeholder="" maxlength="200">
                                 <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="nomeCad">E-mail</label>
                             </div>
                             <div class="w-[95%] lg:w-[85%] relative flex items-center">
                                 <i class="bi bi-key-fill absolute left-3 text-xl text-[#025725]"></i>
-                                <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="password" name="senha" id="" placeholder="" minlength="6" maxlength="200">
+                                <input tabindex="0" class="inptForm w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="password" name="senha" id="" placeholder="" minlength="6" maxlength="200">
                                 <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Senha</label>
                             </div>
                         </div>
@@ -257,26 +245,26 @@
                         <div class="w-full relative flex flex-col items-center gap-4 pt-4">
                             <div class="w-[95%] lg:w-[85%] relative flex items-center">
                                 <i class="bi bi-person-fill absolute left-3 text-xl text-[#025725]"></i>
-                                <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="text" name="nome" id="" placeholder="" maxlength="200">
+                                <input tabindex="0" class="inptForm w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="text" name="nome" id="" placeholder="" maxlength="200">
                                 <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Nome</label>
                             </div>
                             <div class="w-[95%] lg:w-[85%] relative flex items-center">
-                                <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-2 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="text" name="cpf" id="inptCpf" placeholder="" maxlength="14">
+                                <input tabindex="0" class="inptForm w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-2 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="text" name="cpf" id="inptCpf" placeholder="" maxlength="14">
                                 <label class="absolute ml-4 text-gray-400 transition ease-in-out duration-300" for="cpf">CPF</label>
                             </div>
                             <div class="w-[95%] lg:w-[85%] relative flex items-center">
                                 <i class="bi bi-telephone-fill absolute left-3 text-xl text-[#025725]"></i>
-                                <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="tel" name="telefone" id="inptTelefone" placeholder="" maxlength="14">
+                                <input tabindex="0" class="inptForm w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="tel" name="telefone" id="inptTelefone" placeholder="" maxlength="14">
                                 <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="telefone">Telefone</label>
                             </div>
                             <div class="w-[95%] lg:w-[85%] relative flex items-center">
                                 <i class="bi bi-envelope-fill absolute left-3 text-xl text-[#025725]"></i>
-                                <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="email" name="email" id="" placeholder="" maxlength="200">
+                                <input tabindex="0" class="inptForm w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="email" name="email" id="" placeholder="" maxlength="200">
                                 <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="nomeCad">E-mail</label>
                             </div>
                             <div class="w-[95%] lg:w-[85%] relative flex items-center">
                                 <i class="bi bi-key-fill absolute left-3 text-xl text-[#025725]"></i>
-                                <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="password" name="senha" id="" placeholder="" minlength="6" maxlength="200">
+                                <input tabindex="0" class="inptForm w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="password" name="senha" id="" placeholder="" minlength="6" maxlength="200">
                                 <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Senha</label>
                             </div>
                         </div>
@@ -318,6 +306,7 @@
 
         window.onload = () => {
             document.getElementById("formCad").reset();
+            document.querySelectorAll(".inptForm").reset();
         };
 
         window.onload = () => {
