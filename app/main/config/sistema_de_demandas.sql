@@ -72,7 +72,9 @@ CREATE TABLE `secoes` (
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nome` varchar(200) NOT NULL,
+  `cpf` char(14) NOT NULL,
   `email` varchar(200) NOT NULL,
+  `telefone` char(14) NOT NULL,
   `senha` varchar(200) NOT NULL,
   `perfil` varchar(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -81,9 +83,9 @@ CREATE TABLE `usuarios` (
 -- Despejando dados para a tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `perfil`) VALUES
-(1, 'Cássio Holanda Gomes Severiano', 'cassio.holanda@gmail.com', '$2y$10$AgqCALRH6Vo0T/jvgAwkJ.T4yebRtfreufruaqp8I1imDdgBoQcHK', '#201C56'),
-(2, 'Kauan Cristian Santos de Lima', 'kauan.cristian@gmail.com', '$2y$10$Cdcs6Yzx5FnYJYXBGm2hQunQo5k2O3vKDsTawCH3A.yaVj6VOdGQy', '#4C829F');
+INSERT INTO `usuarios` (`id`, `nome`, `cpf` ,`email`, `telefone` ,`senha`, `perfil`) VALUES
+(1, 'Cássio Holanda Gomes Severiano', '038.423.523-51' ,'cassio.holanda@gmail.com', '(85) 8423-6440' ,'$2y$10$AgqCALRH6Vo0T/jvgAwkJ.T4yebRtfreufruaqp8I1imDdgBoQcHK', '#201C56'),
+(2, 'Kauan Cristian Santos de Lima', '024.648.453-53' ,'kauan.cristian@gmail.com', '(85) 2342-0583' ,'$2y$10$Cdcs6Yzx5FnYJYXBGm2hQunQo5k2O3vKDsTawCH3A.yaVj6VOdGQy', '#4C829F');
 
 --
 -- Reestartando AUTO_INCREMENT para a tabela `usuarios`
@@ -123,7 +125,9 @@ ALTER TABLE `secoes`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `cpf` (`cpf`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `telefone` (`telefone`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
@@ -133,25 +137,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `planilhas`
 --
 ALTER TABLE `planilhas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `secoes`
 --
 ALTER TABLE `secoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para tabelas despejadas
