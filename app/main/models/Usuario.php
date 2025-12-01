@@ -22,7 +22,7 @@ class Usuario extends Database {
 
     }
 
-    public function cadastro(string $nome, string $email, string $senha, string $perfil): int {
+    public function cadastro(string $nome, string $cpf, string $email, string $telefone, string $senha, string $perfil): int {
         try {
             $sqlCheck = "SELECT 1 FROM {$this->table1} WHERE email = :email LIMIT 1";
             $stmtCheck = $this->conn->prepare($sqlCheck);
@@ -34,10 +34,12 @@ class Usuario extends Database {
             }
 
             $hash = password_hash($senha, PASSWORD_DEFAULT);
-            $sqlInsert = "INSERT INTO {$this->table1} (nome, email, senha, perfil) VALUES (:nome, :email, :senha, :perfil)";
+            $sqlInsert = "INSERT INTO {$this->table1} (nome, cpf, email, telefone, senha, perfil) VALUES (:nome, :cpf ,:email, :telefone ,:senha, :perfil)";
             $stmtInsert = $this->conn->prepare($sqlInsert);
             $stmtInsert->bindValue(":nome", $nome);
+            $stmtInsert->bindValue(":cpf", $cpf);
             $stmtInsert->bindValue(":email", $email);
+            $stmtInsert->bindValue(":telefone", $telefone);
             $stmtInsert->bindValue(":senha", $hash);
             $stmtInsert->bindValue(":perfil", $perfil);
 

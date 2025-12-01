@@ -11,11 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($action === 'cadastro') {
         
         $nome = trim($_POST['nome'] ?? '');
+        $cpf = $_POST['cpf'] ?? '';
         $email = trim($_POST['email'] ?? '');
+        $telefone = $_POST['telefone'] ?? '';
         $email = filter_var($email, FILTER_SANITIZE_EMAIL); 
         $senha = $_POST['senha'] ?? '';
 
-        if (empty($nome) || empty($email) || empty($senha)) {
+        if (empty($nome) || empty($cpf) || empty($email) || empty($telefone) || empty($senha)) {
             header("Location: ../index.php?erro=campos_vazios");
             exit;
         }
@@ -33,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $perfil = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
             $usuario = new Usuario();
-            $result = $usuario->cadastro($nome, $email, $senha, $perfil);
+            $result = $usuario->cadastro($nome, $cpf, $email, $telefone, $senha, $perfil);
 
             switch ($result) {
                 case Usuario::STATUS_OK:
