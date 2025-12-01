@@ -217,7 +217,7 @@
                     <div class="flex flex-col items-center justify-center translate-x-[-6px] space-y-1">
                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-school text-2xl md:text-[2.5vw] text-[var(--accent-yellow)]"></i>
-                            <div class="flex flex-col space-y-1">
+                            <div class="flex flex-col space-y-[0.8vw] pt-[1vh]">
                                 <h1 class="text-white font-semibold transform text-xl md:text-[1.5vw]">Sistema de <span class="text-[var(--accent-yellow)]">Demandas</span></h1>
                                 <span class="bg-[var(--accent-yellow)] h-0.5 w-full block"></span>
                             </div>
@@ -229,8 +229,8 @@
             </div>
 
             <div class="pt-12 w-full">
-                <nav class="flex justify-center w-full px-4 lg:px-3">
-                    <ul class="space-y-5 flex flex-col items-center w-full">
+                <nav class="flex justify-center w-full px-4 lg:px-[2vw]">
+                    <ul class="space-y-[3vh] flex flex-col items-center w-full">
                         <div class="flex justify-center items-center w-full">
                             <i class="bi bi-plus-circle h-[55px] flex items-center justify-center px-4 text-2xl text-[var(--accent-yellow)] rounded-md iconReference transition ease-in-out duration-300 cursor-pointer hover:text-white hover:bg-[var(--accent-yellow)]"></i>
                             <button class="w-[90%] h-[55px] text-sm lg:text-[1.2vw] rounded-md text-white text-start indent-5 hover:bg-gray-100/30 hover:text-[var(--accent-yellow)] hover:translate-x-[5px] transition ease-in-out duration-300 nav-bar btnSec">
@@ -268,8 +268,8 @@
             <!-- Shadow-->
             <div class="bg-black inset-0 opacity-50 h-screen absolute shadow hidden"></div>
 
-            <div class="h-[65px] bg-gradient-to-r from-[#025221] via-[var(--accent-yellow)] to-[#025221] fixed w-screen lg:w-[75%] z-[8000]">
-                <header class="h-[62px] flex justify-between items-center z-[8000] fixed border-b-2 px-5 bg-white w-full lg:w-[75%]">
+            <div class="h-[67px] bg-gradient-to-r from-[#025221] via-[var(--accent-yellow)] to-[#025221] fixed w-screen lg:w-[75%] z-[8000]">
+                <header class="h-[64px] flex justify-between items-center z-[8000] fixed border-b-2 px-5 bg-white w-full lg:w-[75%]">
                     <!-- Btn menu Mobile -->
                     <div class="z-[9999] relative lg:hidden flex items-center">
                         <button id="btnMenuMb" class="lg:hidden">
@@ -284,8 +284,8 @@
                     </div>
 
                     <div class="hidden lg:block">
-                        <div class="flex items-center">
-                            <img class="object-contain w-9" src="../assets/S.png" alt="">
+                        <div class="flex items-center text-[1vw]">
+                            <img class="object-contain w-[2.5vw]" src="../assets/S.png" alt="">
                             <p class="text-[#025221] font-semibold nomeSecPC pr-1">Página</p>
                             <span class="text-[var(--accent-yellow)] font-semibold subNomeSecPC">Inicial</span>
                         </div>
