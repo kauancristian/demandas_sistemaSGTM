@@ -261,6 +261,15 @@
                                 <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="nomeCad">Nome</label>
                             </div>
                             <div class="w-[95%] lg:w-[85%] relative flex items-center">
+                                <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-2 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="text" name="cpf" id="inptCpf" placeholder="" maxlength="14">
+                                <label class="absolute ml-4 text-gray-400 transition ease-in-out duration-300" for="cpf">CPF</label>
+                            </div>
+                            <div class="w-[95%] lg:w-[85%] relative flex items-center">
+                                <i class="bi bi-telephone-fill absolute left-3 text-xl text-[#025725]"></i>
+                                <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="tel" name="telefone" id="inptTelefone" placeholder="" maxlength="14">
+                                <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="telefone">Telefone</label>
+                            </div>
+                            <div class="w-[95%] lg:w-[85%] relative flex items-center">
                                 <i class="bi bi-envelope-fill absolute left-3 text-xl text-[#025725]"></i>
                                 <input tabindex="0" class="w-full p-4 outline-none border-2 border-[#A1B3AD] rounded-xl bg-[#F9F6EF] text-black indent-8 focus:border-[var(--accent-yellow)] transition ease-in-out duration-300" type="email" name="email" id="" placeholder="" maxlength="200">
                                 <label class="absolute ml-12 text-gray-400 transition ease-in-out duration-300" for="nomeCad">E-mail</label>
@@ -331,7 +340,7 @@
             btnCad.classList.remove("btn-active");
             document.getElementById("ajudaLogin").classList.remove("hidden");
             document.getElementById("ajudaCad").classList.add("hidden");
-        }
+        };
 
         btnCad.onclick = () => {
             formLogin.classList.add("hidden");
@@ -340,7 +349,39 @@
             btnLogin.classList.remove("btn-active");
             document.getElementById("ajudaCad").classList.remove("hidden");
             document.getElementById("ajudaLogin").classList.add("hidden");
+        };
+
+        const inptCpf = document.getElementById("inptCpf");
+        const inptTelefone = document.getElementById("inptTelefone"); 
+
+        inptCpf.oninput = () => {
+            let valor = inptCpf.value.trim().replace(/\D/g, '');
+
+            if(valor.length > 3 && valor.length <= 6) {
+                valor = valor.slice(0,3) + "." + valor.slice(3);
+            } 
+            else if(valor.length > 6 && valor.length <= 9) {
+                valor = valor.slice(0,3) + "." + valor.slice(3,6) + "." + valor.slice(6);
+            }
+            else if(valor.length > 9) {
+                valor = valor.slice(0,3) + "." + valor.slice(3,6) + "." + valor.slice(6,9) + "-" + valor.slice(9,11);
+            }
+
+            inptCpf.value = valor;
+        };
+
+        inptTelefone.oninput = () => {
+            let valorTel = inptTelefone.value.trim().replace(/\D/g, '');
+
+            if (valorTel.length > 2) {
+                valorTel = `(${valorTel.slice(0, 2)}) ${valorTel.slice(2, 6)}` + (valorTel.length > 6 ? `-${valorTel.slice(6, 10)}` : "");
+            } else if (valorTel.length > 0) {
+                valorTel = `(${valorTel}`;
+            };
+
+            inptTelefone.value = valorTel;
         }
+
 
     </script>
 
