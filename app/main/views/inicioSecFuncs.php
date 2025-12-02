@@ -130,14 +130,14 @@
             transition: transform 0.4s ease-in-out;
         }
 
-        .btnScaleEditar,
-        .btnScaleExcluir{
+        .btnScaleGreen,
+        .btnScaleRed{
             position: relative;
             overflow: hidden;
             z-index: 1;
         }
 
-        .btnScaleEditar::after{
+        .btnScaleGreen::after{
             content: "";
             position: absolute;
             left: 50%;
@@ -152,7 +152,7 @@
             z-index: -1;
         }
 
-        .btnScaleExcluir::after{
+        .btnScaleRed::after{
             content: "";
             position: absolute;
             left: 50%;
@@ -167,8 +167,8 @@
             z-index: -1;
         }
 
-        .btnScaleEditar:hover::after,
-        .btnScaleExcluir:hover::after{
+        .btnScaleGreen:hover::after,
+        .btnScaleRed:hover::after{
             transform: translate(-50%, -50%) scale(1);
         }
 
@@ -331,7 +331,7 @@
                                 <div class="hidden md:block">
                                     <?php if(isset($_SESSION['id_usuario'])) : ?>
                                         <form action="../controllers/authController.php?action=logout" method="POST">
-                                            <button class="flex items-center space-x-2 bg-[#025221] text-white py-1 px-3 rounded-lg hover:translate-x-[3px] transition ease-in-out duration-150 botao-sair btnScaleGray" type="submit">
+                                            <button class="flex items-center space-x-2 bg-[#025221] text-white py-1 px-3 rounded-lg hover:translate-x-[3px] transition ease-in-out duration-150 botao-sair btnScaleGreen" type="submit">
                                                 <i class="bi bi-box-arrow-in-right text-xl"></i>
                                                 <p>Sair</p>
                                             </button>
@@ -402,7 +402,7 @@
                     <p class="text-gray-600 text-center px-4 sm:px-0">Você ainda não possui nenhuma planilha criada. Crie a sua primeira logo abaixo.</p>
                     <div class="bg-white shadow-2xl py-6 px-4 rounded-xl btnSpecial flex flex-col items-center space-y-7 w-[220px]">
                          <i class="bi bi-plus-circle text-5xl text-[var(--accent-yellow)]"></i>
-                         <button id="btnNewPlanilha" class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleGray">
+                         <button id="btnNewPlanilha" class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleGreen">
                             <p class="text-white py-2">Nova Planilha</p>
                          </button>
                     </div>
@@ -425,7 +425,7 @@
                 
 
                             <!-- btnCriarPlanilha -->
-                            <button id="btnCriarPlanilha" class="py-2 w-full bg-[#025221] rounded-lg text-white btnScaleGray hover:translate-y-[-3px] transition ease-in-out duration-300">
+                            <button id="btnCriarPlanilha" class="py-2 w-full bg-[#025221] rounded-lg text-white btnScaleGreen hover:translate-y-[-3px] transition ease-in-out duration-300">
                                 <p>Criar Planilha</p>
                             </button>
                         </div>
@@ -441,7 +441,7 @@
                         </div>
 
                         <!-- btnConfirmar -->
-                         <button id="btnProsseguir" class="py-2 w-full bg-[#025221] rounded-lg text-white btnScaleGray hover:translate-y-[-3px] transition ease-in-out duration-300 flex items-center justify-center space-x-2 group ">
+                         <button id="btnProsseguir" class="py-2 w-full bg-[#025221] rounded-lg text-white btnScaleGreen hover:translate-y-[-3px] transition ease-in-out duration-300 flex items-center justify-center space-x-2 group">
                             <p>Prosseguir</p>
                             <i class="bi bi-arrow-right group-hover:translate-x-[3px] transition ease-in-out duration-300 text-xl"></i>
                         </button>
@@ -469,7 +469,7 @@
                     <!-- btnCreateSecs === 0 -->
                     <div id="divBtnInciarSecs" class="bg-white shadow-2xl py-6 px-4 rounded-xl btnSpecial flex flex-col mx-auto items-center space-y-7 w-[220px] mt-8">
                          <i class="bi bi-collection text-5xl text-[var(--accent-yellow)]"></i>
-                         <button id="btnIniciarSecs" class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleGray">
+                         <button id="btnIniciarSecs" class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleGreen">
                             <p class="text-white py-2">Iniciar Seções</p>
                          </button>
                     </div>
@@ -489,10 +489,10 @@
 
                     <!-- Mensagem quando não há planilhas -->
                     <div id="divSemPlanilhas" class="flex flex-col items-center justify-center items-center space-y-6">
-                        <p class="text-gray-600 text-center px-4 sm:px-0">Você ainda não possui nenhuma planilha. Crie uma na seção de "Criação de Planilhas".</p>
+                        <p class="text-gray-600 text-center px-4 sm:px-0">Você ainda não possui nenhuma planilha. Crie uma na seção de "Criação de Planilhas".</p>  
                         <div class="bg-white shadow-2xl py-6 px-4 rounded-xl btnSpecial flex flex-col items-center space-y-7 w-[220px]">
                              <i class="bi bi-clipboard2-data text-5xl text-[var(--accent-yellow)]"></i>
-                             <button id="btnIrParaCreate" class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleGray">
+                             <button id="btnIrParaCreate" class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleGreen">
                                 <p class="text-white py-2">Ir para Criação</p>
                              </button>
                         </div>
@@ -514,7 +514,7 @@
                             <?php if (isset($_SESSION['nome'])): ?>
                                 <div class="w-24 h-24 rounded-full flex items-center justify-center drop-shadow-[0_0_10px_#025221] fotoPerfil"
                                     style="background-color: <?= $_SESSION['perfil']; ?>;">
-                                    <p class="text-white font-semibold text-2xl">
+                                    <p class="text-white font-semibold text-4xl">
                                         <?= htmlspecialchars(mb_substr($_SESSION['nome'], 0, 1, 'UTF-8')); ?>
                                     </p>
                                 </div>
@@ -526,7 +526,7 @@
                             </p>
 
                             <div>
-                                <button class="bg-[#025221] text-white flex items-center space-x-2 py-2 px-4 rounded-xl btnScaleGray hover:translate-y-[-3px] transition ease-in-out duration-300 ">
+                                <button class="bg-[#025221] text-white flex items-center space-x-2 py-2 px-4 rounded-xl btnScaleGreen hover:translate-y-[-3px] transition ease-in-out duration-300">
                                     <i class="bi bi-camera-fill"></i>
                                     <p class="text-sm font-semibold">Alterar Foto de Perfil</p>
                                 </button>
@@ -608,12 +608,12 @@
                 <i class="bi bi-clipboard2-data text-5xl text-[var(--accent-yellow)]"></i>
                 <p class="text-gray-500 text-xs">Criada em: ${new Date(planilha.criado_em).toLocaleDateString('pt-BR')}</p>
                 <div class="flex flex-col space-y-3 w-full">
-                    <button class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleEditar btnAbrir" data-id="${planilha.id}">
+                    <button class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleGreen btnAbrir" data-id="${planilha.id}">
                         <p class="text-white py-2">Abrir
                             <i class="bi bi-box-arrow-up-right"></i>
                         </p>
                     </button>
-                    <button class="bg-red-700 w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleExcluir btnExcluir" data-id="${planilha.id}">
+                    <button class="bg-red-700 w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleRed btnExcluir" data-id="${planilha.id}">
                         <p class="text-white py-2">Excluir
                             <i class="bi bi-trash3-fill"></i>
                         </p>
