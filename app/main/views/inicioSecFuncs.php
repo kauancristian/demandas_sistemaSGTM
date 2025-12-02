@@ -161,7 +161,7 @@
             height: 300px;
             border-radius: 50%;
             transform-origin: center;
-            background-color: #e8b14b;
+            background-color: #ff919150;
             transform: translate(-50%, -50%) scale(0);
             transition: transform 0.2s ease-in-out;
             z-index: -1;
@@ -482,13 +482,13 @@
 
             <!-- Gerenciamento de Planilha -->
             <div class="secFunc hidden">
-                <div class="pt-24">
-                    <div id="containerGerenciamentoPlanilhas" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-12 gap-8 w-full mx-auto pb-12">
+                <div class="pt-12">
+                    <div id="containerGerenciamentoPlanilhas" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 px-12 gap-8 w-full mx-auto pb-12 pt-12  ">
                         <!-- Planilhas carregadas aqui -->
                     </div>
 
                     <!-- Mensagem quando não há planilhas -->
-                    <div id="divSemPlanilhas" class="flex flex-col items-center justify-center items-center pt-12 space-y-6">
+                    <div id="divSemPlanilhas" class="flex flex-col items-center justify-center items-center space-y-6">
                         <p class="text-gray-600 text-center px-4 sm:px-0">Você ainda não possui nenhuma planilha. Crie uma na seção de "Criação de Planilhas".</p>
                         <div class="bg-white shadow-2xl py-6 px-4 rounded-xl btnSpecial flex flex-col items-center space-y-7 w-[220px]">
                              <i class="bi bi-clipboard2-data text-5xl text-[var(--accent-yellow)]"></i>
@@ -605,7 +605,7 @@
             
             card.innerHTML = `
                 <h2 class="text-[#025221] text-center text-lg font-semibold line-clamp-2">${planilha.titulo}</h2>
-                <i class="bi bi-collection text-5xl text-[var(--accent-yellow)]"></i>
+                <i class="bi bi-clipboard2-data text-5xl text-[var(--accent-yellow)]"></i>
                 <p class="text-gray-500 text-xs">Criada em: ${new Date(planilha.criado_em).toLocaleDateString('pt-BR')}</p>
                 <div class="flex flex-col space-y-3 w-full">
                     <button class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleEditar btnAbrir" data-id="${planilha.id}">
@@ -613,7 +613,7 @@
                             <i class="bi bi-box-arrow-up-right"></i>
                         </p>
                     </button>
-                    <button class="bg-[#FFA500] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleExcluir btnExcluir" data-id="${planilha.id}">
+                    <button class="bg-red-700 w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleExcluir btnExcluir" data-id="${planilha.id}">
                         <p class="text-white py-2">Excluir
                             <i class="bi bi-trash3-fill"></i>
                         </p>
@@ -874,6 +874,10 @@
             }
         });
 
+
+        btnIrParaCreate.onclick = () => {
+            btnSec[0].click();
+        }
     </script>
 
      <script>
