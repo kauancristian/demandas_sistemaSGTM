@@ -483,7 +483,7 @@
             <!-- Gerenciamento de Planilha -->
             <div class="secFunc hidden">
                 <div class="pt-12">
-                    <div id="containerGerenciamentoPlanilhas" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 px-12 gap-8 w-full mx-auto pb-12 pt-12  ">
+                    <div id="containerGerenciamentoPlanilhas" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 px-12 gap-8 w-full mx-auto pb-12">
                         <!-- Planilhas carregadas aqui -->
                     </div>
 
