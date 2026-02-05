@@ -196,6 +196,30 @@
             animation: topMovie 0.6s ease-in-out;
         }
 
+        .modalCreatePlanilha {
+            animation: topMovie 0.6s ease-in-out;
+        }
+
+        #divNew {
+            animation: topMovie 0.6s ease-in-out;
+        }
+
+        #divPlanilhaCriada {
+            animation: topMovie 0.6s ease-in-out;
+        }
+
+        #containerGerenciamentoPlanilhas {
+            animation: topMovie 0.6s ease-in-out;
+        }
+
+        #divSemPlanilhas {
+            animation: topMovie 0.6s ease-in-out;
+        }
+
+        .secPerfilContainer {
+            animation: topMovie 0.6s ease-in-out;
+        }
+
         .btnCreate::after{
             content: "";
             position: absolute;
@@ -507,7 +531,7 @@
 
             <!-- Perfil do Usuário  -->
             <div class="secFunc hidden">
-                <div class="pt-20">
+                <div class="pt-20 secPerfilContainer">
                     <div class="bg-[#fff]/10 rounded-xl w-[90%] mx-auto h-[420px] shadow-2xl">
                         <div class="flex flex-col items-center justify-center h-full space-y-6">
                 
@@ -528,7 +552,10 @@
                             <div>
                                 <button class="bg-[#025221] text-white flex items-center space-x-2 py-2 px-4 rounded-xl btnScaleGreen hover:translate-y-[-3px] transition ease-in-out duration-300">
                                     <i class="bi bi-camera-fill"></i>
-                                    <p class="text-sm font-semibold">Alterar Foto de Perfil</p>
+                                    <label class="text-sm font-semibold cursor-pointer">
+                                        Alterar Foto de Perfil
+                                        <input type="file" accept=".png,.jpg,.jpeg" class="hidden" id="inputFotoPerfil">
+                                    </label>
                                 </button>
                             </div>
                         </div>
@@ -607,6 +634,7 @@
                 <h2 class="text-[#025221] text-center text-lg font-semibold line-clamp-2">${planilha.titulo}</h2>
                 <i class="bi bi-clipboard2-data text-5xl text-[var(--accent-yellow)]"></i>
                 <p class="text-gray-500 text-xs">Criada em: ${new Date(planilha.criado_em).toLocaleDateString('pt-BR')}</p>
+                <p class="text-gray-500 text-xs">Atualizada em: ${planilha.atualizado_em ? new Date(planilha.atualizado_em).toLocaleDateString('pt-BR') : new Date(planilha.criado_em).toLocaleDateString('pt-BR')}</p>
                 <div class="flex flex-col space-y-3 w-full">
                     <button class="bg-[#025221] w-full rounded-md hover:translate-y-[-3px] transition ease-in-out duration-300 btnScaleGreen btnAbrir" data-id="${planilha.id}">
                         <p class="text-white py-2">Abrir
@@ -896,6 +924,35 @@
             setTimeout(() => {
                 side_bar.classList.add("hidden");
             },500);
+        }
+     </script>
+
+     <script>
+        // Funcionalidade de alterar foto de perfil
+        const inputFotoPerfil = document.getElementById("inputFotoPerfil");
+        const fotoPerfil = document.querySelector(".fotoPerfil");
+
+        if (inputFotoPerfil) {
+            inputFotoPerfil.addEventListener("change", function(event) {
+                const file = event.target.files[0];
+                
+                if (file) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        // Criar uma imagem temporária para substituir o círculo
+                        const img = document.createElement("img");
+                        img.src = e.target.result;
+                        img.className = "w-24 h-24 rounded-full object-cover drop-shadow-[0_0_10px_#025221]";
+                        
+                        // Limpar conteúdo anterior e inserir a imagem
+                        fotoPerfil.innerHTML = "";
+                        fotoPerfil.appendChild(img);
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
         }
      </script>
 </body>
